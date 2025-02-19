@@ -38,6 +38,16 @@ img {
 
 @media only screen and (max-width: 600px) {
 
+    .collegata2 {
+        width: 85vw;
+        margin-bottom: 20px;
+        
+    }
+    .frame {
+        width: 85vw;
+        margin-bottom: 20px;
+    }
+
     
     .collegata {
         width: 75vw;
@@ -89,6 +99,11 @@ img {
         width: 60vw;
         margin-bottom: 50px;
         }
+
+    .collegata2 {
+        width: 90vw;
+        margin-bottom: 20px;
+    }
 
     
 
