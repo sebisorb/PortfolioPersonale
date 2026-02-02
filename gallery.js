@@ -176,6 +176,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const isPersonale = document.documentElement.classList.contains("personale-page");
         const isFoodPage = document.documentElement.classList.contains("food-page");
         
+        // Mostra il carosello dopo un frame per evitare layout shift visibile
+        const container = carousel.closest(".gallery-carousel-container");
+        if (container) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    container.classList.add("loaded");
+                });
+            });
+        }
+        
         let initialScrollLeft = carousel.scrollLeft;
         let hasScrolled = false;
         let lastPhotoIndex = 0;
@@ -280,6 +290,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 strip._lastActiveIndex = -1;
                 strip._lastStripWidth = -1;
+
+                // Mostra la strip dopo che le miniature sono state generate
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        strip.classList.add("loaded");
+                    });
+                });
 
                 const setActiveThumb = (idx) => {
                     if (!thumbs.length) return;

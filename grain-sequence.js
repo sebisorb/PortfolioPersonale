@@ -1,6 +1,11 @@
-// GRANA SEQUENZA PELLICOLA
+// ===============================
+// GRANA DA SEQUENZA DI IMMAGINI
+// Usa frame di grana pellicola vera in img/grain/ (grain_01.png, grain_02.png, …)
+// ===============================
 (function () {
-    const config = {
+    "use strict";
+
+    var config = {
         pathPrefix: "img/grain/grain_",
         extension: "png",
         frameCount: 24,
@@ -9,44 +14,56 @@
     };
 
     function pad(n, len) {
-        return String(n).padStart(len, "0");
+        var s = String(n);
+        while (s.length < len) s = "0" + s;
+        return s;
     }
 
-    const frames = [];
-    let loaded = 0;
+    function init() {
+        var frameUrls = [];
+        var done = 0;
+        var total = config.frameCount;
 
-    for (let i = 1; i <= config.frameCount; i++) {
-        const src = `${config.pathPrefix}${pad(i, 2)}.${config.extension}`;
-        const img = new Image();
-        img.src = src;
-        img.onload = img.onerror = () => {
-            loaded++;
-            if (loaded === config.frameCount) run(frames);
-        };
-        frames.push(src);
+        for (var i = 1; i <= total; i++) {
+            var src = config.pathPrefix + pad(i, 2) + "." + config.extension;
+            frameUrls.push(src);
+            var img = new Image();
+            img.onload = img.onerror = function () {
+                done++;
+                if (done === total) run(frameUrls);
+            };
+            img.src = src;
+        }
+
+        function run(urls) {
+            if (!urls.length) return;
+
+            var wrap = document.createElement("div");
+            wrap.id = "grain-sequence-layer";
+            wrap.className = "grain-sequence-layer";
+            wrap.setAttribute("aria-hidden", "true");
+
+            var overlay = document.createElement("div");
+            overlay.className = "grain-sequence-overlay";
+
+            wrap.appendChild(overlay);
+            document.body.insertBefore(wrap, document.body.firstChild);
+
+            var idx = 0;
+            overlay.style.backgroundImage = "url(" + urls[0] + ")";
+            overlay.style.opacity = String(config.opacity);
+
+            var ms = 1000 / config.fps;
+            setInterval(function () {
+                idx = (idx + 1) % urls.length;
+                overlay.style.backgroundImage = "url(" + urls[idx] + ")";
+            }, ms);
+        }
     }
 
-    function run(urls) {
-        if (!urls.length) return;
-
-        const wrap = document.createElement("div");
-        wrap.id = "grain-sequence-layer";
-        wrap.className = "grain-sequence-layer";
-        wrap.setAttribute("aria-hidden", "true");
-
-        const overlay = document.createElement("div");
-        overlay.className = "grain-sequence-overlay";
-        overlay.style.opacity = config.opacity;
-
-        wrap.appendChild(overlay);
-        document.body.insertBefore(wrap, document.body.firstChild);
-
-        let idx = 0;
-        overlay.style.backgroundImage = `url(${urls[0]})`;
-
-        setInterval(() => {
-            idx = (idx + 1) % urls.length;
-            overlay.style.backgroundImage = `url(${urls[idx]})`;
-        }, 1000 / config.fps);
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
     }
 })();
