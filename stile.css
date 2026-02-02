@@ -1,9 +1,9 @@
 /* ==============================================
-   STILE.CSS OTTIMIZZATO - MOBILE FIRST
+   STILE.CSS OTTIMIZZATO - MOBILE FIRST 2026
    ============================================== */
 
 :root {
-    --max-width: 1280px;
+    --max-width: 1920px;
     --primary-green: #64ac61;
     --glass-bg: linear-gradient(135deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.18) 100%);
     --glass-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 12px rgba(0,0,0,0.1);
@@ -69,24 +69,25 @@ img {
 }
 
 /* CONTAINER CENTRATO */
-.container, main, .portfolio, .gallery-section {
+.container, main, section, .portfolio {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
 @media (min-width: 1024px) {
-    .container, main, .portfolio, .gallery-section {
+    .container, main, section, .portfolio {
         padding: 0 3rem;
     }
 }
 
 /* FIX DECENTRATO A SINISTRA – centrato vero */
-.progetto-preview, .gallery-grid, .personale-carousel-wrap {
+.portfolio, .progetto-preview, .gallery-grid, .personale-carousel-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem;
+    margin: 0 auto;
 }
 
 .progetto-preview article {
@@ -94,25 +95,57 @@ img {
     text-align: center;
 }
 
-/* HOVER FOTO – NON TAGLIARE + effetto professionale */
+/* HOVER FOTO – NON TAGLIARE + effetto */
 .collegata, .gallery-photo img, .progetto-preview img {
     transition: transform 0.4s ease, opacity 0.4s ease;
     object-fit: cover;
-    aspect-ratio: 4/3; /* o 3/4 a seconda del tuo stile */
+    aspect-ratio: 4/3;
 }
 
 .progetto-preview:hover .collegata,
 .gallery-photo:hover img {
     transform: scale(1.06);
-    opacity: 0.92; /* leggero fade invece di taglio */
+    opacity: 0.92;
 }
 
-/* FIX HOVER TAGLIATO – overflow visibile */
-.progetto-preview, .gallery-grid-item {
-    overflow: visible !important;
+/* TRASPARENZA TOTALE BOX CAROSELLO – SOLO FOTO VISIBILI */
+.progetto-preview,
+.gallery-grid,
+.gallery-section,
+.gallery-carousel,
+.personale-carousel-wrap,
+.gallery-photo,
+.gallery-grid-item,
+.personale-carousel {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0.5rem auto !important;
+    overflow: visible;
 }
 
-/* MENU & PANEL (ridondanze eliminate) */
+.progetto-preview a,
+.progetto-preview article,
+.gallery-photo,
+.gallery-grid-item {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Assicura che solo l'immagine sia visibile */
+.collegata,
+.gallery-photo img,
+.personale-carousel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* MENU & PANEL */
 .has-panel-menu header {
     display: flex;
     justify-content: space-between;
@@ -156,37 +189,19 @@ img {
     color: var(--primary-green);
 }
 
-/* GALLERY & CAROSELLO */
+/* GALLERY GRID */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
-.gallery-photo img {
-    transition: opacity 0.4s ease;
+@media (min-width: 768px) {
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 }
 
-/* RENDI TRASPARENTI BLU/ROSSO/VERDE NEL CAROSELLO (come richiesto) */
-.gallery-photo img,
-.personale-carousel img,
-.progetto-preview img {
-    opacity: 1;
-}
-
-.gallery-photo:hover img,
-.personale-carousel:hover img,
-.progetto-preview:hover img {
-    opacity: 0.35; /* trasparente al 65% su hover */
-}
-
-/* ALTRI COLORI specifici se hai classi .blue, .red, .green */
-.blue, .red, .green {
-    opacity: 0.3 !important;
-}
-
-.blue:hover, .red:hover, .green:hover {
-    opacity: 0.15 !important;
+@media (min-width: 1024px) {
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
 }
 
 /* FOOTER */
@@ -197,11 +212,18 @@ footer {
     text-align: center;
 }
 
-/* MEDIA QUERIES FINALI */
-@media (min-width: 768px) {
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+/* GRAIN OVERLAY */
+.grain-sequence-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
 }
 
-@media (min-width: 1024px) {
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
+.grain-sequence-overlay {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+    background-size: auto;
+    mix-blend-mode: overlay;
 }
