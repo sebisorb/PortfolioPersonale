@@ -1,35 +1,18 @@
 /* ==============================================
-   STILE.CSS OTTIMIZZATO - MOBILE FIRST 2026
+   STILE.CSS FINALE - TUTTI I FIX APPLICATI
    ============================================== */
 
 :root {
     --max-width: 1920px;
     --primary-green: #64ac61;
-    --glass-bg: linear-gradient(135deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.18) 100%);
-    --glass-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 12px rgba(0,0,0,0.1);
     --bg-overlay: rgba(10,10,10,0.92);
     --transition: all 0.3s ease;
-    --gap-attached: 10px;
-    --personale-strip-w: 220px;
 }
 
-@media (min-width: 1024px) {
-    :root { --gap-attached: 20px; }
-}
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; caret-color: transparent; }
 
-/* RESET & GLOBAL */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    caret-color: transparent;
-}
-
-html {
-    min-height: 100%;
-    background: #000;
-    overflow-x: hidden;
-}
+html { min-height: 100%; background: #000; overflow-x: hidden; }
 
 body {
     background: transparent;
@@ -41,13 +24,7 @@ body {
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* BG FISSO + VIDEO */
+/* BG FISSO */
 .bg-fixed-wrapper {
     position: fixed;
     inset: 0;
@@ -68,17 +45,14 @@ img {
 }
 
 /* HEADER STICKY */
-.has-panel-menu header {
+header {
     position: sticky;
     top: 0;
     z-index: 9999;
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 1rem 1.5rem;
-    margin: 0;
     width: 100%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -93,26 +67,14 @@ img {
     cursor: pointer;
 }
 
-@media (max-width: 1024px) {
-    .has-panel-menu header {
-        padding: 0.8rem 1rem;
-    }
-}
-
 /* CONTAINER CENTRATO */
-.container, main, section, .portfolio {
+main, .portfolio, section {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
-@media (min-width: 1024px) {
-    .container, main, section, .portfolio {
-        padding: 0 3rem;
-    }
-}
-
-/* CAROSELLO OTTIMALE: capped 1920x1080, no taglio, margini piccoli, centrato, grande */
+/* CAROSELLO: GRANDE, CENTRATO, NO TAGLIO, TRASPARENZA TOTALE */
 .gallery-carousel,
 .personale-carousel,
 .gallery-section,
@@ -126,14 +88,13 @@ img {
     height: 80vh;
     margin: 2rem auto;
     padding: 1rem;
-    overflow: hidden;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    overflow: hidden;
 }
 
 @media (max-width: 1024px) {
@@ -163,13 +124,13 @@ img {
     }
 }
 
-/* Foto + miniature: massima grandezza, no taglio, margini piccoli, centrato */
+/* FOTO: MASSIMA DIMENSIONE, NO TAGLIO, CENTRATE, MARGINI PICCOLI */
 .gallery-photo img,
 .personale-carousel img,
 .collegata,
 .progetto-preview img {
     max-width: 100%;
-    max-height: calc(100% - 2rem);
+    max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -180,24 +141,20 @@ img {
     transition: transform 0.4s ease;
 }
 
-/* Hover ingrandimento leggero */
 .gallery-photo:hover img,
 .personale-carousel:hover img,
 .progetto-preview:hover .collegata {
     transform: scale(1.05);
 }
 
-/* TRASPARENZA TOTALE BOX – solo foto/miniature visibili, no bordi colorati */
-.progetto-preview,
-.gallery-grid,
-.gallery-section,
-.gallery-carousel,
-.personale-carousel-wrap,
-.gallery-photo,
-.gallery-grid-item,
-.personale-carousel,
+/* TRASPARENZA TOTALE + NO BORDI COLORATI */
 .progetto-preview *,
+.gallery-grid *,
+.gallery-section *,
+.gallery-carousel *,
+.personale-carousel-wrap *,
 .gallery-photo *,
+.gallery-grid-item *,
 .personale-carousel * {
     background: transparent !important;
     border: none !important;
@@ -206,19 +163,11 @@ img {
     border-color: transparent !important;
 }
 
-/* GALLERY GRID BASE */
+/* GALLERY GRID */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-}
-
-@media (min-width: 1024px) {
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
 }
 
 /* FOOTER */
@@ -229,7 +178,7 @@ footer {
     text-align: center;
 }
 
-/* GRAIN OVERLAY */
+/* GRAIN */
 .grain-sequence-layer {
     position: fixed;
     inset: 0;
@@ -241,6 +190,5 @@ footer {
     position: absolute;
     inset: 0;
     background-repeat: repeat;
-    background-size: auto;
     mix-blend-mode: overlay;
 }
