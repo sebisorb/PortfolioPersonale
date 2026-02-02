@@ -1,62 +1,187 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="contatti-page has-panel-menu">
 <head>
+    <!-- Meta Tags Essenziali -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Contatti - Sebastiano Sorbello (sebisorb). Fotografo e Videografo professionista. Acireale, Catania.">
+    <meta name="keywords" content="contatti, Sebastiano Sorbello, sebisorb, fotografo, videografo, Acireale, Catania">
+    <meta name="author" content="Sebastiano Sorbello">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contatti - sebisorb | Sebastiano Sorbello">
+    <meta property="og:description" content="Contatti per collaborazioni e progetti fotografici e video">
+    <meta property="og:image" content="img/ph/sorb.png">
+    <meta property="og:url" content="https://tuosito.github.io/Contatti.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contatti - sebisorb">
+    <meta name="twitter:description" content="Contatti per collaborazioni e progetti">
+    <meta name="twitter:image" content="img/ph/sorb.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/ph/bianco.png">
+    <link rel="preload" href="stile.css" as="style">
+    <link rel="preload" href="img/ph/sorb.png" as="image">
+    <!-- Preconnect per Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="stile.css">
-    <title>sebisorb</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    <!-- Title -->
+    <title>Contatti - sebisorb | Sebastiano Sorbello</title>
 </head>
-<body>
-    <header>
-        <div class="logo-container">
-            <a href="index.html"><img class="logo" src="img/ph/bianco.png" alt="sebisorb Logo"></a>
+<body class="pagina-gallery">
+    <div class="bg-fixed-wrapper" aria-hidden="true">
+        <div class="bg-fixed-black"></div>
+        <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+            <source src="img/ph/sfondoanimatoverticale.mp4?v=2" type="video/mp4" media="(max-width: 1023px)">
+            <source src="img/ph/sfondoanimato.mp4?v=2" type="video/mp4" media="(min-width: 1024px)">
+        </video>
+    </div>
+    <!-- Header con navigazione -->
+    <header role="banner">
+        <div class="header-left">
+            <button type="button" class="header-lavori" aria-label="Apri menu Lavori" aria-expanded="false" aria-controls="mobileMenuPanel">LAVORI</button>
         </div>
-        <nav class="navigazione">
-            <a href="Profilo.html" class="bottone"><h1>PROFILO</h1></a>
-            <a href="Lavori.html" class="bottone"><h1>LAVORI</h1></a>
-            <a href="Contatti.html" class="bottone"><span style="color:#64ac61"><h1>CONTATTI</h1></span></a>
+        <div class="logo-container">
+            <a href="index.html" aria-label="Torna alla homepage" title="Torna alla homepage">
+                <img class="logo" src="img/ph/sebisorbX.png" alt="sebisorb Logo - Sebastiano Sorbello">
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="Contatti.html" class="bottone header-contatti" aria-label="Vai alla pagina contatti"><h1 class="nav-evidenziata">CONTATTI</h1></a>
+        </div>
+        <nav class="navigazione" role="navigation" aria-label="Navigazione principale">
+            <div class="bottone bottone-dropdown" aria-label="Menu personale">
+                <h1>PERSONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="Personale.html" role="menuitem" aria-label="Vai alle foto personali">FOTO</a>
+                    <a href="Video.html" role="menuitem" aria-label="Vai ai video personali">VIDEO</a>
+                </div>
+            </div>
+            <div class="bottone bottone-dropdown" aria-label="Menu professionale">
+                <h1>PROFESSIONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
+                    <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
+                    <a href="product.html" role="menuitem" aria-label="Vai alla product photography">PRODUCT</a>
+                </div>
+            </div>
+            <a href="Contatti.html" class="bottone" aria-label="Vai alla pagina contatti">
+                <h1>CONTATTI</h1>
+            </a>
         </nav>
+        <button type="button" class="mobile-menu-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+        </button>
     </header>
-    <main>
+    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
+        <div class="mobile-menu-columns">
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PROFESSIONALE</div>
+                <a href="food.html" class="mobile-menu-link">FOOD</a>
+                <a href="editoriali.html" class="mobile-menu-link">EDITORIALI</a>
+                <a href="product.html" class="mobile-menu-link">PRODUCT</a>
+            </div>
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PERSONALE</div>
+                <a href="Personale.html" class="mobile-menu-link">FOTO</a>
+                <a href="Video.html" class="mobile-menu-link">VIDEO</a>
+                <span class="mobile-menu-spacer" aria-hidden="true"></span>
+            </div>
+        </div>
+        <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
+    </div>
+    <!-- Main Content -->
+    <main role="main">
+        <h1 class="sr-only">Contatti - Sebastiano Sorbello</h1>
+        <section class="contatti-hero" aria-label="Contatti">
+            <h2 class="contatti-title">CONTATTI</h2>
+            <p class="contatti-subtitle">Per collaborazioni e progetti</p>
+        </section>
         <div class="contatti">
-            <div class="coppia">
-                <img src="img/loghi/email (1).png" alt="Mail Logo" class="socialz">
-                <p class="socialinfo">sebisorbll@gmail.com</p>
-            </div>
-            <div class="coppia">
-                <a href="https://www.instagram.com/sebisorb/"><img src="img/loghi/instagram.png" alt="Instagram Logo" class="socialz"></a>
-                <p class="socialinfo">sebisorb</p>
-            </div>
-            <div class="coppia">
-                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA"><img src="img/loghi/youtube.png" alt="YouTube Logo" class="socialz"></a>
-                <p class="socialinfo">sebisorb</p>
-            </div>
-            <div class="coppia">
-                <img src="img/loghi/whatsapp.png" alt="WhatsApp Logo" class="socialz">
-                <p class="socialinfo">+39 347 21 46 153</p>
-            </div>
+            <a href="mailto:sebisorbll@gmail.com" id="emailLinkBox" class="coppia-link" title="Invia email" aria-label="Apri client di posta per scrivere a sebisorb">
+                <div class="coppia">
+                    <img src="img/loghi/email (1).png" alt="Email" class="socialz" loading="lazy">
+                    <p class="socialinfo">sebisorbll@gmail.com</p>
+                </div>
+            </a>
+            <a href="https://www.instagram.com/sebisorb/" target="_blank" rel="noopener noreferrer" class="coppia-link" aria-label="Visita il profilo Instagram di sebisorb">
+                <div class="coppia">
+                    <img src="img/loghi/instagram.png" alt="Instagram" class="socialz" loading="lazy">
+                    <p class="socialinfo">@sebisorb</p>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA" target="_blank" rel="noopener noreferrer" class="coppia-link" aria-label="Visita il canale YouTube">
+                <div class="coppia">
+                    <img src="img/loghi/youtube.png" alt="YouTube" class="socialz" loading="lazy">
+                    <p class="socialinfo">@sebisorb</p>
+                </div>
+            </a>
+            <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" target="_blank" rel="noopener noreferrer" class="coppia-link" aria-label="Scrivimi su WhatsApp">
+                <div class="coppia">
+                    <img src="img/loghi/whatsapp.png" alt="WhatsApp" class="socialz" loading="lazy">
+                    <p class="socialinfo">+39 347 21 46 153</p>
+                </div>
+            </a>
         </div>
     </main>
-    <footer>
+    <!-- Footer -->
+    <footer role="contentinfo">
         <div class="footer-content">
-            <nav class="footer-nav">
-                <a href="Profilo.html"><h1>PROFILO</h1></a>
-                <a href="Lavori.html"><h1>LAVORI</h1></a>
-                <a href="Contatti.html"><h1>CONTATTI</h1></a>
-            </nav>
-            <div class="contact-info">
-                <p>Sebastiano La Rosa</p>
-                <p>sebisorbll@gmail.com</p>
-                <p>sebilsorb</p>
-            </div>
-            <div class="social-icons">
-                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA"><img src="img/loghi/yt.png" alt="YouTube"></a>
-                <a href="https://www.instagram.com/sebisorb/"><img src="img/loghi/ig.png" alt="Instagram"></a>
-                <a href="https://www.linkedin.com/in/sebi-sorbello-a3837a252/"><img src="img/loghi/link.png" alt="LinkedIn"></a>
+            <!-- Contatti -->
+            <address class="contact-info">
+                <p><strong>Sebastiano Sorbello</strong></p>
+                <p>
+                    <a href="mailto:sebisorbll@gmail.com" 
+                       id="emailLink"
+                       title="Copia email negli appunti"
+                       aria-label="Copia email negli appunti">
+                        sebisorbll@gmail.com
+                    </a>
+                </p>
+                <p>@sebisorb</p>
+            </address>
+
+            <!-- Social -->
+            <div class="social-icons" role="navigation" aria-label="Link social media">
+                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="Scrivimi su WhatsApp">
+                    <img src="img/loghi/footertsapp.png" alt="WhatsApp" loading="lazy">
+                </a>
+                <a href="https://www.instagram.com/sebisorb/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="Visita il profilo Instagram di sebisorb">
+                    <img src="img/loghi/instafooter.png" alt="Instagram" loading="lazy">
+                </a>
+                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="Visita il canale YouTube di Sebastiano Sorbello">
+                    <img src="img/loghi/footertube.png" alt="YouTube" loading="lazy">
+                </a>
             </div>
         </div>
     </footer>
+
+    <script src="grain-sequence.js" defer></script>
+    <script src="dropdown.js" defer></script>
+    <script src="mobile-menu.js" defer></script>
 </body>
 </html>

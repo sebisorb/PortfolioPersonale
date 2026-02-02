@@ -1,54 +1,229 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="video-page has-panel-menu">
 <head>
+    <!-- Meta Tags Essenziali -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Video personali di Sebastiano Sorbello - sebisorb. Progetti video, cortometraggi, ricerca visiva e produzioni autoriali.">
+    <meta name="keywords" content="video personali, videografia, cortometraggi, produzioni autoriali, Sebastiano Sorbello, sebisorb">
+    <meta name="author" content="Sebastiano Sorbello">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Video - sebisorb | Video personali">
+    <meta property="og:description" content="Video personali: progetti video, cortometraggi, ricerca visiva.">
+    <meta property="og:image" content="img/ph/sorb.png">
+    <meta property="og:url" content="https://tuosito.github.io/Video.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Video - sebisorb">
+    <meta name="twitter:description" content="Video personali: progetti video, cortometraggi, ricerca visiva.">
+    <meta name="twitter:image" content="img/ph/sorb.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/ph/bianco.png">
+    <link rel="preload" href="stile.css" as="style">
+    <link rel="preload" href="img/ph/sorb.png" as="image">
+    <!-- Preconnect per Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="stile.css">
-    <title>sebisorb</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    <!-- Title -->
+    <title>Video - sebisorb | Video personali</title>
 </head>
-<body>
-    <header>
-        <div class="logo-container">
-            <a href="index.html"><img class="logo" src="img/ph/bianco.png" alt="sebisorb Logo"></a>
+<body class="pagina-gallery">
+    <div class="bg-fixed-wrapper" aria-hidden="true">
+        <div class="bg-fixed-black"></div>
+        <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+            <source src="img/ph/sfondoanimatoverticale.mp4?v=2" type="video/mp4" media="(max-width: 1023px)">
+            <source src="img/ph/sfondoanimato.mp4?v=2" type="video/mp4" media="(min-width: 1024px)">
+        </video>
+    </div>
+    <!-- Header con navigazione -->
+    <header role="banner">
+        <div class="header-left">
+            <button type="button" class="header-lavori" aria-label="Apri menu Lavori" aria-expanded="false" aria-controls="mobileMenuPanel">LAVORI</button>
         </div>
-        <nav class="navigazione">
-            <a href="Profilo.html" class="bottone"><h1>PROFILO</h1></a>
-            <a href="Lavori.html" class="bottone"><span style="color:#64ac61"><h1>LAVORI</h1></span></a>
-            <a href="Contatti.html" class="bottone"><h1>CONTATTI</h1></a>
+        <div class="logo-container">
+            <a href="index.html" aria-label="Torna alla homepage" title="Torna alla homepage">
+                <img class="logo" src="img/ph/sebisorbX.png" alt="sebisorb Logo - Sebastiano Sorbello">
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="Contatti.html" class="bottone header-contatti" aria-label="Vai alla pagina contatti"><h1>CONTATTI</h1></a>
+        </div>
+        <nav class="navigazione" role="navigation" aria-label="Navigazione principale">
+            <div class="bottone bottone-dropdown" aria-label="Menu personale">
+                <h1 class="nav-evidenziata">PERSONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="Personale.html" role="menuitem" aria-label="Vai alle foto personali">FOTO</a>
+                    <a href="Video.html" role="menuitem" aria-label="Vai ai video personali">VIDEO</a>
+                </div>
+            </div>
+            <div class="bottone bottone-dropdown" aria-label="Menu professionale">
+                <h1>PROFESSIONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
+                    <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
+                    <a href="product.html" role="menuitem" aria-label="Vai alla product photography">PRODUCT</a>
+                </div>
+            </div>
+            <a href="Contatti.html" class="bottone" aria-label="Vai alla pagina contatti">
+                <h1>CONTATTI</h1>
+            </a>
         </nav>
+        <button type="button" class="mobile-menu-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+        </button>
     </header>
-    <main>
-        <div class="collegamento">
-            <a href="iomedio.html"><img src="img/iomedio/io.png" alt="Copertina Io, me e d io" class="collegata"></a>
-            <p class="about-text">Io, me e d io</p>
-            <a href="lealea.html"><img src="img/lealea/copertina.png" alt="Copertina LeaLea Live at Michelangelos" class="collegata"></a>
-            <p class="about-text">lealea / live at Insirillo</p>
-            <a href="lovepatrol.html"><img src="img/lovep/copertina 2_1.41.1.png" alt="Copertina Love Patrol" class="collegata"></a>
-            <p class="about-text">Love Patrol</p>
-            <a href="Analogie.html"><img src="img/analog/Copertina YT 4.png" alt="Copertina Analogie Digitali" class="collegata"></a>
-            <p class="about-text">Analogie Digitali</p>
+    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
+        <div class="mobile-menu-columns">
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PROFESSIONALE</div>
+                <a href="food.html" class="mobile-menu-link">FOOD</a>
+                <a href="editoriali.html" class="mobile-menu-link">EDITORIALI</a>
+                <a href="product.html" class="mobile-menu-link">PRODUCT</a>
+            </div>
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PERSONALE</div>
+                <a href="Personale.html" class="mobile-menu-link">FOTO</a>
+                <a href="Video.html" class="mobile-menu-link">VIDEO</a>
+                <span class="mobile-menu-spacer" aria-hidden="true"></span>
+            </div>
+        </div>
+        <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="gallery-main" role="main">
+        <!-- Hero Section -->
+        <div class="backlight-wrapper">
+            <section class="gallery-hero" aria-labelledby="hero-title">
+                <h1 id="hero-title" class="gallery-hero-title">Video</h1>
+                <p class="gallery-hero-description">documentarismo, messa in scena e narrazione demenziale</p>
+            </section>
+        </div>
+
+        <!-- Container per i video (titolo + descrizione sopra ogni video, come su Food per i carousel) -->
+        <div class="video-page-container">
+            <!-- Video 1 -->
+            <section id="video-1" class="gallery-section video-section" aria-labelledby="video-1-title">
+                <h2 id="video-1-title" class="gallery-title">L'invasione del Castello</h2>
+                <p class="gallery-section-description">Documentazione ed analisi grottesca del festival musicale.</p>
+                <div class="video-item">
+                    <iframe 
+                        src="https://www.youtube.com/embed/HXQ39UfVkvA" 
+                        title="Video personale 1"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Video 2 -->
+            <section id="video-2" class="gallery-section video-section" aria-labelledby="video-2-title">
+                <h2 id="video-2-title" class="gallery-title">Love Patrol</h2>
+                <p class="gallery-section-description">Gioco sui cliché dei Noir tra investigazioni e pulsione.</p>
+                <div class="video-item">
+                    <iframe 
+                        src="https://www.youtube.com/embed/8_gLKWZ9UdY" 
+                        title="Video personale 2"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Video 3 -->
+            <section id="video-3" class="gallery-section video-section" aria-labelledby="video-3-title">
+                <h2 id="video-3-title" class="gallery-title">Io, me e d io</h2>
+                <p class="gallery-section-description">Analisi e critica grottesca dell'uomo artistoide.</p>
+                <div class="video-item">
+                    <iframe 
+                        src="https://www.youtube.com/embed/itUPJRKeH1A" 
+                        title="Video personale 3"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Video 4 -->
+            <section id="video-4" class="gallery-section video-section" aria-labelledby="video-4-title">
+                <h2 id="video-4-title" class="gallery-title">sebisorbXlealea</h2>
+                <p class="gallery-section-description">aftermovie di uno dei primi live dei Lealea.</p>
+                <div class="video-item">
+                    <iframe 
+                        src="https://www.youtube.com/embed/W_KLfIIBzqs" 
+                        title="Video personale 4"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Video 5 -->
+            <section id="video-5" class="gallery-section video-section" aria-labelledby="video-5-title">
+                <h2 id="video-5-title" class="gallery-title">Pantalica così</h2>
+                <p class="gallery-section-description">Viaggio buffo e psichedelico su Pantalica.</p>
+                <div class="video-item">
+                    <iframe 
+                        src="https://www.youtube.com/embed/3p5SR7bR2KU" 
+                        title="Video personale 5"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </section>
         </div>
     </main>
-    <footer>
+    
+    <!-- Footer -->
+    <footer role="contentinfo">
         <div class="footer-content">
-            <nav class="footer-nav">
-                <a href="Profilo.html"><h1>PROFILO</h1></a>
-                <a href="Lavori.html"><h1>LAVORI</h1></a>
-                <a href="Contatti.html"><h1>CONTATTI</h1></a>
-            </nav>
-            <div class="contact-info">
-                <p>Sebastiano La Rosa</p>
-                <p>sebisorbll@gmail.com</p>
-                <p>sebilsorb</p>
-            </div>
-            <div class="social-icons">
-                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA"><img src="img/loghi/yt.png" alt="YouTube"></a>
-                <a href="https://www.instagram.com/sebisorb/"><img src="img/loghi/ig.png" alt="Instagram"></a>
-                <a href="https://www.linkedin.com/in/sebi-sorbello-a3837a252/"><img src="img/loghi/link.png" alt="LinkedIn"></a>
+            <!-- Contatti -->
+            <address class="contact-info">
+                <p><strong>Sebastiano Sorbello</strong></p>
+                <p>
+                    <a href="mailto:sebisorbll@gmail.com" id="emailLink" title="Copia email negli appunti" aria-label="Copia email negli appunti">sebisorbll@gmail.com</a>
+                </p>
+                <p>@sebisorb</p>
+            </address>
+
+            <!-- Social -->
+            <div class="social-icons" role="navigation" aria-label="Link social media">
+                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" target="_blank" rel="noopener noreferrer" aria-label="Scrivimi su WhatsApp">
+                    <img src="img/loghi/footertsapp.png" alt="WhatsApp" loading="lazy">
+                </a>
+                <a href="https://www.instagram.com/sebisorb/" target="_blank" rel="noopener noreferrer" aria-label="Visita il profilo Instagram di sebisorb">
+                    <img src="img/loghi/instafooter.png" alt="Instagram" loading="lazy">
+                </a>
+                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA" target="_blank" rel="noopener noreferrer" aria-label="Visita il canale YouTube di Sebastiano Sorbello">
+                    <img src="img/loghi/footertube.png" alt="YouTube" loading="lazy">
+                </a>
             </div>
         </div>
     </footer>
+
+    <script src="grain-sequence.js" defer></script>
+    <script src="dropdown.js" defer></script>
+    <script src="mobile-menu.js" defer></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" class="profilo-page has-panel-menu">
+<html lang="it" class="product-page has-panel-menu">
 <head>
     <!-- Meta Tags Essenziali -->
     <meta charset="utf-8">
@@ -7,27 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Sebastiano Sorbello (sebisorb) - Artigiano digitale specializzato in foto e video. Portfolio professionale. Acireale, Catania.">
-    <meta name="keywords" content="Sebastiano Sorbello, sebisorb, fotografo, videografo, artigiano digitale, Acireale, Catania, portfolio">
+    <meta name="description" content="Product photography professionale per e-commerce e cataloghi. Fotografia di prodotto per comunicazione commerciale. Portfolio di Sebastiano Sorbello - sebisorb.">
+    <meta name="keywords" content="product photography, fotografia prodotto, e-commerce photography, fotografia commerciale, cataloghi, Sebastiano Sorbello, sebisorb">
     <meta name="author" content="Sebastiano Sorbello">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Profilo - sebisorb | Sebastiano Sorbello">
-    <meta property="og:description" content="Artigiano digitale specializzato in foto e video. Portfolio professionale.">
-    <meta property="og:image" content="img/ph/sorb.png">
-    <meta property="og:url" content="https://tuosito.github.io/Profilo.html">
+    <meta property="og:title" content="Product - sebisorb | Fotografia di prodotto">
+    <meta property="og:description" content="Fotografia di prodotto per e-commerce, cataloghi e comunicazione commerciale. Portfolio professionale.">
+    <meta property="og:image" content="img/foto/Street Photography/1.png">
+    <meta property="og:url" content="https://tuosito.github.io/product.html">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Profilo - sebisorb">
-    <meta name="twitter:description" content="Artigiano digitale specializzato in foto e video.">
-    <meta name="twitter:image" content="img/ph/sorb.png">
+    <meta name="twitter:title" content="Product - sebisorb">
+    <meta name="twitter:description" content="Fotografia di prodotto per e-commerce, cataloghi e comunicazione commerciale.">
+    <meta name="twitter:image" content="img/foto/Street Photography/1.png">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/ph/bianco.png">
     <link rel="preload" href="stile.css" as="style">
-    <link rel="preload" href="img/ph/sorb.png" as="image">
+    <link rel="preload" href="img/foto/Street Photography/1.png" as="image">
     <!-- Preconnect per Font Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,38 @@
     <link rel="stylesheet" type="text/css" href="stile.css">
     
     <!-- Title -->
-    <title>Profilo - sebisorb | Sebastiano Sorbello</title>
+    <title>Product - sebisorb | Fotografia di prodotto</title>
+    
+    <!-- Schema.org JSON-LD per SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "PhotographyService",
+        "name": "Product - sebisorb",
+        "description": "Servizi professionali di fotografia di prodotto per e-commerce, cataloghi e comunicazione commerciale. Immagini che valorizzano i prodotti e aumentano le vendite.",
+        "provider": {
+            "@type": "Person",
+            "name": "Sebastiano Sorbello",
+            "alternateName": "sebisorb",
+            "email": "sebisorbll@gmail.com",
+            "telephone": "+393472146153",
+            "sameAs": [
+                "https://www.instagram.com/sebisorb/",
+                "https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA"
+            ]
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": ["Acireale", "Catania", "Sicilia"]
+        },
+        "serviceType": [
+            "Product Photography",
+            "E-commerce Photography",
+            "Commercial Photography"
+        ],
+        "url": "https://tuosito.github.io/product.html"
+    }
+    </script>
 </head>
 <body class="pagina-gallery">
     <div class="bg-fixed-wrapper" aria-hidden="true">
@@ -71,7 +102,7 @@
                 </div>
             </div>
             <div class="bottone bottone-dropdown" aria-label="Menu professionale">
-                <h1>PROFESSIONALE</h1>
+                <h1 class="nav-evidenziata">PROFESSIONALE</h1>
                 <div class="bottone-dropdown-menu" role="menu">
                     <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
                     <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
@@ -105,28 +136,58 @@
         </div>
         <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
     </div>
-    
+
     <!-- Main Content -->
-    <main role="main">
+    <main class="gallery-main" role="main">
+        <!-- Hero Section -->
         <div class="backlight-wrapper">
-            <section class="profilo" aria-labelledby="profilo-heading">
-                <h1 id="profilo-heading" class="sr-only">Profilo di Sebastiano Sorbello</h1>
-                <img src="img/ph/sorb.png" alt="Sebastiano Sorbello - Fotografo e Videografo" class="profilo-img" loading="lazy" decoding="async">
-                <div class="profilo-info">
-                    <div class="profilo-dati-container">
-                        <span class="profilo-dati">1996 Acireale (CT)</span>
-                        <span class="profilo-skills">Video · Foto · Layout</span>
-                    </div>
-                </div>
-                <p class="profilo-text">Sebastiano Sorbello,<br> 
-                    anche conosciuto come<br><b>sebisorb</b>.
-                </p>
-                <p class="profilo-text2">La sua voglia di creare attraversò le principali fasi dell'evoluzione produttiva umana, dalla sartoria alle armi balistiche per le avventure in campagna. Per fortuna il suo interesse non verteva alla distruzione. Con la scoperta della musica si avventurò allo studio dello strumento a 6 corde, sognando di formare un gruppo con i suoi amici. Questi purtroppo lo esclusero dalla formazione della band. Il giovane dovette reindirizzare la sua voglia creativa in un'altra delle sue passioni: il cinema. Fu così che iniziò la produzione di corti demenziali che culminò in un interesse tramutato in professione. Oggi sebisorb è un cineasta, autore e artigiano dell'audio/visivo. Un buon portfolio deve essere pomposo senza scadere nella menzogna, giusto?</p>
+            <section class="gallery-hero" aria-labelledby="hero-title">
+                <h1 id="hero-title" class="gallery-hero-title">Product</h1>
+                <p class="gallery-hero-description">Fotografia di prodotto per e-commerce e cataloghi</p>
             </section>
         </div>
-        <img class="profbas" src="img/ph/sorb.png" alt="Sebastiano Sorbello - sebisorb" loading="lazy" decoding="async">
+
+        <!-- SEZIONE PRODUCT PHOTOGRAPHY -->
+        <section id="product" class="gallery-section" aria-labelledby="product-title">
+            <h2 id="product-title" class="gallery-title">PRODUCT</h2>
+            <p class="gallery-section-description">Fotografia di prodotto per e-commerce, cataloghi e comunicazione commerciale. Immagini che valorizzano i prodotti e aumentano le vendite.</p>
+            <div class="gallery-carousel-container personale-carousel-container">
+                <div class="gallery-carousel-wrapper">
+                    <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-product" aria-label="Foto precedente" style="display: none;">
+                        <span>◀</span>
+                    </button>
+                    <div class="gallery-carousel personale-carousel" id="carousel-product" data-section="product">
+                        <div class="gallery-photo" data-index="0">
+                            <img src="img/foto/Street Photography/1.png" alt="Product Photography 1" loading="eager" decoding="async">
+                        </div>
+                        <!-- Aggiungi qui altre foto seguendo lo stesso pattern -->
+                        <!-- 
+                        <div class="gallery-photo" data-index="1">
+                            <img src="img/foto/food/live1.jpg" alt="Product Photography 2" loading="lazy" decoding="async">
+                        </div>
+                        -->
+                    </div>
+                    <button class="gallery-nav-arrow gallery-nav-next" data-carousel="carousel-product" aria-label="Foto successiva">
+                        <span>▶</span>
+                    </button>
+                </div>
+                <div class="personale-strip-viewport" aria-hidden="true">
+                    <div class="personale-carousel-strip" data-carousel="carousel-product" aria-label="Anteprime Product"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Finale -->
+        <section class="gallery-cta-section" aria-labelledby="cta-title">
+            <h2 id="cta-title" class="gallery-cta-title">Contatti</h2>
+            <p class="gallery-cta-text">Per informazioni e disponibilità</p>
+            <div class="gallery-cta-actions" role="group" aria-label="Azioni contatto">
+                <a href="Contatti.html" class="gallery-cta-button gallery-cta-button-large" aria-label="Vai alla pagina contatti">Contattami</a>
+                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano,%20vorrei%20informazioni%20sulla%20fotografia%20di%20prodotto" target="_blank" rel="noopener noreferrer" class="gallery-cta-button gallery-cta-button-large" aria-label="Scrivimi su WhatsApp">WhatsApp</a>
+            </div>
+        </section>
     </main>
-    
+
     <!-- Footer -->
     <footer role="contentinfo">
         <div class="footer-content">
@@ -141,7 +202,7 @@
 
             <!-- Social -->
             <div class="social-icons" role="navigation" aria-label="Link social media">
-                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" target="_blank" rel="noopener noreferrer" aria-label="Scrivimi su WhatsApp">
+                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano,%20vorrei%20informazioni%20sulla%20fotografia%20di%20prodotto" target="_blank" rel="noopener noreferrer" aria-label="Scrivimi su WhatsApp">
                     <img src="img/loghi/footertsapp.png" alt="WhatsApp" loading="lazy">
                 </a>
                 <a href="https://www.instagram.com/sebisorb/" target="_blank" rel="noopener noreferrer" aria-label="Visita il profilo Instagram di sebisorb">
@@ -157,5 +218,6 @@
     <script src="grain-sequence.js" defer></script>
     <script src="dropdown.js" defer></script>
     <script src="mobile-menu.js" defer></script>
+    <script src="gallery.js" defer></script>
 </body>
 </html>

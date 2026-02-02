@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="it" class="personale-page has-panel-menu">
+<head>
+    <!-- Meta Tags Essenziali -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Fotografie personali di Sebastiano Sorbello - sebisorb. Ricerca visiva, momenti, paesaggi, progetti personali.">
+    <meta name="keywords" content="fotografia personale, ricerca visiva, paesaggi, momenti, Sebastiano Sorbello, sebisorb">
+    <meta name="author" content="Sebastiano Sorbello">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Personale - sebisorb | Fotografie personali">
+    <meta property="og:description" content="Fotografie personali: ricerca visiva, momenti, paesaggi.">
+    <meta property="og:image" content="img/foto/Personale/macerie1.jpg">
+    <meta property="og:url" content="https://tuosito.github.io/Personale.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Personale - sebisorb">
+    <meta name="twitter:description" content="Fotografie personali: ricerca visiva, momenti, paesaggi.">
+    <meta name="twitter:image" content="img/foto/Personale/macerie1.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/ph/bianco.png">
+    <!-- Preload risorse critiche (LCP + CSS) -->
+    <link rel="preload" href="stile.css" as="style">
+    <link rel="preload" href="img/foto/Personale/macerie1.jpg" as="image">
+    <!-- Preconnect per Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="stile.css">
+    
+    <!-- Title -->
+    <title>Personale - sebisorb | Fotografie personali</title>
+</head>
+<body class="pagina-gallery">
+    <div class="bg-fixed-wrapper" aria-hidden="true">
+        <div class="bg-fixed-black"></div>
+        <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+            <source src="img/ph/sfondoanimatoverticale.mp4?v=2" type="video/mp4" media="(max-width: 1023px)">
+            <source src="img/ph/sfondoanimato.mp4?v=2" type="video/mp4" media="(min-width: 1024px)">
+        </video>
+    </div>
+    <!-- Header con navigazione -->
+    <header role="banner">
+        <div class="header-left">
+            <button type="button" class="header-lavori" aria-label="Apri menu Lavori" aria-expanded="false" aria-controls="mobileMenuPanel">LAVORI</button>
+        </div>
+        <div class="logo-container">
+            <a href="index.html" aria-label="Torna alla homepage" title="Torna alla homepage">
+                <img class="logo" src="img/ph/sebisorbX.png" alt="sebisorb Logo - Sebastiano Sorbello">
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="Contatti.html" class="bottone header-contatti" aria-label="Vai alla pagina contatti"><h1>CONTATTI</h1></a>
+        </div>
+        <nav class="navigazione" role="navigation" aria-label="Navigazione principale">
+            <div class="bottone bottone-dropdown" aria-label="Menu personale">
+                <h1 class="nav-evidenziata">PERSONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="Personale.html" role="menuitem" aria-label="Vai alle foto personali">FOTO</a>
+                    <a href="Video.html" role="menuitem" aria-label="Vai ai video personali">VIDEO</a>
+                </div>
+            </div>
+            <div class="bottone bottone-dropdown" aria-label="Menu professionale">
+                <h1>PROFESSIONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
+                    <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
+                    <a href="product.html" role="menuitem" aria-label="Vai alla product photography">PRODUCT</a>
+                </div>
+            </div>
+            <a href="Contatti.html" class="bottone" aria-label="Vai alla pagina contatti">
+                <h1>CONTATTI</h1>
+            </a>
+        </nav>
+        <button type="button" class="mobile-menu-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+        </button>
+    </header>
+    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
+        <div class="mobile-menu-columns">
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PROFESSIONALE</div>
+                <a href="food.html" class="mobile-menu-link">FOOD</a>
+                <a href="editoriali.html" class="mobile-menu-link">EDITORIALI</a>
+                <a href="product.html" class="mobile-menu-link">PRODUCT</a>
+            </div>
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PERSONALE</div>
+                <a href="Personale.html" class="mobile-menu-link">FOTO</a>
+                <a href="Video.html" class="mobile-menu-link">VIDEO</a>
+                <span class="mobile-menu-spacer" aria-hidden="true"></span>
+            </div>
+        </div>
+        <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="gallery-main" role="main">
+        <!-- MACERIE -->
+        <section id="macerie" class="gallery-section" aria-labelledby="macerie-title">
+            <h2 id="macerie-title" class="gallery-title">MACERIE</h2>
+            <div class="gallery-carousel-container personale-carousel-container">
+                <div class="gallery-carousel-wrapper">
+                    <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-macerie" aria-label="Foto precedente" style="display: none;">
+                        <span>◀</span>
+                    </button>
+                    <div class="gallery-carousel personale-carousel" data-section="macerie" id="carousel-macerie">
+                        <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/macerie1.jpg" alt="Macerie 1" loading="eager" decoding="async"></div>
+                        <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/macerie2.jpg" alt="Macerie 2" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/macerie3.jpg" alt="Macerie 3" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="3"><img src="img/foto/Personale/macerie4.jpg" alt="Macerie 4" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="4"><img src="img/foto/Personale/macerie5.jpg" alt="Macerie 5" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="5"><img src="img/foto/Personale/macerie6.jpg" alt="Macerie 6" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="6"><img src="img/foto/Personale/macerie7.jpg" alt="Macerie 7" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="7"><img src="img/foto/Personale/macerie8.jpg" alt="Macerie 8" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="8"><img src="img/foto/Personale/macerie9.jpg" alt="Macerie 9" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="9"><img src="img/foto/Personale/macerie11.jpg" alt="Macerie 10" loading="lazy" decoding="async"></div>
+                    </div>
+                    <button class="gallery-nav-arrow gallery-nav-next" data-carousel="carousel-macerie" aria-label="Foto successiva">
+                        <span>▶</span>
+                    </button>
+                </div>
+                <div class="personale-strip-viewport" aria-hidden="true">
+                    <div class="personale-carousel-strip" data-carousel="carousel-macerie" aria-label="Anteprime Macerie"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASTELLONAVE -->
+        <section id="castellonave" class="gallery-section" aria-labelledby="castellonave-title">
+            <h2 id="castellonave-title" class="gallery-title">CASTELLONAVE</h2>
+            <div class="gallery-carousel-container personale-carousel-container">
+                <div class="gallery-carousel-wrapper">
+                    <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-castellonave" aria-label="Foto precedente" style="display: none;">
+                        <span>◀</span>
+                    </button>
+                    <div class="gallery-carousel personale-carousel" data-section="castellonave" id="carousel-castellonave">
+                        <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/castellonave1.jpg" alt="Castellonave 1" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/castellonave2.jpg" alt="Castellonave 2" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/castellonave3.jpg" alt="Castellonave 3" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="3"><img src="img/foto/Personale/castellonave4.jpg" alt="Castellonave 4" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="4"><img src="img/foto/Personale/castellonave5.jpg" alt="Castellonave 5" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="5"><img src="img/foto/Personale/castellonave6.jpg" alt="Castellonave 6" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="6"><img src="img/foto/Personale/castellonave7.jpg" alt="Castellonave 7" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="7"><img src="img/foto/Personale/castellonave8.jpg" alt="Castellonave 8" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="8"><img src="img/foto/Personale/castellonave9.jpg" alt="Castellonave 9" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="9"><img src="img/foto/Personale/castellonave10.jpg" alt="Castellonave 10" loading="lazy" decoding="async"></div>
+                    </div>
+                    <button class="gallery-nav-arrow gallery-nav-next" data-carousel="carousel-castellonave" aria-label="Foto successiva">
+                        <span>▶</span>
+                    </button>
+                </div>
+                <div class="personale-strip-viewport" aria-hidden="true">
+                    <div class="personale-carousel-strip" data-carousel="carousel-castellonave" aria-label="Anteprime Castellonave"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IR -->
+        <section id="ir" class="gallery-section" aria-labelledby="ir-title">
+            <h2 id="ir-title" class="gallery-title">IR</h2>
+            <div class="gallery-carousel-container personale-carousel-container">
+                <div class="gallery-carousel-wrapper">
+                    <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-ir" aria-label="Foto precedente" style="display: none;">
+                        <span>◀</span>
+                    </button>
+                    <div class="gallery-carousel personale-carousel" data-section="ir" id="carousel-ir">
+                        <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/ir1.jpg" alt="IR 1" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/ir2.jpg" alt="IR 2" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/ir3.jpg" alt="IR 3" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="3"><img src="img/foto/Personale/ir4.jpg" alt="IR 4" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="4"><img src="img/foto/Personale/ir5.jpg" alt="IR 5" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="5"><img src="img/foto/Personale/ir6.jpg" alt="IR 6" loading="lazy" decoding="async"></div>
+                    </div>
+                    <button class="gallery-nav-arrow gallery-nav-next" data-carousel="carousel-ir" aria-label="Foto successiva">
+                        <span>▶</span>
+                    </button>
+                </div>
+                <div class="personale-strip-viewport" aria-hidden="true">
+                    <div class="personale-carousel-strip" data-carousel="carousel-ir" aria-label="Anteprime IR"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALLOWEEN -->
+        <section id="halloween" class="gallery-section" aria-labelledby="halloween-title">
+            <h2 id="halloween-title" class="gallery-title">HALLOWEEN</h2>
+            <div class="gallery-carousel-container personale-carousel-container">
+                <div class="gallery-carousel-wrapper">
+                    <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-halloween" aria-label="Foto precedente" style="display: none;">
+                        <span>◀</span>
+                    </button>
+                    <div class="gallery-carousel personale-carousel" data-section="halloween" id="carousel-halloween">
+                        <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/halloween1.jpg" alt="Halloween 1" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/halloween2.jpg" alt="Halloween 2" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/halloween3.jpg" alt="Halloween 3" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="3"><img src="img/foto/Personale/halloween4.jpg" alt="Halloween 4" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="4"><img src="img/foto/Personale/halloween5.jpg" alt="Halloween 5" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="5"><img src="img/foto/Personale/halloween6.jpg" alt="Halloween 6" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="6"><img src="img/foto/Personale/halloween7.jpg" alt="Halloween 7" loading="lazy" decoding="async"></div>
+                        <div class="gallery-photo" data-index="7"><img src="img/foto/Personale/halloween8.jpg" alt="Halloween 8" loading="lazy" decoding="async"></div>
+                    </div>
+                    <button class="gallery-nav-arrow gallery-nav-next" data-carousel="carousel-halloween" aria-label="Foto successiva">
+                        <span>▶</span>
+                    </button>
+                </div>
+                <div class="personale-strip-viewport" aria-hidden="true">
+                    <div class="personale-carousel-strip" data-carousel="carousel-halloween" aria-label="Anteprime Halloween"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <address class="contact-info">
+                <p><strong>Sebastiano Sorbello</strong></p>
+                <p>
+                    <a href="mailto:sebisorbll@gmail.com" id="emailLink" title="Copia email negli appunti" aria-label="Copia email negli appunti">sebisorbll@gmail.com</a>
+                </p>
+                <p>@sebisorb</p>
+            </address>
+
+            <!-- Social -->
+            <div class="social-icons" role="navigation" aria-label="Link social media">
+                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" target="_blank" rel="noopener noreferrer" aria-label="Scrivimi su WhatsApp">
+                    <img src="img/loghi/footertsapp.png" alt="WhatsApp" loading="lazy">
+                </a>
+                <a href="https://www.instagram.com/sebisorb/" target="_blank" rel="noopener noreferrer" aria-label="Visita il profilo Instagram">
+                    <img src="img/loghi/instafooter.png" alt="Instagram" loading="lazy">
+                </a>
+                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA" target="_blank" rel="noopener noreferrer" aria-label="Visita il canale YouTube">
+                    <img src="img/loghi/footertube.png" alt="YouTube" loading="lazy">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="grain-sequence.js" defer></script>
+    <script src="dropdown.js" defer></script>
+    <script src="mobile-menu.js" defer></script>
+    <script src="gallery.js" defer></script>
+</body>
+</html>

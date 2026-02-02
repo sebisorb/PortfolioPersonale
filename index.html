@@ -1,57 +1,273 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="index-page has-panel-menu">
 <head>
+    <!-- Meta Tags Essenziali -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sebastiano Sorbello - Fotografo e Videografo professionista. Portfolio di fotografia e video. Acireale, Catania.">
+    <meta name="keywords" content="fotografo, videografo, portfolio, fotografia, video, Sebastiano Sorbello, Acireale, Catania, sebisorb">
+    <meta name="author" content="Sebastiano Sorbello">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="sebisorb - Sebastiano Sorbello | Fotografo & Videografo">
+    <meta property="og:description" content="Portfolio professionale di fotografia e videografia">
+    <meta property="og:image" content="img/ph/sorb.png">
+    <meta property="og:url" content="https://tuosito.github.io">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="sebisorb - Sebastiano Sorbello">
+    <meta name="twitter:description" content="Portfolio professionale di fotografia e videografia">
+    <meta name="twitter:image" content="img/ph/sorb.png">
+    
+    <!-- Favicon (aggiungi il tuo) -->
+    <link rel="icon" type="image/png" href="img/ph/bianco.png">
+    <link rel="preload" href="stile.css" as="style">
+    <link rel="preload" href="img/ph/sorb.png" as="image">
+    <!-- Preconnect per Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="stile.css">
-    <title>sebisorb</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    <!-- Title -->
+    <title>sebisorb - Sebastiano Sorbello | Fotografo & Videografo</title>
+    
+    <!-- Schema.org JSON-LD (WebSite + Person) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "sebisorb - Sebastiano Sorbello | Fotografo & Videografo",
+                "url": "https://tuosito.github.io",
+                "description": "Portfolio professionale di fotografia e videografia. Acireale, Catania.",
+                "inLanguage": "it"
+            },
+            {
+                "@type": "Person",
+                "name": "Sebastiano Sorbello",
+                "alternateName": "sebisorb",
+                "jobTitle": "Fotografo e Videografo",
+                "description": "Fotografo e Videografo professionista. Portfolio di fotografia e video.",
+                "url": "https://tuosito.github.io",
+                "sameAs": [
+                    "https://www.instagram.com/sebisorb/",
+                    "https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA"
+                ],
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Acireale",
+                    "addressRegion": "CT"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
-    <header>
+    <div class="bg-fixed-wrapper" aria-hidden="true">
+        <div class="bg-fixed-black"></div>
+        <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+            <source src="img/ph/sfondoanimatoverticale.mp4?v=2" type="video/mp4" media="(max-width: 1023px)">
+            <source src="img/ph/sfondoanimato.mp4?v=2" type="video/mp4" media="(min-width: 1024px)">
+        </video>
+    </div>
+    <!-- Header con navigazione -->
+    <header role="banner">
+        <div class="header-left">
+            <button type="button" class="header-lavori" aria-label="Apri menu Lavori" aria-expanded="false" aria-controls="mobileMenuPanel">LAVORI</button>
+        </div>
         <div class="logo-container">
-            <a href="index.html"><img class="logo" src="img/ph/bianco.png" alt="sebisorb Logo"></a>
+            <a href="index.html" aria-label="Torna alla homepage" title="Torna alla homepage">
+                <img class="logo" src="img/ph/sebisorbX.png" alt="sebisorb Logo - Sebastiano Sorbello">
+            </a>
         </div>
-        <nav class="navigazione">
-            <a href="Profilo.html" class="bottone"><h1>PROFILO</h1></a>
-            <a href="Lavori.html" class="bottone"><h1>LAVORI</h1></a>
-            <a href="Contatti.html" class="bottone"><h1>CONTATTI</h1></a>
-        </nav>
-    </header>
-    <main>
-        <div class="profilo">
-            <a href="Profilo.html"><img src="img/ph/sorb.png" alt="Sebastiano La Rosa" class="profilo-img"></a>
-            <p class="profilo-info">Sebastiano La Rosa<br>1996 Acireale (CT)<br>Video · Audio · Layout</p>
+        <div class="header-right">
+            <a href="Contatti.html" class="bottone header-contatti" aria-label="Vai alla pagina contatti"><h1>CONTATTI</h1></a>
         </div>
-        <div class="skills">
-            <img src="img/loghi.png" alt="Skills">
-        </div>
-        <div class="collegamento">
-            <a href="Video.html"><img src="img/lovep/copertina 2_1.41.1.png" alt="Copertina Love Patrol" class="collegata"></a>
-            <p class="about-text">VIDEO</p>
-            <a href="Foto.html"><img src="img/foto/prop.jpg" alt="Copertina Io, me e d io" class="collegata"></a>
-            <p class="about-text">FOTO</p>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-content">
-            <nav class="footer-nav">
-                <a href="Profilo.html"><h1>PROFILO</h1></a>
-                <a href="Lavori.html"><h1>LAVORI</h1></a>
-                <a href="Contatti.html"><h1>CONTATTI</h1></a>
-            </nav>
-            <div class="contact-info">
-                <p>Sebastiano La Rosa</p>
-                <p>sebisorbll@gmail.com</p>
-                <p>sebilsorb</p>
+        <nav class="navigazione" role="navigation" aria-label="Navigazione principale">
+            <div class="bottone bottone-dropdown" aria-label="Menu personale">
+                <h1>PERSONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="Personale.html" role="menuitem" aria-label="Vai alle foto personali">FOTO</a>
+                    <a href="Video.html" role="menuitem" aria-label="Vai ai video personali">VIDEO</a>
+                </div>
             </div>
-            <div class="social-icons">
-                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA"><img src="img/loghi/yt.png" alt="YouTube"></a>
-                <a href="https://www.instagram.com/sebisorb/"><img src="img/loghi/ig.png" alt="Instagram"></a>
-                <a href="https://www.linkedin.com/in/sebi-sorbello-a3837a252/"><img src="img/loghi/link.png" alt="LinkedIn"></a>
+            <div class="bottone bottone-dropdown" aria-label="Menu professionale">
+                <h1>PROFESSIONALE</h1>
+                <div class="bottone-dropdown-menu" role="menu">
+                    <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
+                    <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
+                    <a href="product.html" role="menuitem" aria-label="Vai alla product photography">PRODUCT</a>
+                </div>
+            </div>
+            <a href="Contatti.html" class="bottone" aria-label="Vai alla pagina contatti">
+                <h1>CONTATTI</h1>
+            </a>
+        </nav>
+        <button type="button" class="mobile-menu-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+            <span class="mobile-menu-toggle-bar"></span>
+        </button>
+    </header>
+    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
+        <div class="mobile-menu-columns">
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PROFESSIONALE</div>
+                <a href="food.html" class="mobile-menu-link">FOOD</a>
+                <a href="editoriali.html" class="mobile-menu-link">EDITORIALI</a>
+                <a href="product.html" class="mobile-menu-link">PRODUCT</a>
+            </div>
+            <div class="mobile-menu-col">
+                <div class="mobile-menu-category">PERSONALE</div>
+                <a href="Personale.html" class="mobile-menu-link">FOTO</a>
+                <a href="Video.html" class="mobile-menu-link">VIDEO</a>
+                <span class="mobile-menu-spacer" aria-hidden="true"></span>
+            </div>
+        </div>
+        <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
+    </div>
+
+    <!-- Main Content -->
+    <main role="main">
+        <!-- Sezione Profilo (box con retroilluminazione sotto il box) -->
+        <div class="backlight-wrapper backlight-y-40">
+            <section class="profilo backlight-box" aria-labelledby="profilo-heading">
+                <h1 id="profilo-heading" class="sr-only">Sebastiano Sorbello - Fotografo e Videografo</h1>
+                <img src="img/ph/sorb.png" 
+                     alt="Sebastiano Sorbello - Fotografo e Videografo" 
+                     class="profilo-img"
+                     loading="lazy"
+                     decoding="async">
+                <div class="profilo-dati-container">
+                    <span class="profilo-dati">1996 Acireale (CT)</span>
+                    <span class="profilo-skills">Video · Foto · Layout</span>
+                </div>
+                <p class="profilo-text">Sebastiano Sorbello<br><b>sebisorb</b></p>
+                <p class="profilo-text2">Formazione artistica e tecnologica, specializzato in Foto e Video. Fin da piccolo ho avuto una forte fascinazione verso la creazione, dalla sartoria alle armi per le avventure in campagna. Nella prima adolescenza scopro la musica ed inizio a suonare la chitarra. Venendo escluso dalla band di amici, decido quindi di reindirizzare la mia voglia di creare nella mia passione per il cinema. Inizio così a sperimentare nella produzione di corti demenziali ed in seguito progetti più autoriali e antropologici. Culminando infine in una formazione professionale che oggi applico a progetti di fotografia e videografia.</p>
+            </section>
+        </div>
+
+        <!-- Skills / Software -->
+        <section class="skills" aria-label="Software e competenze">
+            <p class="skills-intro">Strumenti che uso</p>
+            <img src="img/loghi.png" 
+                 alt="Software utilizzati: Adobe Premiere, Photoshop, After Effects, Illustrator" 
+                 class="skills-img"
+                 loading="lazy"
+                 decoding="async">
+        </section>
+
+        <!-- Collegamenti ai Lavori -->
+        <section class="collegamento" aria-label="Portfolio lavori">
+            <!-- Portfolio Personale - Foto -->
+            <article class="progetto-preview">
+                <a href="Personale.html" aria-label="Guarda il portfolio personale - foto">
+                    <img src="img/foto/personale/macerie1.jpg" 
+                         alt="Portfolio personale - foto" 
+                         class="collegata"
+                         loading="lazy"
+                         decoding="async">
+                </a>
+                <h2 class="about-text">PORTFOLIO PERSONALE</h2>
+                <p class="progetto-desc">Progetti che realizzo per passione e voglia di comunicare, tra ricerca visiva e sperimentazione.</p>
+            </article>
+
+            <!-- Food -->
+            <article class="progetto-preview">
+                <a href="food.html" aria-label="Guarda la food photography">
+                    <img src="img/foto/food/live1.jpg" 
+                         alt="Food photography" 
+                         class="collegata"
+                         loading="lazy"
+                         decoding="async">
+                </a>
+                <h2 class="about-text">FOOD</h2>
+                <p class="progetto-desc">Fotografia professionale per ristoranti e locali. Shooting live, studio e servizio.</p>
+            </article>
+
+            <!-- Video -->
+            <article class="progetto-preview">
+                <a href="Video.html" aria-label="Guarda i video personali">
+                    <img src="img/foto/copertina.png" 
+                         alt="Video personali" 
+                         class="collegata"
+                         loading="lazy"
+                         decoding="async">
+                </a>
+                <h2 class="about-text">VIDEO</h2>
+                <p class="progetto-desc">Documentarismo, messa in scena e narrazione demenziale.</p>
+            </article>
+
+            <!-- Editoriali -->
+            <article class="progetto-preview">
+                <a href="editoriali.html" aria-label="Vai alle editoriali">
+                    <img src="img/foto/Street Photography/1.png" 
+                         alt="Editoriali" 
+                         class="collegata"
+                         loading="lazy"
+                         decoding="async">
+                </a>
+                <h2 class="about-text">EDITORIALI</h2>
+                <p class="progetto-desc">Fotografia editoriale e reportage per riviste, pubblicazioni e progetti culturali.</p>
+            </article>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <!-- Contatti -->
+            <address class="contact-info">
+                <p><strong>Sebastiano Sorbello</strong></p>
+                <p>
+                    <a href="mailto:sebisorbll@gmail.com" 
+                       id="emailLink"
+                       title="Copia email negli appunti"
+                       aria-label="Copia email negli appunti">
+                        sebisorbll@gmail.com
+                    </a>
+                </p>
+                <p>@sebisorb</p>
+            </address>
+
+            <!-- Social Icons -->
+            <div class="social-icons" role="navigation" aria-label="Link social media">
+                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="Scrivimi su WhatsApp">
+                    <img src="img/loghi/footertsapp.png" alt="WhatsApp" loading="lazy">
+                </a>
+                <a href="https://www.instagram.com/sebisorb/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="Visita il profilo Instagram di sebisorb">
+                    <img src="img/loghi/instafooter.png" alt="Instagram" loading="lazy">
+                </a>
+                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   aria-label="Visita il canale YouTube di Sebastiano Sorbello">
+                    <img src="img/loghi/footertube.png" alt="YouTube" loading="lazy">
+                </a>
             </div>
         </div>
     </footer>
+
+    <script src="grain-sequence.js" defer></script>
+    <script src="dropdown.js" defer></script>
+    <script src="mobile-menu.js" defer></script>
 </body>
 </html>
