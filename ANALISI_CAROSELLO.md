@@ -1,13 +1,14 @@
 # Analisi carousel (Food / Personale)
 
 ## Struttura HTML
-- `.gallery-carousel-container.personale-carousel-container` (flex column)
+- `.gallery-carousel-container.carousel-strip-layout` (flex column)
   - `.gallery-carousel-wrapper` (contiene carousel + frecce)
     - `.gallery-nav-prev` (nascosto < 1280px)
-    - `.gallery-carousel.personale-carousel` (strip orizzontale)
+    - `.gallery-carousel` (strip orizzontale)
       - `.gallery-photo` × N (slot con img)
     - `.gallery-nav-next`
-  - `.personale-strip-viewport` (strip miniature)
+  - `.gallery-strip-viewport` (strip miniature)
+    - `.gallery-carousel-strip`
 
 ## Problemi individuati
 
@@ -17,7 +18,7 @@
 ### 2. Altezza wrapper sotto 1024px (centraggio verticale)
 Il container è `flex-direction: column` con due figli: **wrapper** e **strip**. Il wrapper ha `height: 100%`; la strip ha `flex: 0 0 auto`. Con altezza container fissata (clamp), "100%" sul wrapper significa "tutta l’altezza del container", quindi wrapper + strip superano l’altezza del container e si crea overflow/ambiguïtà. Il browser può dare al wrapper un’altezza “a contenuto” e il carousel non riceve un’altezza definita → lo slot (blu) non si centra nel rosso.
 
-**Soluzione**: dare al wrapper **flex: 1 1 0%** e **min-height: 0** (solo nel contesto `.personale-carousel-container` sotto 1024px) così prende lo **spazio rimanente** (container − strip). Così wrapper e carousel hanno altezza definita e `align-items: center` sul carousel centra gli slot.
+**Soluzione**: dare al wrapper **flex: 1 1 0%** e **min-height: 0** (solo nel contesto `.carousel-strip-layout` sotto 1024px) così prende lo **spazio rimanente** (container − strip). Così wrapper e carousel hanno altezza definita e `align-items: center` sul carousel centra gli slot.
 
 ### 3. Ridondanza scrollbar `.gallery-carousel`
 Stesse regole scrollbar (webkit + track/thumb/hover/active/button) compaiono:
@@ -35,7 +36,7 @@ Le righe 1809–1814 (verde/rosso/blu) sono temporanee: vanno rimosse in produzi
 ### 6. Regole `.gallery-photo` duplicate
 - Base: `.gallery-photo` (slot generico).
 - Personale/Food: `html.personale-page .gallery-photo` (e food/has-panel) con border-radius, img height/object-fit, focus, tap-highlight.
-- Desktop dentro @media 1024: di nuovo `.gallery-photo` e `html...personale-carousel-container .gallery-photo` con padding, max-width, transition.
+- Desktop dentro @media 1024: di nuovo `.gallery-photo` e `html...carousel-strip-layout .gallery-photo` con padding, max-width, transition.
 
 Ordine e specificità sono ok, ma si può raggruppare per contesto (base / personale-food / desktop) per leggibilità.
 
@@ -51,7 +52,7 @@ Ordine e specificità sono ok, ma si può raggruppare per contesto (base / perso
 
 ## Interventi consigliati (in ordine)
 1. Correggere il blocco orfano GALLERY GRID (spostare in @media 1024 o rimuovere duplicato).
-2. Sotto 1024px: wrapper con `flex: 1 1 0%` e `min-height: 0` nel contesto `.personale-carousel-container`; lasciare `align-items: center` sul carousel; eventualmente `align-self: center` sullo slot per sicurezza.
+2. Sotto 1024px: wrapper con `flex: 1 1 0%` e `min-height: 0` nel contesto `.carousel-strip-layout`; lasciare `align-items: center` sul carousel; eventualmente `align-self: center` sullo slot per sicurezza.
 3. Rimuovere i colori debug.
 4. Consolidare le regole scrollbar del carousel (tenere in base, rimuovere duplicato desktop se identico).
 5. (Opzionale) Raggruppare/commentare le sezioni carousel e valutare classe condivisa per personale/food/panel.

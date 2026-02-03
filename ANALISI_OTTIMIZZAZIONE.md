@@ -27,7 +27,7 @@
 ## 2. Codice “morto” sulla pagina Personale attuale
 
 La **Personale.html** attuale usa solo:
-- Caroselli orizzontali (`.gallery-carousel.personale-carousel`) con strip sotto (`.personale-carousel-strip`).
+- Caroselli orizzontali (`.gallery-carousel`) con strip sotto (`.gallery-carousel-strip`).
 - Nessun hero, nessun `.personale-categoria`, nessun `.personale-carousel-vertical` / `.personale-carousel-wrap` / `.personale-strip` (strip verticale).
 
 ### 2.1 CSS inutilizzato su Personale attuale

@@ -110,10 +110,10 @@ html.page-loading .gallery-grid-item img,
 html.page-loading .hero-image img,
 html.page-loading .profile-container img,
 html.page-loading .about-container img,
-html.page-loading .personale-carousel-strip,
+html.page-loading .gallery-carousel-strip,
 html.page-loading .personale-scrollbar,
 html.page-loading .gallery-carousel-container,
-html.page-loading .personale-carousel-container,
+html.page-loading .carousel-strip-layout,
 html.page-loading main > section {
     opacity: 0 !important;
     visibility: hidden !important;
@@ -128,10 +128,10 @@ html.page-ready .gallery-grid-item img,
 html.page-ready .hero-image img,
 html.page-ready .profile-container img,
 html.page-ready .about-container img,
-html.page-ready .personale-carousel-strip,
+html.page-ready .gallery-carousel-strip,
 html.page-ready .personale-scrollbar,
 html.page-ready .gallery-carousel-container,
-html.page-ready .personale-carousel-container,
+html.page-ready .carousel-strip-layout,
 html.page-ready main > section {
     opacity: 1;
     visibility: visible;
@@ -1390,20 +1390,39 @@ html.has-panel-menu main {
     background-color: var(--primary-green);
 }
 
-/* ========== CAROUSEL — DIMENSIONI PER FORMATO ==========
-   Unica fonte: .gallery-carousel-container (altezza). Wrapper, carousel, slot, foto = 100% derivato.
-   Formato          | Larghezza viewport | Altezza container (clamp min, vh, max)
-   -----------------|--------------------|------------------------------------------
-   Mobile piccolo   | ≤ 479px            | 180px, 42vh, 260px
-   Mobile           | 480px – 599px      | 200px, 45vh, 280px
-   Mobile large     | 600px – 767px      | 220px, 50vh, 320px
-   Tablet           | 768px – 1023px     | 240px, 52vh, 360px
-   Desktop          | ≥ 1024px           | 350px, 55vh, 65vh
+/* ========== CAROUSEL SYSTEM — CONSOLIDATO E OTTIMIZZATO ==========
+   
+   STRUTTURA:
+   .gallery-carousel-container (alias per compatibilità)
+   ├─ .gallery-carousel-wrapper
+   │  ├─ .gallery-carousel
+   │  │  └─ .gallery-photo > <img> (border-radius: 12px qui!)
+   │  └─ frecce navigazione
+    └─ .gallery-strip-viewport
+        └─ .gallery-carousel-strip
+            └─ .gallery-strip-thumb
+
+   NOMENCLATURA UNIFICATA:
+   - gallery-carousel-container = contenitore principale (uso su TUTTE le pagine)
+   - gallery-carousel-wrapper = wrapper (uso su TUTTE le pagine)
+   - gallery-carousel = carosello orizzontale (uso su TUTTE le pagine)
+   - gallery-photo = slot foto (uso su TUTTE le pagine)
+    - carousel-strip-layout = layout con strip sotto (Food/Personale/Product)
+
+   FORMATO RESPONSIVE (clamp min, preferito, max):
+   - Mobile ≤479px:    180px, 42vh, 260px
+   - Mobile 480-599px: 275px, 56vh, 415px
+   - Mobile 600-767px: 350px, 65vh, 515px
+   - Tablet 768-1023px: 480px, 75vh, 650px
+   - Desktop ≥1024px:   500px, 78vh, 95vh
    ============================================== */
+
+/* === BASE: TUTTE LE PAGINE === */
+
 .gallery-carousel-container {
     width: 100%;
     max-width: 100%;
-    height: clamp(275px, 56vh, 415px); /* Mobile 480px–599px */
+    height: clamp(275px, 56vh, 415px); /* fallback mobile */
     overflow: visible;
     position: relative;
     padding: 0;
@@ -1416,16 +1435,19 @@ html.has-panel-menu main {
     display: flex;
     align-items: center;
     height: 100%;
+    position: relative;
 }
 
-/* Personale: container flex così la strip non si allarga oltre 5 thumb */
-.personale-carousel-container {
+/* === STRIP LAYOUT: FLEX COLUMN PER STRIP SOTTO === */
+
+.carousel-strip-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
 }
-.personale-carousel-container .gallery-carousel-wrapper {
+
+.carousel-strip-layout .gallery-carousel-wrapper {
     align-self: stretch;
     width: 100%;
     min-width: 0;
@@ -1433,9 +1455,10 @@ html.has-panel-menu main {
     height: 100%;
 }
 
-/* Personale: viewport strip — larghezza fissa 5 thumb, overflow nascosto (niente sesta visibile).
-   min-width: 0 è essenziale: come flex item ha min-width: auto e si allargherebbe al contenuto (strip). */
-.personale-strip-viewport {
+
+/* === STRIP VIEWPORT (Caroselli con strip) === */
+
+.gallery-strip-viewport {
     flex: 0 0 auto;
     width: min(var(--personale-strip-viewport-w, 328px), 95vw);
     min-width: 0;
@@ -1451,24 +1474,23 @@ html.has-panel-menu main {
 }
 
 @keyframes swipeArrow {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(4px);
-    }
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
 }
+
+/* === CAROUSEL PRINCIPALE === */
 
 .gallery-carousel {
     display: flex;
     align-items: center;
     gap: 12px;
     overflow-x: auto;
+    overflow-y: visible;
     scroll-behavior: smooth;
     padding: 0 0 20px;
     margin: 0;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-green) rgba(255, 255, 255, 0.1);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
     -webkit-overflow-scrolling: touch;
@@ -1477,9 +1499,140 @@ html.has-panel-menu main {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    flex: 1;
 }
 
-/* Evita flicker/CLS: nasconde i caroselli finché non sono pronti */
+/* Nascondi scrollbar webkit */
+.gallery-carousel::-webkit-scrollbar {
+    height: 0;
+    display: none;
+}
+
+/* === FOTO SLOT === */
+
+.gallery-photo {
+    flex: 0 0 auto;
+    height: 100%;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform var(--transition-speed) ease-in-out;
+    box-sizing: border-box;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.gallery-photo:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-green);
+}
+
+.gallery-photo:active {
+    transform: scale(0.97);
+}
+
+/* === FOTO IMAGE (UNICO LUOGO PER BORDER-RADIUS!) === */
+
+.gallery-photo img {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* === STRIP CAROUSEL (Personale sotto) === */
+
+.gallery-carousel-strip {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 14px 10px 10px;
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    scrollbar-width: none;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gallery-carousel-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-carousel-strip .gallery-strip-thumb {
+    flex: 0 0 auto;
+    width: clamp(56px, 8vw, 72px);
+    min-width: clamp(56px, 8vw, 72px);
+    height: clamp(56px, 8vw, 72px);
+    min-height: max(48px, clamp(56px, 8vw, 72px));
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    display: block;
+    transition: opacity 0.2s ease;
+    opacity: 0.92;
+}
+
+.gallery-carousel-strip .gallery-strip-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius-sm);
+    filter: saturate(0.6);
+    transition: filter 0.2s ease;
+}
+
+.gallery-carousel-strip .gallery-strip-thumb:hover {
+    opacity: 1;
+}
+
+.gallery-carousel-strip .gallery-strip-thumb:hover img {
+    filter: saturate(1);
+}
+
+.gallery-carousel-strip .gallery-strip-thumb.active img {
+    filter: none;
+}
+
+.gallery-carousel-strip .gallery-strip-thumb:focus-visible,
+.gallery-carousel-strip .gallery-strip-thumb.active {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+}
+
+.gallery-carousel-strip .gallery-strip-thumb.active,
+.gallery-carousel-strip .gallery-strip-thumb:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--primary-green);
+}
+
+/* === CARICAMENTO E ANIMAZIONI === */
+
 .gallery-carousel-container:not(.loaded) .gallery-photo,
 .gallery-carousel-container:not(.loaded) .gallery-photo img {
     opacity: 0 !important;
@@ -1495,199 +1648,32 @@ html.has-panel-menu main {
     transition: opacity 280ms ease, transform 280ms ease, filter 280ms ease;
 }
 
-/* Scrollbar nativa personalizzata - stile custom per pagina principale (come mobile) */
-html::-webkit-scrollbar {
-    width: 6px;
-}
-
-html::-webkit-scrollbar-track {
-    background: transparent; /* Track trasparente come mobile */
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-html::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: var(--radius-sm);
-    transition: background-color 0.2s ease;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: none;
-}
-
-html::-webkit-scrollbar-thumb:hover {
-    background: #7bc178;
-}
-
-html::-webkit-scrollbar-thumb:active {
-    background: #5a9a57;
-}
-
-/* Nascondi frecce laterali */
-html::-webkit-scrollbar-button {
-    display: none;
-    width: 0;
-    height: 0;
-}
-
-html::-webkit-scrollbar-button:start:decrement,
-html::-webkit-scrollbar-button:end:increment {
-    display: none;
-}
-
-/* Scrollbar per Firefox - solo thumb verde, track trasparente */
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-green) transparent;
-}
-
-/* Personale: stessa scrollbar verde, ma senza frecce e più arrotondata.
-   Nota: il rendering varia per OS/browser (su macOS spesso è overlay). */
-html.personale-page {
-    /* Nascondiamo la scrollbar nativa: useremo overlay custom (stile “pill” Giulia). */
-}
-html.has-panel-menu {
-    scrollbar-width: none;
-    scrollbar-color: transparent transparent;
-}
-html.personale-page {
-    /* Larghezza viewport strip (5 thumb 56px + 4 gap 8px); solo Personale */
-    --personale-strip-viewport-w: 328px;
-}
-html.has-panel-menu::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-/* Personale: niente “backlight” verde dietro gli hero box */
-html.personale-page .backlight-wrapper::before,
-html.food-page .backlight-wrapper::before,
-html.has-panel-menu .backlight-wrapper::before {
-    display: none;
-}
-
-/* Personale: i titoli sezione non devono avere la lineetta verde */
-html.has-panel-menu .gallery-title::after {
-    display: none;
-}
-html.has-panel-menu .gallery-title {
-    padding-bottom: 0;
-    margin-bottom: 4px;
-}
-
-/* Personale: sezioni non sotto header sticky (anchor / scroll); spazio strip → titolo prossima serie */
-html.has-panel-menu .gallery-section {
-    scroll-margin-top: var(--header-h, 150px);
-    margin-bottom: clamp(50px, 8vh, 100px);
-}
-
-/* Personale: hero come Food ma più “compatto” tra titolo e descrizione */
-/* Personale: caroselli come Food + strip al posto della scrollbar */
-.gallery-carousel {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* legacy */
-}
-.gallery-carousel::-webkit-scrollbar {
-    height: 0;
-}
-
-/* Personale: strip leggermente più alta su Y (padding verticale) così le foto non vengono tagliate; le miniature restano 56×56 */
-.personale-carousel-strip {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 8px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 14px 10px 10px;
-    margin: 0;
-    width: 100%;
-    min-width: 0; /* permette alla strip di rispettare il viewport (flex min-width: auto altrimenti la allarga) */
-    scrollbar-width: none;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-.personale-carousel-strip::-webkit-scrollbar {
-    display: none;
-}
-.personale-carousel-strip .personale-strip-thumb {
-    flex: 0 0 auto;
-    width: clamp(56px, 8vw, 72px);
-    min-width: clamp(56px, 8vw, 72px);
-    height: clamp(56px, 8vw, 72px);
-    min-height: max(48px, clamp(56px, 8vw, 72px)); /* Touch target accessibile */
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 0;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-}
-.personale-carousel-strip .personale-strip-thumb:focus-visible,
-.personale-carousel-strip .personale-strip-thumb.active {
-    outline: none;
-    box-shadow: var(--shadow-focus);
-}
-
-/* Personale: thumbs riempiono la cella senza tagli strani (elementi piccoli: 6px) */
-.personale-carousel-strip .personale-strip-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-    filter: saturate(0.6);
-    transition: filter 0.2s ease;
-}
-.personale-carousel-strip .personale-strip-thumb.active img {
-    filter: none;
-}
-/* Hover thumb strip: saturazione 100% */
-.personale-carousel-strip .personale-strip-thumb:hover img {
-    filter: saturate(1);
-}
-
-/* Mobile/tablet (<1024px): strip e thumb fissi — niente ridimensionamento tra 600 e 900px (override dopo le regole base) */
-@media (max-width: 1023px) {
-    .personale-strip-viewport {
-        width: min(328px, 95vw) !important;
-    }
-    .personale-carousel-strip .personale-strip-thumb {
-        width: 56px !important;
-        min-width: 56px !important;
-        height: 56px !important;
-        min-height: 56px !important;
-    }
-}
-
-/* Personale: animazione prima visualizzazione (solo viewport al load) — lenta e fluida */
-.personale-carousel-container.personale-animate-pending .gallery-carousel-wrapper {
+.carousel-strip-layout.carousel-animate-pending .gallery-carousel-wrapper {
     opacity: 0;
     transform: translateY(50px);
     will-change: opacity, transform;
 }
 
-/* Nasconde le miniature fino all’avvio dell’animazione (evita flash al load) */
-.personale-carousel-container.personale-animate-pending .personale-carousel-strip {
+.carousel-strip-layout.carousel-animate-pending .gallery-carousel-strip {
     opacity: 0;
     pointer-events: none;
     will-change: opacity;
 }
 
-.personale-carousel-container.animate-initial .gallery-carousel-wrapper {
+.carousel-strip-layout.animate-initial .gallery-carousel-wrapper {
     animation: personaleCarouselIn 1.25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     will-change: opacity, transform;
 }
 
-.personale-carousel-container.animate-initial .personale-strip-thumb {
+.carousel-strip-layout.animate-initial .gallery-strip-thumb {
     opacity: 0;
     transform: translateX(-16px);
     animation: personaleThumbIn 0.55s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     animation-delay: var(--thumb-delay, 1s);
     will-change: opacity, transform;
 }
-/* Solo alla prima visualizzazione: le altre miniature (swipe) appaiono subito */
-.personale-carousel-container.animate-initial .personale-strip-thumb.no-entrance-animation {
+
+.carousel-strip-layout.animate-initial .gallery-strip-thumb.no-entrance-animation {
     animation: none;
     opacity: 1;
     transform: none;
@@ -1716,67 +1702,149 @@ html.has-panel-menu .gallery-section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .personale-carousel-container.personale-animate-pending .gallery-carousel-wrapper,
-    .personale-carousel-container.animate-initial .gallery-carousel-wrapper,
-    .personale-carousel-container.animate-initial .personale-strip-thumb,
-    .personale-carousel-container.animate-initial .personale-carousel-strip {
+    .carousel-strip-layout.carousel-animate-pending .gallery-carousel-wrapper,
+    .carousel-strip-layout.animate-initial .gallery-carousel-wrapper,
+    .carousel-strip-layout.animate-initial .gallery-strip-thumb,
+    .carousel-strip-layout.animate-initial .gallery-carousel-strip {
         animation: none;
         opacity: 1;
         transform: none;
     }
 }
 
-/* Personale / Food: foto carosello (elementi grandi: 12px) */
-.gallery-photo {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    padding: 0;
-    background: transparent;
+/* === RESPONSIVE HEIGHTS === */
+
+@media (max-width: 479px) {
+    .gallery-carousel-container {
+        height: clamp(260px, 60vh, 375px);
+    }
 }
-.gallery-photo img {
-    border-radius: var(--radius-lg);
+
+@media (min-width: 600px) {
+    .gallery-carousel-container {
+        height: clamp(350px, 65vh, 515px);
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-carousel-container {
+        height: clamp(480px, 75vh, 650px);
+    }
+}
+
+@media (max-width: 1023px) {
+    .gallery-strip-viewport {
+        width: min(328px, 95vw) !important;
+    }
+    
+    .gallery-carousel-strip .gallery-strip-thumb {
+        width: 56px !important;
+        min-width: 56px !important;
+        height: 56px !important;
+        min-height: 56px !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-carousel-container {
+        height: clamp(500px, 78vh, 95vh);
+    }
+}
+
+@media (min-width: 1920px) {
+    .gallery-carousel-container {
+        height: clamp(750px, 90vh, 1050px);
+    }
+}
+
+/* Scrollbar nativa personalizzata */
+html::-webkit-scrollbar {
+    width: 6px;
+}
+
+html::-webkit-scrollbar-track {
+    background: transparent;
+    -webkit-box-shadow: none;
     box-shadow: none;
 }
-.gallery-photo img {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    max-height: none;
-    object-fit: contain;
-    object-position: center;
-    display: block;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+
+html::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
 }
 
-/* Personale / Food: box selezione focus con border-radius 12px */
-.gallery-photo:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--primary-green);
+html::-webkit-scrollbar-thumb:hover {
+    background: #7bc178;
 }
 
-/* Personale / Food: niente rettangolo blu di selezione al tap/click */
-.gallery-photo,
-.gallery-photo img {
-    -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-touch-callout: none;
+html::-webkit-scrollbar-thumb:active {
+    background: #5a9a57;
 }
 
-/* Scrollbar overlay custom (Personale) */
+html::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+html::-webkit-scrollbar-button:start:decrement,
+html::-webkit-scrollbar-button:end:increment {
+    display: none;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) transparent;
+}
+
+html.has-panel-menu {
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+}
+
+html.has-panel-menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+html.personale-page {
+    --personale-strip-viewport-w: 328px;
+}
+
+html.personale-page .backlight-wrapper::before,
+html.food-page .backlight-wrapper::before,
+html.has-panel-menu .backlight-wrapper::before {
+    display: none;
+}
+
+html.has-panel-menu .gallery-title::after {
+    display: none;
+}
+
+html.has-panel-menu .gallery-title {
+    padding-bottom: 0;
+    margin-bottom: 4px;
+}
+
+html.has-panel-menu .gallery-section {
+    scroll-margin-top: var(--header-h, 150px);
+    margin-bottom: clamp(50px, 8vh, 100px);
+}
+
 .personale-scrollbar {
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
-    width: 12px; /* area hit */
+    width: 12px;
     z-index: 2000;
-    pointer-events: none; /* attiva solo sul thumb */
+    pointer-events: none;
 }
+
 .personale-scrollbar-thumb {
     position: absolute;
     right: 0;
@@ -1789,71 +1857,19 @@ html.has-panel-menu .gallery-section {
     pointer-events: auto;
     cursor: grab;
 }
+
 .personale-scrollbar-thumb:active {
     cursor: grabbing;
 }
 
-
-/* Slot: altezza 100% container (derivata), larghezza auto = box aderente alla foto (aspect ratio). */
-.gallery-photo {
-    flex: 0 0 auto;
-    height: 100%;
-    width: auto;
-    min-width: 0;
-    max-width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    padding: 8px;
-    cursor: pointer;
-    transition: transform var(--transition-speed) ease-in-out;
-    box-sizing: border-box;
-}
-
-.gallery-photo img {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
-    border-radius: var(--radius-lg);
-}
-
-.gallery-photo:active {
-    transform: scale(0.97);
-}
-
-/* Carousel: altezza container per formato (vedi tabella sopra). */
-@media (max-width: 479px) {
-    .gallery-carousel-container {
-        height: clamp(260px, 60vh, 375px);
-    }
-}
-@media (min-width: 600px) {
-    .gallery-carousel-container {
-        height: clamp(350px, 65vh, 515px);
-    }
-}
-@media (min-width: 768px) {
-    .gallery-carousel-container {
-        height: clamp(480px, 75vh, 650px);
-    }
-}
 @media (min-width: 1024px) {
-    .gallery-carousel-container {
-        height: clamp(650px, 85vh, 900px);
-    }
     .gallery-main {
         padding-left: 20px;
         padding-right: 20px;
     }
 }
+
 @media (min-width: 1920px) {
-    .gallery-carousel-container {
-        height: clamp(750px, 90vh, 1050px);
-    }
     .gallery-main {
         padding-left: max(20px, calc((100vw - 1920px) / 2 + 20px));
         padding-right: max(20px, calc((100vw - 1920px) / 2 + 20px));
@@ -2237,7 +2253,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     display: none;
 }
 
-.personale-strip-thumb {
+.personale-strip .gallery-strip-thumb {
     flex-shrink: 0;
     width: 64px;          /* mantiene miniatura piccola */
     margin: 0;            /* allinea la thumb al bordo della strip (gap coerente con hero↔foto) */
@@ -2253,7 +2269,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     opacity: 0.92;
 }
 
-.personale-strip-thumb img {
+.personale-strip .gallery-strip-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -2261,12 +2277,12 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     border-radius: var(--radius-sm);
 }
 
-.personale-strip-thumb:hover {
+.personale-strip .gallery-strip-thumb:hover {
     opacity: 1;
 }
 
-.personale-strip-thumb.active,
-.personale-strip-thumb:focus-visible {
+.personale-strip .gallery-strip-thumb.active,
+.personale-strip .gallery-strip-thumb:focus-visible {
     box-shadow: inset 0 0 0 2px var(--primary-green);
 }
 
@@ -2299,7 +2315,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         order: 2;
         -webkit-overflow-scrolling: touch;
     }
-    .personale-strip-thumb {
+    .personale-strip .gallery-strip-thumb {
         width: 56px;
         min-width: 56px;
         aspect-ratio: 1;
@@ -2880,12 +2896,12 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         height: 3px;
     }
 
-    /* Desktop: container = unica fonte — altezza 55vh (clamp 350–65vh); slot 100%. Padding laterale 0: box verde e rosso coincidono. */
+    /* Desktop: container = unica fonte — altezza 78vh (clamp 500–95vh); slot 100%. Padding laterale 0: box verde e rosso coincidono. */
     .gallery-carousel-container {
         max-width: 1920px;
         margin: 0 auto;
         padding: 0;
-        height: clamp(350px, 55vh, 65vh);
+        height: clamp(500px, 78vh, 95vh);
     }
 
     .gallery-carousel-wrapper {
@@ -2896,12 +2912,11 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         padding: 0;
         height: 100%;
         align-self: stretch;
-        overflow: hidden;
-        border-radius: var(--radius-lg);
+        overflow: visible;
     }
 
     /* Personale/Food desktop: wrapper prende spazio rimanente (flex: 1) così la strip resta dentro il box verde */
-    .personale-carousel-container .gallery-carousel-wrapper {
+    .carousel-strip-layout .gallery-carousel-wrapper {
         flex: 1 1 0%;
         min-height: 0;
     }
@@ -2911,30 +2926,21 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         .gallery-carousel-container {
             padding: 0;
         }
-        .personale-carousel-container .gallery-carousel-wrapper {
+        .carousel-strip-layout .gallery-carousel-wrapper {
             padding: 0;
         }
-        .personale-carousel-container .gallery-carousel {
+        .carousel-strip-layout .gallery-carousel {
             padding: 20px 0;
         }
     }
 
     /* Personale/Food desktop: altezza da container, larghezza auto = box aderente alla foto */
-    .personale-carousel-container .gallery-photo {
+    .carousel-strip-layout .gallery-photo {
         height: 100%;
         width: auto;
         min-width: 0;
         max-width: min(90vw, 1400px);
         padding: 0;
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-    }
-    .personale-carousel-container .gallery-photo img {
-        height: 100%;
-        width: auto;
-        max-width: 100%;
-        object-fit: contain;
-        border-radius: var(--radius-lg);
     }
 
     .gallery-carousel {
@@ -2943,12 +2949,11 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         align-items: center;
         gap: 20px;
         overflow-x: auto;
-        overflow-y: hidden;
+        overflow-y: visible;
         scroll-behavior: smooth;
         padding: 20px 0;
         height: 100%;
         box-sizing: border-box;
-        border-radius: var(--radius-lg);
         scrollbar-width: thin;
         scrollbar-color: var(--primary-green) rgba(255, 255, 255, 0.1);
         justify-content: flex-start;
@@ -2959,11 +2964,11 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     }
 
     /* Personale/Food desktop: niente scrollbar sul carousel (come in precedenza) */
-    .personale-carousel-container .gallery-carousel {
+    .carousel-strip-layout .gallery-carousel {
         scrollbar-width: none;
         scrollbar-color: transparent transparent;
     }
-    .personale-carousel-container .gallery-carousel::-webkit-scrollbar {
+    .carousel-strip-layout .gallery-carousel::-webkit-scrollbar {
         height: 0;
         width: 0;
         display: none;
@@ -2980,9 +2985,6 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         will-change: transform;
     }
 
-    .gallery-photo img {
-        border-radius: var(--radius-lg);
-    }
 
     /* Preloader Desktop */
     /* Hero Desktop — margine titolo–bordo superiore = margine descrizione–bordo inferiore */
@@ -3131,14 +3133,14 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     }
 
     /* Personale / Food desktop: stesso comportamento della versione mobile */
-    .personale-strip-viewport {
+    .gallery-strip-viewport {
         width: min(var(--personale-strip-viewport-w, 328px), 95vw);
         min-width: 0;
         max-width: 100%;
         overflow: hidden;
         display: block;
     }
-    .personale-carousel-strip {
+    .gallery-carousel-strip {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -3154,7 +3156,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
     }
-    .personale-carousel-strip::-webkit-scrollbar {
+    .gallery-carousel-strip::-webkit-scrollbar {
         display: none;
     }
 }
@@ -3179,11 +3181,10 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         gap: 0;
         padding: 0;
         height: 100%;
-        overflow: hidden;
-        border-radius: var(--radius-lg);
+        overflow: visible;
     }
 
-    .personale-carousel-container .gallery-carousel-wrapper {
+    .carousel-strip-layout .gallery-carousel-wrapper {
         flex: 1 1 0%;
         min-height: 0;
     }
@@ -3194,6 +3195,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         align-items: center;
         justify-content: flex-start;
         padding: 12px 0;
+        width: 100%;
     }
 
     /* Slot e immagine: stesso comportamento ovunque sotto 1024px */
@@ -3204,19 +3206,10 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    .gallery-photo img {
-        height: 100%;
-        width: auto;
-        max-width: 100%;
-        max-height: none;
-        object-fit: contain;
-        object-position: center;
-        display: block;
-        min-height: 0;
+        max-width: 92vw;
     }
 
-    .personale-carousel-container .personale-strip-viewport {
+    .carousel-strip-layout .gallery-strip-viewport {
         align-self: center;
     }
 

@@ -28,7 +28,7 @@
     <link rel="icon" type="image/png" href="img/ph/bianco.png">
     <!-- Preload risorse critiche (LCP + CSS) -->
     <link rel="preload" href="stile.css" as="style">
-    <link rel="preload" href="img/foto/Personale/macerie1.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="img/foto/Personale/macerie1.jpg" as="image">
     <!-- Preconnect per Font Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,13 +58,13 @@
         <!-- MACERIE -->
         <section id="macerie" class="gallery-section" aria-labelledby="macerie-title">
             <h2 id="macerie-title" class="gallery-title">MACERIE</h2>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-macerie" aria-label="Foto precedente">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="macerie" id="carousel-macerie">
-                        <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/macerie1.jpg" alt="Macerie 1" loading="lazy" decoding="async"></div>
+                    <div class="gallery-carousel" data-section="macerie" id="carousel-macerie">
+                        <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/macerie1.jpg" alt="Macerie 1" loading="eager" decoding="async"></div>
                         <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/macerie2.jpg" alt="Macerie 2" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/macerie3.jpg" alt="Macerie 3" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="3"><img src="img/foto/Personale/macerie4.jpg" alt="Macerie 4" loading="lazy" decoding="async"></div>
@@ -79,8 +79,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-macerie" aria-label="Anteprime Macerie"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-macerie" aria-label="Anteprime Macerie"></div>
                 </div>
             </div>
         </section>
@@ -88,12 +88,12 @@
         <!-- CASTELLONAVE -->
         <section id="castellonave" class="gallery-section" aria-labelledby="castellonave-title">
             <h2 id="castellonave-title" class="gallery-title">CASTELLONAVE</h2>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-castellonave" aria-label="Foto precedente">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="castellonave" id="carousel-castellonave">
+                    <div class="gallery-carousel" data-section="castellonave" id="carousel-castellonave">
                         <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/castellonave1.jpg" alt="Castellonave 1" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/castellonave2.jpg" alt="Castellonave 2" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/castellonave3.jpg" alt="Castellonave 3" loading="lazy" decoding="async"></div>
@@ -109,8 +109,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-castellonave" aria-label="Anteprime Castellonave"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-castellonave" aria-label="Anteprime Castellonave"></div>
                 </div>
             </div>
         </section>
@@ -118,12 +118,12 @@
         <!-- IR -->
         <section id="ir" class="gallery-section" aria-labelledby="ir-title">
             <h2 id="ir-title" class="gallery-title">IR</h2>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-ir" aria-label="Foto precedente">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="ir" id="carousel-ir">
+                    <div class="gallery-carousel" data-section="ir" id="carousel-ir">
                         <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/ir1.jpg" alt="IR 1" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/ir2.jpg" alt="IR 2" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/ir3.jpg" alt="IR 3" loading="lazy" decoding="async"></div>
@@ -135,8 +135,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-ir" aria-label="Anteprime IR"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-ir" aria-label="Anteprime IR"></div>
                 </div>
             </div>
         </section>
@@ -144,12 +144,12 @@
         <!-- HALLOWEEN -->
         <section id="halloween" class="gallery-section" aria-labelledby="halloween-title">
             <h2 id="halloween-title" class="gallery-title">HALLOWEEN</h2>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-halloween" aria-label="Foto precedente">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="halloween" id="carousel-halloween">
+                    <div class="gallery-carousel" data-section="halloween" id="carousel-halloween">
                         <div class="gallery-photo" data-index="0"><img src="img/foto/Personale/halloween1.jpg" alt="Halloween 1" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="1"><img src="img/foto/Personale/halloween2.jpg" alt="Halloween 2" loading="lazy" decoding="async"></div>
                         <div class="gallery-photo" data-index="2"><img src="img/foto/Personale/halloween3.jpg" alt="Halloween 3" loading="lazy" decoding="async"></div>
@@ -163,8 +163,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-halloween" aria-label="Anteprime Halloween"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-halloween" aria-label="Anteprime Halloween"></div>
                 </div>
             </div>
         </section>

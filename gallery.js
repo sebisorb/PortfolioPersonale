@@ -165,11 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (isStripPage) {
         initialViewportContainers = new Set();
-        document.querySelectorAll(".personale-carousel-container").forEach((container) => {
+        document.querySelectorAll(".carousel-strip-layout").forEach((container) => {
             const r = container.getBoundingClientRect();
             if (r.top < window.innerHeight && r.bottom > 0) {
                 initialViewportContainers.add(container);
-                container.classList.add("personale-animate-pending");
+                container.classList.add("carousel-animate-pending");
             }
         });
     }
@@ -289,8 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Personale / Food / Product: strip (miniature) — init solo quando il container è in viewport (IntersectionObserver). Stesse regole animazione per tutti i caroselli.
         if (isStripPage && carousel.id) {
-            const strip = document.querySelector(`.personale-carousel-strip[data-carousel="${carousel.id}"]`);
-            const stripContainer = strip ? strip.closest(".personale-carousel-container") : null;
+            const strip = document.querySelector(`.gallery-carousel-strip[data-carousel="${carousel.id}"]`);
+            const stripContainer = strip ? strip.closest(".carousel-strip-layout") : null;
             if (!strip || !stripContainer || strip.dataset.init === "1") return;
 
             const buildStrip = () => {
@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!src) return;
                     const btn = document.createElement("button");
                     btn.type = "button";
-                    btn.className = "personale-strip-thumb";
+                    btn.className = "gallery-strip-thumb";
                     btn.dataset.index = String(i);
                     btn.setAttribute("aria-label", "Vai all'immagine " + (i + 1));
                     const tImg = document.createElement("img");
@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 /* Event delegation: un listener sulla strip per tutti i thumbnail */
                 strip.addEventListener("click", (e) => {
-                    const btn = e.target.closest(".personale-strip-thumb");
+                    const btn = e.target.closest(".gallery-strip-thumb");
                     if (!btn) return;
                     const index = parseInt(btn.dataset.index, 10);
                     if (isNaN(index) || index < 0 || index >= photoWraps.length) return;
@@ -395,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (typeof ResizeObserver !== "undefined") {
                     const ro = new ResizeObserver(scheduleUpdateFromCarousel);
                     ro.observe(strip);
-                    const stripContainerForRo = strip.closest(".personale-carousel-container");
+                    const stripContainerForRo = strip.closest(".carousel-strip-layout");
                     if (stripContainerForRo && stripContainerForRo !== strip) ro.observe(stripContainerForRo);
                 }
                 carousel.addEventListener("scroll", scheduleUpdateFromCarousel, { passive: true });
@@ -424,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const runAnimation = () => {
                             stripContainer.classList.add("animate-initial");
                             requestAnimationFrame(() => {
-                                stripContainer.classList.remove("personale-animate-pending");
+                                stripContainer.classList.remove("carousel-animate-pending");
                             });
                             
                             /* Cleanup will-change dopo animazione (0.85s carousel + 0.3s delay + 0.45s thumb = ~1.6s). */
@@ -610,10 +610,10 @@ document.addEventListener("DOMContentLoaded", () => {
         /* Opzione A: attendi immagini → applica padding/margin → triggera animazioni. */
         const hasStripLayoutNow = document.documentElement.classList.contains("personale-page") || document.documentElement.classList.contains("food-page") || document.documentElement.classList.contains("product-page");
         if (hasStripLayoutNow) {
-            const stripCarousels = document.querySelectorAll(".personale-carousel-container .gallery-carousel");
+            const stripCarousels = document.querySelectorAll(".carousel-strip-layout .gallery-carousel");
             
             const carouselsToCheck = Array.from(stripCarousels).filter((c) => {
-                const container = c.closest(".personale-carousel-container");
+                const container = c.closest(".carousel-strip-layout");
                 return initialViewportContainers && initialViewportContainers.has(container);
             });
             
@@ -682,7 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (hasStripLayout) {
                 /* Al load: ricalcola padding/margin (immagini definitive) e assicurati che animazione sia attiva. */
                 requestAnimationFrame(() => {
-                    document.querySelectorAll(".personale-carousel-container .gallery-carousel").forEach((c) => {
+                    document.querySelectorAll(".carousel-strip-layout .gallery-carousel").forEach((c) => {
                         updateCarouselPaddingForCenter(c);
                     });
                 });
@@ -705,7 +705,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const isStripLayoutPage = document.documentElement.classList.contains("personale-page") || document.documentElement.classList.contains("food-page") || document.documentElement.classList.contains("product-page");
                 if (isStripLayoutPage) {
                     requestAnimationFrame(() => {
-                        document.querySelectorAll(".personale-carousel-container .gallery-carousel").forEach((c) => updateCarouselPaddingForCenter(c));
+                        document.querySelectorAll(".carousel-strip-layout .gallery-carousel").forEach((c) => updateCarouselPaddingForCenter(c));
                     });
                 }
                 
@@ -762,7 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const alt = imgEl ? (imgEl.getAttribute("alt") || "") : "";
             const btn = document.createElement("button");
             btn.type = "button";
-            btn.className = "personale-strip-thumb";
+            btn.className = "gallery-strip-thumb";
             btn.dataset.index = String(index);
             btn.setAttribute("aria-label", "Vai all'immagine " + (index + 1) + (alt ? ": " + alt : ""));
             const thumbImg = document.createElement("img");
@@ -776,7 +776,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* Event delegation: un listener sulla strip per tutti i thumbnail */
         stripEl.addEventListener("click", (e) => {
-            const btn = e.target.closest(".personale-strip-thumb");
+            const btn = e.target.closest(".gallery-strip-thumb");
             if (!btn) return;
             const index = parseInt(btn.dataset.index, 10);
             if (isNaN(index) || index < 0 || index >= items.length) return;
@@ -784,7 +784,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         let activeIndex = -1;
-        const thumbs = stripEl.querySelectorAll(".personale-strip-thumb");
+        const thumbs = stripEl.querySelectorAll(".gallery-strip-thumb");
 
         function setStates(idx) {
             items.forEach((it) => it.classList.remove("is-active"));

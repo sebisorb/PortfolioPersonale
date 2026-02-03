@@ -28,7 +28,7 @@
     <link rel="icon" type="image/png" href="img/ph/bianco.png">
     <!-- Preload risorse critiche (LCP + CSS) -->
     <link rel="preload" href="stile.css" as="style">
-    <link rel="preload" href="img/foto/food/live1.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="img/foto/food/live1.jpg" as="image">
     <!-- Preconnect per Font Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,12 +128,12 @@
         <section id="live" class="gallery-section" aria-labelledby="live-title">
             <h2 id="live-title" class="gallery-title">LIVE</h2>
             <p class="gallery-section-description">Shooting direttamente nel tuo ristorante, catturando l'atmosfera autentica e i piatti nel loro ambiente naturale.</p>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-live" aria-label="Foto precedente" style="display: none;">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="live" id="carousel-live">
+                    <div class="gallery-carousel" data-section="live" id="carousel-live">
                     <div class="gallery-photo" data-index="0">
                         <img src="img/foto/food/live1.jpg" alt="Food Photography Live 1" loading="lazy" decoding="async">
                     </div>
@@ -184,8 +184,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-live" aria-label="Anteprime Live"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-live" aria-label="Anteprime Live"></div>
                 </div>
             </div>
         </section>
@@ -194,12 +194,12 @@
         <section id="studio" class="gallery-section" aria-labelledby="studio-title">
             <h2 id="studio-title" class="gallery-title">STUDIO</h2>
             <p class="gallery-section-description">Ricreo un setup "da studio" direttamente nel tuo locale, portando luci e tutto il necessario. Ideale per menu, social e comunicazione.</p>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-studio" aria-label="Foto precedente" style="display: none;">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="studio" id="carousel-studio">
+                    <div class="gallery-carousel" data-section="studio" id="carousel-studio">
                     <div class="gallery-photo" data-index="0">
                         <img src="img/foto/food/studio1.jpg" alt="Food Photography Studio 1" loading="lazy" decoding="async">
                     </div>
@@ -250,8 +250,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-studio" aria-label="Anteprime Studio"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-studio" aria-label="Anteprime Studio"></div>
                 </div>
             </div>
         </section>
@@ -260,12 +260,12 @@
         <section id="servizio" class="gallery-section" aria-labelledby="servizio-title">
             <h2 id="servizio-title" class="gallery-title">SERVIZIO</h2>
             <p class="gallery-section-description">Documentazione del servizio al tavolo, piatti pronti per il cliente e momenti di servizio.</p>
-            <div class="gallery-carousel-container personale-carousel-container">
+            <div class="gallery-carousel-container carousel-strip-layout">
                 <div class="gallery-carousel-wrapper">
                     <button class="gallery-nav-arrow gallery-nav-prev" data-carousel="carousel-servizio" aria-label="Foto precedente" style="display: none;">
                         <span>◀</span>
                     </button>
-                    <div class="gallery-carousel personale-carousel" data-section="servizio" id="carousel-servizio">
+                    <div class="gallery-carousel" data-section="servizio" id="carousel-servizio">
                     <div class="gallery-photo" data-index="0">
                         <img src="img/foto/food/servizio1.jpg" alt="Food Photography Servizio 1" loading="lazy" decoding="async">
                     </div>
@@ -304,8 +304,8 @@
                         <span>▶</span>
                     </button>
                 </div>
-                <div class="personale-strip-viewport" aria-hidden="true">
-                    <div class="personale-carousel-strip" data-carousel="carousel-servizio" aria-label="Anteprime Servizio"></div>
+                <div class="gallery-strip-viewport" aria-hidden="true">
+                    <div class="gallery-carousel-strip" data-carousel="carousel-servizio" aria-label="Anteprime Servizio"></div>
                 </div>
             </div>
         </section>
