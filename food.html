@@ -28,7 +28,7 @@
     <link rel="icon" type="image/png" href="img/ph/bianco.png">
     <!-- Preload risorse critiche (LCP + CSS) -->
     <link rel="preload" href="stile.css" as="style">
-    <link rel="preload" href="img/foto/food/live1.jpg" as="image">
+    <link rel="preload" href="img/foto/food/live1.jpg" as="image" fetchpriority="high">
     <!-- Preconnect per Font Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,7 +135,7 @@
                     </button>
                     <div class="gallery-carousel personale-carousel" data-section="live" id="carousel-live">
                     <div class="gallery-photo" data-index="0">
-                        <img src="img/foto/food/live1.jpg" alt="Food Photography Live 1" loading="lazy" decoding="async">
+                        <img src="img/foto/food/live1.jpg" alt="Food Photography Live 1" loading="eager" decoding="async" fetchpriority="high" width="2400" height="1600">
                     </div>
                     <div class="gallery-photo" data-index="1">
                         <img src="img/foto/food/live2.jpg" alt="Food Photography Live 2" loading="lazy" decoding="async">
