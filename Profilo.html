@@ -50,61 +50,7 @@
         </video>
     </div>
     <!-- Header con navigazione -->
-    <header role="banner">
-        <div class="header-left">
-            <button type="button" class="header-lavori" aria-label="Apri menu Lavori" aria-expanded="false" aria-controls="mobileMenuPanel">LAVORI</button>
-        </div>
-        <div class="logo-container">
-            <a href="index.html" aria-label="Torna alla homepage" title="Torna alla homepage">
-                <img class="logo" src="img/ph/sebisorbX.png" alt="sebisorb Logo - Sebastiano Sorbello">
-            </a>
-        </div>
-        <div class="header-right">
-            <a href="Contatti.html" class="bottone header-contatti" aria-label="Vai alla pagina contatti"><h1>CONTATTI</h1></a>
-        </div>
-        <nav class="navigazione" role="navigation" aria-label="Navigazione principale">
-            <div class="bottone bottone-dropdown" aria-label="Menu personale">
-                <h1>PERSONALE</h1>
-                <div class="bottone-dropdown-menu" role="menu">
-                    <a href="Personale.html" role="menuitem" aria-label="Vai alle foto personali">FOTO</a>
-                    <a href="Video.html" role="menuitem" aria-label="Vai ai video personali">VIDEO</a>
-                </div>
-            </div>
-            <div class="bottone bottone-dropdown" aria-label="Menu professionale">
-                <h1>PROFESSIONALE</h1>
-                <div class="bottone-dropdown-menu" role="menu">
-                    <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
-                    <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
-                    <a href="product.html" role="menuitem" aria-label="Vai alla product photography">PRODUCT</a>
-                </div>
-            </div>
-            <a href="Contatti.html" class="bottone" aria-label="Vai alla pagina contatti">
-                <h1>CONTATTI</h1>
-            </a>
-        </nav>
-        <button type="button" class="mobile-menu-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenuPanel">
-            <span class="mobile-menu-toggle-bar"></span>
-            <span class="mobile-menu-toggle-bar"></span>
-            <span class="mobile-menu-toggle-bar"></span>
-        </button>
-    </header>
-    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
-        <div class="mobile-menu-columns">
-            <div class="mobile-menu-col">
-                <div class="mobile-menu-category">PROFESSIONALE</div>
-                <a href="food.html" class="mobile-menu-link">FOOD</a>
-                <a href="editoriali.html" class="mobile-menu-link">EDITORIALI</a>
-                <a href="product.html" class="mobile-menu-link">PRODUCT</a>
-            </div>
-            <div class="mobile-menu-col">
-                <div class="mobile-menu-category">PERSONALE</div>
-                <a href="Personale.html" class="mobile-menu-link">FOTO</a>
-                <a href="Video.html" class="mobile-menu-link">VIDEO</a>
-                <span class="mobile-menu-spacer" aria-hidden="true"></span>
-            </div>
-        </div>
-        <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
-    </div>
+    <div id="header-placeholder"></div>
     
     <!-- Main Content -->
     <main role="main">
@@ -128,34 +74,11 @@
     </main>
     
     <!-- Footer -->
-    <footer role="contentinfo">
-        <div class="footer-content">
-            <!-- Contatti -->
-            <address class="contact-info">
-                <p><strong>Sebastiano Sorbello</strong></p>
-                <p>
-                    <a href="mailto:sebisorbll@gmail.com" id="emailLink" title="Copia email negli appunti" aria-label="Copia email negli appunti">sebisorbll@gmail.com</a>
-                </p>
-                <p>@sebisorb</p>
-            </address>
+    <div id="footer-placeholder"></div>
 
-            <!-- Social -->
-            <div class="social-icons" role="navigation" aria-label="Link social media">
-                <a href="https://wa.me/393472146153?text=Ciao%20Sebastiano" target="_blank" rel="noopener noreferrer" aria-label="Scrivimi su WhatsApp">
-                    <img src="img/loghi/footertsapp.png" alt="WhatsApp" loading="lazy">
-                </a>
-                <a href="https://www.instagram.com/sebisorb/" target="_blank" rel="noopener noreferrer" aria-label="Visita il profilo Instagram di sebisorb">
-                    <img src="img/loghi/instafooter.png" alt="Instagram" loading="lazy">
-                </a>
-                <a href="https://www.youtube.com/channel/UC5YKIzqmDr_mJyhiih4DOiA" target="_blank" rel="noopener noreferrer" aria-label="Visita il canale YouTube di Sebastiano Sorbello">
-                    <img src="img/loghi/footertube.png" alt="YouTube" loading="lazy">
-                </a>
-            </div>
-        </div>
-    </footer>
-
+    <script src="page-loader.js"></script>
+    <script src="image-dimensions.js" defer></script>
+    <script src="components-loader.js"></script>
     <script src="grain-sequence.js" defer></script>
-    <script src="dropdown.js" defer></script>
-    <script src="mobile-menu.js" defer></script>
 </body>
 </html>

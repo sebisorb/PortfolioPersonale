@@ -81,7 +81,10 @@
         lavoriBtn.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            toggleMenuFromDesktop();
+            console.log("LAVORI clicked, is-open state:", panel.classList.contains("is-open"));
+            // Toggle menù su entrambi mobile e desktop
+            if (panel.classList.contains("is-open")) closeMenu();
+            else openMenu();
         });
     }
 

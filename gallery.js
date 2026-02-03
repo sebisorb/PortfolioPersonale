@@ -12,6 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return window.innerWidth < 1024;
     }
 
+    // Gestione scroll orizzontale SOLO con Shift+rotella (non interferisce con lo scroll verticale)
+    function enableWheelScroll(container) {
+        container.addEventListener(
+            "wheel",
+            (e) => {
+                if (!e.shiftKey) return;
+                e.preventDefault();
+                container.scrollLeft += e.deltaY;
+            },
+            { passive: false }
+        );
+    }
+
     // ===============================
     // PERSONALE — Header height come CSS var (per snap/scroll-margin/peek)
     // ===============================
@@ -27,15 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
         applyHeaderHeightVar();
-        let headerResizeT;
-        window.addEventListener(
-            "resize",
-            () => {
-                clearTimeout(headerResizeT);
-                headerResizeT = setTimeout(applyHeaderHeightVar, 150);
-            },
-            { passive: true }
-        );
 
         // Scrollbar overlay custom (stile pill) — solo desktop (su mobile può risultare invasiva)
         if (!isMobileDevice()) {
@@ -171,19 +175,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     carousels.forEach((carousel) => {
+        enableWheelScroll(carousel);
         setupCarouselPrefetch(carousel);
         const photos = carousel.querySelectorAll(".gallery-photo img");
         const isPersonale = document.documentElement.classList.contains("personale-page");
         const isFoodPage = document.documentElement.classList.contains("food-page");
         
-        // Mostra il carosello dopo un frame per evitare layout shift visibile
+        // Wait for page ready event before showing carousel
         const container = carousel.closest(".gallery-carousel-container");
         if (container) {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    container.classList.add("loaded");
+            const showCarousel = () => {
+                if (container.classList.contains("loaded")) return;
+
+                const waitForImages = (root, done) => {
+                    const imgs = Array.from(root.querySelectorAll("img"));
+                    if (imgs.length === 0) {
+                        done();
+                        return;
+                    }
+
+                    let remaining = 0;
+                    const markDone = () => {
+                        remaining -= 1;
+                        if (remaining <= 0) done();
+                    };
+
+                    imgs.forEach((img) => {
+                        if (img.complete && img.naturalWidth > 0) return;
+                        remaining += 1;
+                        img.addEventListener("load", markDone, { once: true });
+                        img.addEventListener("error", markDone, { once: true });
+                    });
+
+                    if (remaining === 0) {
+                        done();
+                    } else {
+                        setTimeout(done, 2500);
+                    }
+                };
+
+                waitForImages(container, () => {
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            container.classList.add("loaded");
+                        });
+                    });
                 });
-            });
+            };
+            
+            // If page is already ready, show immediately
+            if (document.documentElement.classList.contains('page-ready')) {
+                showCarousel();
+            } else {
+                // Wait for pageReady event
+                document.addEventListener('pageReady', showCarousel, { once: true });
+            }
         }
         
         let initialScrollLeft = carousel.scrollLeft;
@@ -276,16 +322,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     btn.appendChild(tImg);
                     strip.appendChild(btn);
                     thumbs.push(btn);
+                });
 
-                    btn.addEventListener("click", () => {
-                        const target = photoWraps[i];
-                        if (!target) return;
-                        /* Scroll carousel per centrare la foto corrispondente */
-                        const scrollLeft = target.offsetLeft - (carousel.clientWidth - target.offsetWidth) / 2;
-                        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-                        const clamped = Math.max(0, Math.min(scrollLeft, maxScroll));
-                        carousel.scrollTo({ left: clamped, behavior: "smooth" });
-                    });
+                /* Event delegation: un listener sulla strip per tutti i thumbnail */
+                strip.addEventListener("click", (e) => {
+                    const btn = e.target.closest(".personale-strip-thumb");
+                    if (!btn) return;
+                    const index = parseInt(btn.dataset.index, 10);
+                    if (isNaN(index) || index < 0 || index >= photoWraps.length) return;
+                    const target = photoWraps[index];
+                    if (!target) return;
+                    /* Scroll carousel per centrare la foto corrispondente */
+                    const scrollLeft = target.offsetLeft - (carousel.clientWidth - target.offsetWidth) / 2;
+                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                    const clamped = Math.max(0, Math.min(scrollLeft, maxScroll));
+                    carousel.scrollTo({ left: clamped, behavior: "smooth" });
                 });
 
                 strip._lastActiveIndex = -1;
@@ -313,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     /* Su desktop tutte le thumb sono visibili: non centrare la thumb attiva con scroll */
                     const activeEl = thumbs[idx];
-                    if (isMobileDevice() && activeEl && stripWidth > 0) {
+                    if (activeEl && stripWidth > 0) {
                         const stripRect = strip.getBoundingClientRect();
                         const thumbRect = activeEl.getBoundingClientRect();
                         const stripCenter = stripRect.left + stripRect.width / 2;
@@ -370,19 +421,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     /* Attendi che il layout (padding/margin) sia pronto prima di far partire l'animazione. */
                     const startAnimation = () => {
-                        stripContainer.classList.add("animate-initial");
-                        requestAnimationFrame(() => {
-                            stripContainer.classList.remove("personale-animate-pending");
-                        });
-                        
-                        /* Cleanup will-change dopo animazione (1.25s carousel + ritardo massimo thumb ~1s + 0.55s thumb = ~3s). */
-                        setTimeout(() => {
-                            const wrapper = stripContainer.querySelector(".gallery-carousel-wrapper");
-                            if (wrapper) wrapper.style.willChange = "auto";
-                            thumbs.forEach((thumb) => {
-                                thumb.style.willChange = "auto";
+                        const runAnimation = () => {
+                            stripContainer.classList.add("animate-initial");
+                            requestAnimationFrame(() => {
+                                stripContainer.classList.remove("personale-animate-pending");
                             });
-                        }, 3200);
+                            
+                            /* Cleanup will-change dopo animazione (0.85s carousel + 0.3s delay + 0.45s thumb = ~1.6s). */
+                            setTimeout(() => {
+                                const wrapper = stripContainer.querySelector(".gallery-carousel-wrapper");
+                                if (wrapper) wrapper.style.willChange = "auto";
+                                thumbs.forEach((thumb) => {
+                                    thumb.style.willChange = "auto";
+                                });
+                            }, 1800);
+                        };
+
+                        if (document.documentElement.classList.contains("page-ready")) {
+                            runAnimation();
+                        } else {
+                            document.addEventListener("pageReady", runAnimation, { once: true });
+                        }
                     };
                     
                     if (layoutIsReady) {
@@ -533,7 +592,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         /* Frecce carosello solo da 1280px (nascoste su tablet portrait) */
-        const ARROWS_BREAKPOINT = 1280;
+        const ARROWS_BREAKPOINT = 1024;
         function initAllCarousels() {
             if (window.innerWidth >= ARROWS_BREAKPOINT) {
                 const navPrevButtons = document.querySelectorAll('.gallery-nav-prev[data-carousel]');
@@ -630,25 +689,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }, { once: true });
 
-        /* Resize: aggiorna padding centramento per tutti i carousel strip (desktop e mobile). */
-        (function () {
-            const isStripLayoutPage = () => document.documentElement.classList.contains("personale-page") || document.documentElement.classList.contains("food-page") || document.documentElement.classList.contains("product-page");
-            let paddingResizeT;
-            window.addEventListener("resize", () => {
-                if (!isStripLayoutPage()) return;
-                clearTimeout(paddingResizeT);
-                paddingResizeT = setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        document.querySelectorAll(".personale-carousel-container .gallery-carousel").forEach((c) => updateCarouselPaddingForCenter(c));
-                    });
-                }, 280);
-            });
-        })();
+        /* Resize: gestito da handler unificato più in basso */
         
+        /* Resize handler unificato: gestisce header height, padding update e carousel reinit */
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
+                /* 1. Header height var update (se su pagina Personale) */
+                if (isPanelMenuPage) {
+                    applyHeaderHeightVar();
+                }
+                
+                /* 2. Padding update per strip layout */
+                const isStripLayoutPage = document.documentElement.classList.contains("personale-page") || document.documentElement.classList.contains("food-page") || document.documentElement.classList.contains("product-page");
+                if (isStripLayoutPage) {
+                    requestAnimationFrame(() => {
+                        document.querySelectorAll(".personale-carousel-container .gallery-carousel").forEach((c) => updateCarouselPaddingForCenter(c));
+                    });
+                }
+                
+                /* 3. Carousel reinit se cambio desktop/mobile */
                 const nowIsDesktop = window.innerWidth >= ARROWS_BREAKPOINT;
                 if (nowIsDesktop !== lastIsDesktop) {
                     lastIsDesktop = nowIsDesktop;
@@ -711,10 +772,15 @@ document.addEventListener("DOMContentLoaded", () => {
             thumbImg.decoding = "async";
             btn.appendChild(thumbImg);
             stripEl.appendChild(btn);
+        });
 
-            btn.addEventListener("click", () => {
-                item.scrollIntoView({ behavior: "smooth", block: "start" });
-            });
+        /* Event delegation: un listener sulla strip per tutti i thumbnail */
+        stripEl.addEventListener("click", (e) => {
+            const btn = e.target.closest(".personale-strip-thumb");
+            if (!btn) return;
+            const index = parseInt(btn.dataset.index, 10);
+            if (isNaN(index) || index < 0 || index >= items.length) return;
+            items[index].scrollIntoView({ behavior: "smooth", block: "start" });
         });
 
         let activeIndex = -1;
