@@ -790,47 +790,8 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
 }
 
 /* ==================
-   CONTATTI - MOBILE
+   CONTATTI - MOBILE & DESKTOP OTTIMIZZATO
    ================== */
-.contatti-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 0 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-}
-.contatti-hero > *:first-child {
-    margin-top: 12px;
-}
-.contatti-hero > *:last-child {
-    margin-bottom: 12px;
-}
-
-.contatti-title {
-    width: 100%;
-    text-align: center;
-    font-size: 54px;
-    letter-spacing: 4px;
-    line-height: 1.1;
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.contatti-subtitle {
-    width: 100%;
-    text-align: center;
-    font-size: 16px;
-    opacity: 0.85;
-    font-style: italic;
-    margin-top: 0;
-}
-
 .contatti {
     display: grid;
     grid-template-columns: 1fr;
@@ -848,10 +809,12 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-speed) ease-in-out;
+    cursor: pointer;
 }
 
-.contatti .coppia-link,
 .contatti .coppia-link * {
     cursor: pointer;
     user-select: none;
@@ -860,28 +823,8 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     -ms-user-select: none;
 }
 
-.coppia-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    transition: transform var(--transition-speed) ease-in-out;
-    cursor: pointer;
-}
-
-.coppia-link * {
-    cursor: pointer;
-}
-
 .coppia-link:hover {
     transform: translateY(-5px);
-}
-
-.coppia-link:hover .coppia {
-    transform: none; /* Previene conflitto con transform del link */
-}
-
-.coppia-link:hover .coppia::before {
-    opacity: 1;
 }
 
 .coppia {
@@ -901,24 +844,15 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     transition: transform var(--transition-speed) ease-in-out,
                 box-shadow var(--transition-speed) ease-in-out;
     width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     box-sizing: border-box;
     position: relative;
     z-index: 10;
-}
-
-/* Contatti: box uguali e icone allineate */
-.contatti .coppia-link {
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.contatti .coppia {
-    flex: 1;
     min-height: 160px;
 }
 
-/* Icona in uno spazio fisso così tutte le icone sono allineate (mobile: centrata) */
 .contatti .socialz {
     width: 56px;
     height: 56px;
@@ -945,8 +879,9 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     z-index: 0;
 }
 
-
-
+.coppia-link:hover .coppia::before {
+    opacity: 1;
+}
 
 .socialz {
     width: 55px;
@@ -1000,8 +935,8 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     top: 50%;
     transform: translate(-50%, -50%);
     color: var(--primary-green);
-    font-weight: 500;
-    white-space: nowrap;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 /* ==================
@@ -1989,6 +1924,7 @@ html.has-panel-menu .gallery-section {
         font-size: 13px;
         margin: 0;
         padding: 0;
+        opacity: 0.85;
         line-height: 1.6;
     }
 
@@ -2186,16 +2122,40 @@ html.has-panel-menu .gallery-section {
     }
 
     .contatti .coppia-link {
-        max-width: none;
-        margin-left: 0;
-        margin-right: 0;
+        max-width: 500px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-decoration: none;
+        color: inherit;
+        transition: transform var(--transition-speed) ease-in-out;
+        cursor: pointer;
     }
 
     .coppia {
-        flex-direction: row;
-        text-align: left;
-        padding: 40px 60px;
-        gap: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+        padding: 30px 25px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(30px) saturate(180%);
+        -webkit-backdrop-filter: blur(30px) saturate(180%);
+        border: none;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--glass-shadow);
+        transition: transform var(--transition-speed) ease-in-out,
+                    box-shadow var(--transition-speed) ease-in-out;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 10;
+        min-height: 160px;
     }
 
     /* Contatti desktop: colonna fissa per le icone così restano tutte sulla stessa verticale */
@@ -2491,6 +2451,8 @@ html.has-panel-menu .gallery-section {
         min-width: 0;
         max-width: min(90vw, 1400px);
         padding: 0;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
     }
 
     .gallery-carousel {
