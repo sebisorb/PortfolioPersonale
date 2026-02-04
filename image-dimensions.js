@@ -70,7 +70,6 @@
         "img/foto/Personale/ir4.jpg": [2400, 1800],
         "img/foto/Personale/ir5.jpg": [2400, 1800],
         "img/foto/Personale/ir6.jpg": [2400, 1800],
-        "img/foto/personale/macerie1.jpg": [2400, 1800],
         "img/foto/Personale/macerie1.jpg": [2400, 1800],
         "img/foto/Personale/macerie2.jpg": [2400, 1800],
         "img/foto/Personale/macerie3.jpg": [1800, 2400],

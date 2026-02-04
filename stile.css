@@ -17,8 +17,6 @@
     --transition-speed: 0.3s;
     /* Spaziatura fissa per gruppi di elementi “attaccati” */
     --gap-attached: 10px;
-    --personale-strip-w: 220px;
-    --header-height: 70px;
     --radius-sm: 6px;
     --radius-lg: 12px;
     /* Shadow system */
@@ -87,7 +85,6 @@ img {
    ================== */
 html {
     min-height: 100%;
-    background-color: #000;
     overflow-x: hidden; /* Responsive: evita scroll orizzontale su tutti i device */
     scroll-behavior: smooth; /* Smooth scrolling globale */
     scrollbar-gutter: stable both-edges; /* Evita shift quando compare la scrollbar */
@@ -173,7 +170,7 @@ header * {
     bottom: 0;
     width: 100%;
     height: 100%;
-    z-index: -999;
+    z-index: -1;
     overflow: visible;
     pointer-events: none;
 }
@@ -185,7 +182,7 @@ header * {
     left: 0;
     right: 0;
     min-height: 100vh;
-    height: 300vh;
+    height: 200vh; /* Estensione sotto scroll per content dinamico; absolute, resta dentro wrapper fixed */
     background-color: #000;
 }
 
@@ -195,8 +192,6 @@ header * {
     left: 0;
     width: 100%;
     height: 100%;
-    min-width: 100%;
-    min-height: 100%;
     object-fit: cover;
     pointer-events: none;
 }
@@ -209,9 +204,15 @@ header * {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.25) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.15) 100%);
     pointer-events: none;
     z-index: 0;
+}
+
+@media (min-width: 1024px) {
+    .bg-fixed-wrapper::after {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.25) 100%);
+    }
 }
 
 /* Fallback se il wrapper non c’è (pagina senza JS o vecchia struttura) */
@@ -285,7 +286,7 @@ header {
 
 /* Spazio per compensare l'header fixed */
 main {
-    margin-top: var(--header-height);
+    padding-top: 95px;
 }
 
 .logo-container {
@@ -334,7 +335,6 @@ main {
     width: 75px;
     height: auto;
     display: block;
-    vertical-align: middle;
     transition: transform var(--transition-speed) ease-in-out;
     cursor: pointer;
 }
@@ -375,7 +375,7 @@ main {
     bottom: -3px;
     left: 50%;
     background-color: var(--primary-green);
-    transition: all var(--transition-speed) ease-in-out;
+    transition: width var(--transition-speed) ease-in-out;
     transform: translateX(-50%);
 }
 
@@ -497,7 +497,7 @@ main.gallery-main {
 
 body.pagina-gallery main {
     background-color: transparent;
-    padding-top: 20px;
+    padding-top: 120px;
     /* IMPORTANT: le frecce desktop sono posizionate fuori dal carosello (valori negativi).
        Se il main ha overflow-x:hidden vengono tagliate ai margini esterni. */
     overflow-x: visible;
@@ -557,7 +557,6 @@ body.pagina-gallery main {
 }
 
 .backlight-wrapper .profilo,
-.backlight-wrapper .gallery-hero,
 .backlight-wrapper .contatti-hero {
     position: relative;
     z-index: 1;
@@ -1148,98 +1147,13 @@ footer {
     box-sizing: border-box;
 }
 
-/* Pagine con panel menu: header, logo, spazio sotto header */
-html.has-panel-menu header {
-    padding: 10px 18px;
-}
 html.has-panel-menu .logo {
     width: 120px;
 }
 
 /* Spazio sotto header fisso per tutte le pagine con panel */
 html.has-panel-menu main {
-    padding-top: 95px;
-}
-
-/* Hero Section — margine titolo–bordo superiore = margine descrizione–bordo inferiore */
-.gallery-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 0 25px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 80px;
-    width: 90%;
-    max-width: 500px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: none;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--glass-shadow);
-    position: relative;
-    z-index: 10;
-}
-.gallery-hero > *:first-child {
-    margin-top: 12px;
-}
-.gallery-hero > *:last-child {
-    margin-bottom: 12px;
-}
-
-
-
-.gallery-hero-title {
-    width: 100%;
-    text-align: center;
-    font-size: 54px;
-    letter-spacing: 3px;
-    line-height: 1.1;
-    margin-bottom: 8px;
-    margin-top: 0;
-    color: #ffffff;
-    user-select: none;
-    text-transform: uppercase;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: default;
-    position: relative;
-    z-index: 1;
-}
-
-.gallery-hero-subtitle {
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
-    color: var(--primary-green);
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: 600;
-    position: relative;
-    text-transform: uppercase;
-    z-index: 1;
-}
-
-.gallery-hero-subtitle-line {
-    display: block;
-}
-
-.gallery-hero-description {
-    width: 100%;
-    text-align: center;
-    font-size: 15px;
-    line-height: 1.8;
-    max-width: 100%;
-    margin: 0 auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    color: rgba(255, 255, 255, 0.9);
-    box-sizing: border-box;
+    padding-top: 160px;
 }
 
 .gallery-cta-button {
@@ -1252,7 +1166,9 @@ html.has-panel-menu main {
     font-size: 16px;
     font-weight: 600;
     font-family: "Oswald", "Arial", sans-serif;
-    transition: all var(--transition-speed) ease-in-out;
+    transition: background-color var(--transition-speed) ease-in-out,
+                transform var(--transition-speed) ease-in-out,
+                box-shadow var(--transition-speed) ease-in-out;
     border: 2px solid var(--primary-green);
 }
 
@@ -1267,6 +1183,7 @@ html.has-panel-menu main {
     text-align: center;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.85);
+    margin-top: 0;
     margin-bottom: 40px;
     max-width: 700px;
     margin-left: auto;
@@ -1369,8 +1286,9 @@ html.has-panel-menu main {
     text-align: center;
     font-size: 52px;
     letter-spacing: 3px;
-    margin-bottom: 8px;
-    padding-bottom: 12px;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    line-height: 1.05;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1445,6 +1363,7 @@ html.has-panel-menu main {
     flex-direction: column;
     align-items: center;
     max-width: 100%;
+    gap: 0;
 }
 
 .carousel-strip-layout .gallery-carousel-wrapper {
@@ -1483,7 +1402,7 @@ html.has-panel-menu main {
 .gallery-carousel {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
     overflow-x: auto;
     overflow-y: visible;
     scroll-behavior: smooth;
@@ -1521,13 +1440,12 @@ html.has-panel-menu main {
     justify-content: center;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    padding: 8px;
+    padding: 0;
     cursor: pointer;
     transition: transform var(--transition-speed) ease-in-out;
     box-sizing: border-box;
     background: transparent;
     -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -1618,6 +1536,7 @@ html.has-panel-menu main {
 
 .gallery-carousel-strip .gallery-strip-thumb.active img {
     filter: none;
+    border: 2px solid rgba(255, 255, 255, 0.4);
 }
 
 .gallery-carousel-strip .gallery-strip-thumb:focus-visible,
@@ -1733,27 +1652,24 @@ html.has-panel-menu main {
 }
 
 @media (max-width: 1023px) {
-    .gallery-strip-viewport {
-        width: min(328px, 95vw) !important;
-    }
-    
     .gallery-carousel-strip .gallery-strip-thumb {
         width: 56px !important;
         min-width: 56px !important;
         height: 56px !important;
         min-height: 56px !important;
     }
+    
+    /* Fix centraggio verticale carousel mobile: wrapper prende spazio rimanente */
+    .carousel-strip-layout .gallery-carousel-wrapper {
+        flex: 1 1 0%;
+        min-height: 0;
+        height: auto;
+    }
 }
 
 @media (min-width: 1024px) {
     .gallery-carousel-container {
         height: clamp(500px, 78vh, 95vh);
-    }
-}
-
-@media (min-width: 1920px) {
-    .gallery-carousel-container {
-        height: clamp(750px, 90vh, 1050px);
     }
 }
 
@@ -1827,7 +1743,11 @@ html.has-panel-menu .gallery-title::after {
 
 html.has-panel-menu .gallery-title {
     padding-bottom: 0;
-    margin-bottom: 4px;
+    margin-bottom: 0;
+}
+
+html.has-panel-menu .gallery-section-description {
+    margin-top: 0;
 }
 
 html.has-panel-menu .gallery-section {
@@ -1866,13 +1786,6 @@ html.has-panel-menu .gallery-section {
     .gallery-main {
         padding-left: 20px;
         padding-right: 20px;
-    }
-}
-
-@media (min-width: 1920px) {
-    .gallery-main {
-        padding-left: max(20px, calc((100vw - 1920px) / 2 + 20px));
-        padding-right: max(20px, calc((100vw - 1920px) / 2 + 20px));
     }
 }
 
@@ -2009,320 +1922,6 @@ html.has-panel-menu .gallery-section {
 }
 
 /* ==================
-   GALLERY CON MAPPA (slider verticale + strip miniature tipo scrollbar)
-   ================== */
-.gallery-con-mappa {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: 0;
-    position: relative;
-}
-
-.gallery-con-mappa .gallery-mappa-wrap {
-    flex: 1;
-    min-width: 0;
-}
-
-.gallery-mappa {
-    flex-shrink: 0;
-    width: 72px;
-    height: min(420px, 70vh);
-    position: sticky;
-    top: 120px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 6px 4px;
-    margin-left: 12px;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-green) rgba(255, 255, 255, 0.1);
-}
-
-.gallery-mappa::-webkit-scrollbar {
-    width: 4px;
-}
-
-.gallery-mappa::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-sm);
-}
-
-.gallery-mappa::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: var(--radius-sm);
-}
-
-.gallery-mappa-thumb {
-    flex-shrink: 0;
-    width: 100%;
-    aspect-ratio: 1;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    display: block;
-    transition: box-shadow 0.2s ease, transform 0.15s ease;
-}
-
-.gallery-mappa-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: var(--radius-sm);
-}
-
-.gallery-mappa-thumb:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
-}
-
-.gallery-mappa-thumb.active {
-    box-shadow: 0 0 0 2px var(--primary-green);
-}
-
-.gallery-mappa-thumb:focus-visible {
-    outline: 2px solid var(--primary-green);
-    outline-offset: 2px;
-}
-
-/* Su mobile la mappa non viene mostrata (o si può fare strip orizzontale in fondo) */
-@media (max-width: 1023px) {
-    .gallery-con-mappa {
-        flex-direction: column;
-    }
-    .gallery-mappa {
-        display: none;
-    }
-}
-
-/* ==================
-   PERSONALE — Stack verticale “editoriale” + strip laterale sticky
-   Snap proximity + center: la foto si centra nello schermo quando ti fermi.
-   ================== */
-html.has-panel-menu {
-    /* Altezza header sticky (aggiornata da JS) */
-    --header-h: 110px;
-    scroll-snap-type: y proximity;
-    scroll-padding-top: var(--header-h);
-    scroll-behavior: smooth;
-}
-@media (prefers-reduced-motion: reduce) {
-    html.has-panel-menu {
-        scroll-behavior: auto;
-        scroll-snap-type: none;
-    }
-}
-
-.personale-categoria {
-    margin-bottom: 0;
-    /* Navigazione via anchor / scrollTo: non finire sotto header sticky */
-    scroll-margin-top: var(--header-h);
-}
-
-.personale-hero-snap {
-    scroll-snap-align: start;
-    scroll-margin-top: var(--header-h);
-}
-
-.personale-categoria .backlight-wrapper {
-    margin-bottom: 0;
-}
-
-.personale-categoria .gallery-hero {
-    margin-bottom: 0;
-    /* Personale: niente box/hero, solo testo */
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    border: 0;
-    padding: 0;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-}
-
-/* Personale: rimuovi anche la “barretta” verde del backlight sotto al box */
-html.personale-page .personale-categoria .backlight-wrapper::before {
-    display: none;
-}
-
-/* Personale: il distacco titolo↔foto deve essere SOLO il gap del gruppo (.ui-attach),
-   quindi azzeriamo gli “spessori” verticali interni della hero (margini dei figli). */
-
-.personale-carousel-wrap {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: var(--gap-attached);
-    justify-content: center;
-    position: relative;
-}
-
-/* Spacer sinistro = stessa larghezza strip (simmetria).
-   Così: spacer + gap + FOTO + gap + STRIP => la FOTO risulta centrata come l'hero. */
-.personale-carousel-wrap::before {
-    content: "";
-    flex: 0 0 var(--personale-strip-w);
-}
-
-/* Colonna foto: niente overflow, altezza naturale (N × 100vh); lo scroll è quello della pagina */
-.personale-carousel-vertical {
-    /* Non occupare tutta la riga: così la strip resta “attaccata” alla foto */
-    width: min(86vw, 1100px);
-    min-width: 0;
-    height: auto;
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    /* Ritmo verticale “editoriale” tra immagini */
-    gap: 48px;
-    padding: 0;
-}
-
-/* Ogni item = blocco immagine; snap center = la foto si centra nello schermo */
-.personale-carousel-item {
-    flex-shrink: 0;
-    width: 100%;
-    scroll-snap-align: center;
-    scroll-snap-stop: normal;
-    scroll-margin-top: var(--header-h);
-    display: block;
-    cursor: pointer;
-    position: relative;
-    background: transparent;
-    box-sizing: border-box;
-}
-
-/* Frame: centra la foto nel suo blocco, senza “inventare” vuoti enormi */
-.personale-photo-frame {
-    width: 100%;
-    height: auto;
-    display: grid;
-    place-items: center;
-}
-
-.personale-photo-frame img {
-    width: auto;
-    height: auto;
-    max-width: min(86vw, 1100px);
-    /* Grande ma naturale (stile editoriale) */
-    max-height: min(86dvh, 920px);
-    object-fit: contain;
-    display: block;
-    vertical-align: middle;
-    will-change: transform, opacity;
-    transition: opacity 220ms ease;
-}
-
-/* Stato active: evidenzia solo via strip (niente trasformazioni sulla foto); stessa opacity per tutti */
-.personale-carousel-item .personale-photo-frame img { opacity: 1; }
-
-/* Strip: miniature senza box, centrata sull’asse Y dello schermo */
-.personale-strip {
-    flex-shrink: 0;
-    width: var(--personale-strip-w);
-    /* Sticky “editoriale”: resta visibile mentre scorri la serie */
-    height: calc(100dvh - var(--header-h) - 40px);
-    position: sticky;
-    top: calc(var(--header-h) + 20px);
-    transform: none;
-    overflow-y: auto;
-    overflow-x: visible; /* consente hover senza “tagli” laterali */
-    /* La distanza foto↔strip deve essere SOLO il gap fisso: niente padding-left */
-    padding: 0;
-    align-items: flex-start;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.personale-strip::-webkit-scrollbar {
-    display: none;
-}
-
-.personale-strip .gallery-strip-thumb {
-    flex-shrink: 0;
-    width: 64px;          /* mantiene miniatura piccola */
-    margin: 0;            /* allinea la thumb al bordo della strip (gap coerente con hero↔foto) */
-    aspect-ratio: 1;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    display: block;
-    transition: opacity 0.2s ease;
-    opacity: 0.92;
-}
-
-.personale-strip .gallery-strip-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: var(--radius-sm);
-}
-
-.personale-strip .gallery-strip-thumb:hover {
-    opacity: 1;
-}
-
-.personale-strip .gallery-strip-thumb.active,
-.personale-strip .gallery-strip-thumb:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--primary-green);
-}
-
-@media (max-width: 1023px) {
-    /* Mobile: ritorno al comportamento “semplice” (scroll pagina) */
-    .personale-carousel-wrap {
-        flex-direction: column;
-    }
-    .personale-carousel-wrap::before {
-        content: none;
-    }
-    .personale-carousel-vertical {
-        order: 1;
-        transform: none;
-        width: 100%;
-        gap: 18px;
-    }
-    .personale-strip {
-        position: static;
-        transform: none;
-        top: auto;
-        width: 100%;
-        height: auto;
-        max-height: 100px;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 6px;
-        padding: 6px 0;
-        order: 2;
-        -webkit-overflow-scrolling: touch;
-    }
-    .personale-strip .gallery-strip-thumb {
-        width: 56px;
-        min-width: 56px;
-        aspect-ratio: 1;
-    }
-}
-
-/* ==================
    PRELOADER IMMAGINI
    ================== */
 /* Screen reader only (accessibilità) */
@@ -2376,15 +1975,13 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         font-size: 24px;
     }
 
-    /* HEADER DESKTOP — elementi limitati a layout max 1920, safe area */
+    /* HEADER DESKTOP — max width e responsive padding */
     header {
         max-width: 1920px;
         margin-left: auto;
         margin-right: auto;
-        width: 100%;
-        padding: max(10px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 10px max(60px, env(safe-area-inset-left));
-        margin-bottom: 20px;
-        min-height: 50px;
+        padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left));
+        min-height: 48px;
     }
 
     .logo {
@@ -2409,10 +2006,6 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     main {
         max-width: min(1920px, 100%);
         padding: 0 20px;
-    }
-
-    body.pagina-gallery main {
-        padding-top: 20px;
     }
 
     /* PROFILO DESKTOP */
@@ -2773,8 +2366,8 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         align-items: center;
         justify-items: center;
         justify-content: center;
-        padding: max(11px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 11px max(60px, env(safe-area-inset-left));
-        min-height: 54px;
+        padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left));
+        min-height: 48px;
     }
     html.personale-page .header-left,
     html.food-page .header-left,
@@ -2798,9 +2391,9 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         border: none;
         border-radius: var(--radius-lg);
         cursor: pointer;
-        padding: 10px 18px;
+        padding: 4px 12px;
         margin: 0;
-        min-height: 44px;
+        min-height: 32px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -2820,8 +2413,8 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     html.food-page .header-contatti,
     html.has-panel-menu .header-contatti {
         font-family: "Oswald", "Arial", sans-serif;
-        padding: 10px 18px;
-        min-height: 44px;
+        padding: 4px 12px;
+        min-height: 32px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -2870,7 +2463,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     html.personale-page .gallery-main,
     html.food-page .gallery-main,
     html.has-panel-menu main {
-        padding-top: 98px;
+        padding-top: 120px;
     }
 
     /* Personale desktop: più spazio tra titolo e carousel, titolo proporzionato */
@@ -2879,7 +2472,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     html.has-panel-menu .gallery-title {
         font-size: 72px;
         letter-spacing: 3px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
     /* Personale / Food desktop: altezza carousel 600px, slot fisso (un slide per volta) */
@@ -2887,8 +2480,9 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     .gallery-title {
         font-size: 84px;
         letter-spacing: 4px;
-        margin-bottom: 12px;
-        padding-bottom: 20px;
+        margin-bottom: 6px;
+        padding-bottom: 14px;
+        line-height: 1.05;
     }
 
     .gallery-title::after {
@@ -2913,6 +2507,13 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         height: 100%;
         align-self: stretch;
         overflow: visible;
+    }
+
+    /* Layout desktop: strip a sinistra (verticale), carousel a destra */
+    .carousel-strip-layout {
+        flex-direction: row;
+        gap: 20px;
+        align-items: stretch;
     }
 
     /* Personale/Food desktop: wrapper prende spazio rimanente (flex: 1) così la strip resta dentro il box verde */
@@ -2947,7 +2548,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         flex: 1;
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 12px;
         overflow-x: auto;
         overflow-y: visible;
         scroll-behavior: smooth;
@@ -2987,54 +2588,6 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
 
 
     /* Preloader Desktop */
-    /* Hero Desktop — margine titolo–bordo superiore = margine descrizione–bordo inferiore */
-    .gallery-hero {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 0 60px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 120px;
-        width: 60%;
-        max-width: 900px;
-    }
-    .gallery-hero > *:first-child {
-        margin-top: 12px;
-    }
-    .gallery-hero > *:last-child {
-        margin-bottom: 12px;
-    }
-
-    .gallery-hero-title {
-        width: 100%;
-        text-align: center;
-        font-size: 80px;
-        letter-spacing: 5px;
-        line-height: 1.1;
-        margin-bottom: 10px;
-        margin-top: 0;
-        white-space: nowrap;
-    }
-
-    .gallery-hero-subtitle {
-        width: 100%;
-        text-align: center;
-        font-size: 22px;
-        margin-bottom: 0;
-    }
-
-    .gallery-hero-description {
-        width: 100%;
-        text-align: center;
-        font-size: 18px;
-        max-width: 100%;
-        margin-top: 0;
-        margin-bottom: 0;
-        box-sizing: border-box;
-    }
 
     .gallery-cta-button {
         padding: 14px 35px;
@@ -3043,7 +2596,8 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
 
     .gallery-section-description {
         font-size: 16px;
-        margin-bottom: 40px;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     .gallery-cta-section {
@@ -3080,7 +2634,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        height: 93%;
+        height: 96%;
         width: 48px;
         background: rgba(0, 0, 0, 0.6);
         border: none;
@@ -3089,7 +2643,9 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: background-color 0.3s ease,
+                    transform 0.3s ease,
+                    opacity 0.3s ease;
         font-size: 24px;
         color: #ffffff;
         font-family: "Oswald", "Arial", sans-serif;
@@ -3132,32 +2688,45 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         transform: translateX(-4px);
     }
 
-    /* Personale / Food desktop: stesso comportamento della versione mobile */
-    .gallery-strip-viewport {
-        width: min(var(--personale-strip-viewport-w, 328px), 95vw);
+    /* Personale / Food desktop: strip verticale a destra */
+    .carousel-strip-layout .gallery-strip-viewport {
+        flex: 0 0 auto;
+        width: 80px;
+        height: 63%;
         min-width: 0;
-        max-width: 100%;
+        max-width: 80px;
         overflow: hidden;
         display: block;
+        align-self: center;
     }
-    .gallery-carousel-strip {
+    .carousel-strip-layout .gallery-carousel-strip {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
         gap: 8px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 14px 10px 10px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 10px 8px;
         margin: 0;
         width: 100%;
+        height: 100%;
         min-width: 0;
         scrollbar-width: none;
         box-sizing: border-box;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
     }
-    .gallery-carousel-strip::-webkit-scrollbar {
+    .carousel-strip-layout .gallery-carousel-strip::-webkit-scrollbar {
         display: none;
+    }
+
+    .carousel-strip-layout .gallery-carousel-strip .gallery-strip-thumb {
+        flex: 0 0 auto;
+        width: 64px;
+        min-width: 64px;
+        height: 64px;
+        min-height: 64px;
     }
 }
 
@@ -3206,7 +2775,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         display: flex;
         align-items: center;
         justify-content: center;
-        max-width: 92vw;
+        max-width: 90vw;
     }
 
     .carousel-strip-layout .gallery-strip-viewport {
@@ -3314,7 +2883,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     }
     html.has-panel-menu .mobile-menu-panel {
         position: fixed;
-        top: calc(var(--header-h, 140px) - 35px);
+        top: 70px;
         left: 50%;
         transform: translateX(-50%);
         width: min(300px, calc(100vw - 40px));
@@ -3413,7 +2982,7 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
     html.has-panel-menu .mobile-menu-panel {
         display: block !important;
         position: fixed;
-        top: calc(var(--header-h, 76px) - 26px);
+        top: 85px;
         left: 50%;
         transform: translateX(-50%);
         width: min(300px, calc(100vw - 120px));
@@ -3490,34 +3059,3 @@ html.personale-page .personale-categoria .backlight-wrapper::before {
         display: none !important;
     }
 }
-
-/* ==================
-   GRANA SEQUENZA — immagini grana pellicola in sequenza
-   Sopra tutto (overlay), pointer-events: none così i click passano
-   ================== */
-.grain-sequence-layer {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9998;
-    pointer-events: none;
-    overflow: hidden;
-    /* Disattivata temporaneamente la grana globale */
-    display: none;
-}
-
-.grain-sequence-overlay {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-repeat: repeat;
-    background-size: auto;
-    background-position: 0 0;
-    mix-blend-mode: overlay; /* grigio 50% “sparisce”, resta solo la grana */
-}
-/* ==============================================
-   BACK TO TOP BUTTON
-   ============================================== */
-.back-to-top {

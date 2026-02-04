@@ -25,21 +25,52 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
+    // Blocca scroll pagina quando cursore è sulla strip verticale (desktop)
+    function preventPageScrollOnStrip() {
+        if (isMobileDevice()) return;
+        
+        const strips = document.querySelectorAll(".gallery-carousel-strip");
+        strips.forEach((strip) => {
+            strip.addEventListener(
+                "wheel",
+                (e) => {
+                    const atTop = strip.scrollTop === 0;
+                    const atBottom = strip.scrollTop + strip.clientHeight >= strip.scrollHeight - 1;
+                    
+                    // Previeni scroll pagina solo se la strip può ancora scrollare
+                    if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) {
+                        e.stopPropagation();
+                    }
+                },
+                { passive: true }
+            );
+        });
+    }
+
+    // ===============================
+    // CALCOLA HEADER HEIGHT PER TUTTE LE PAGINE
+    // ===============================
+    const headerEl = document.querySelector("header");
+    const applyHeaderHeightVar = () => {
+        if (!headerEl) return;
+        const h = headerEl.getBoundingClientRect().height;
+        if (h && Number.isFinite(h) && h > 0) {
+            document.documentElement.style.setProperty("--header-h", Math.round(h) + "px");
+        }
+    };
+    
+    // Calcola subito
+    applyHeaderHeightVar();
+    
+    // Ricalcola se la finestra cambia (resize, orientamento)
+    window.addEventListener("resize", applyHeaderHeightVar);
+
     // ===============================
     // PERSONALE — Header height come CSS var (per snap/scroll-margin/peek)
     // ===============================
     const isPersonalePage = document.documentElement.classList.contains("personale-page");
     const isPanelMenuPage = !!document.getElementById("mobileMenuPanel");
     if (isPanelMenuPage) {
-        const headerEl = document.querySelector("header");
-        const applyHeaderHeightVar = () => {
-            if (!headerEl) return;
-            const h = headerEl.getBoundingClientRect().height;
-            if (h && Number.isFinite(h)) {
-                document.documentElement.style.setProperty("--header-h", Math.round(h) + "px");
-            }
-        };
-        applyHeaderHeightVar();
 
         // Scrollbar overlay custom (stile pill) — solo desktop (su mobile può risultare invasiva)
         if (!isMobileDevice()) {
@@ -162,6 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const layoutReadyCallbacks = []; /* Callback da eseguire quando layout (padding/margin) è pronto */
     let layoutIsReady = false;
     let allowPaddingUpdates = !isStripPage; /* Strip pages: blocca padding finché immagini non sono pronte. */
+    
+    // Attiva blocco scroll pagina su strip
+    preventPageScrollOnStrip();
     
     if (isStripPage) {
         initialViewportContainers = new Set();
@@ -723,179 +757,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===============================
     // PERSONALE — Un carosello verticale per categoria + strip miniature (senza scrollbar)
     // ===============================
-    // Scroll nativo pagina + strip sticky: stato attivo gestito con IntersectionObserver
-    const personaleStateByWrap = new WeakMap();
-    const personaleWraps = document.querySelectorAll(".personale-carousel-wrap");
-    if (personaleWraps.length > 0) {
-    personaleWraps.forEach((wrap) => {
-        const carousel = wrap.querySelector(".personale-carousel-vertical");
-        const stripEl = wrap.querySelector(".personale-strip");
-        if (!carousel || !stripEl) return;
-
-        // Evita doppie inizializzazioni (es. script incluso due volte / navigazione dinamica)
-        if (wrap.dataset.personaleInit === "1") return;
-        wrap.dataset.personaleInit = "1";
-        stripEl.innerHTML = "";
-
-        const items = Array.from(carousel.querySelectorAll(".personale-carousel-item"));
-        if (!items.length) return;
-
-        // Wrap immagini in un frame per centratura stabile (portrait/landscape)
-        const srcs = items.map((item) => {
-            const img = item.querySelector("img");
-            if (!img) return "";
-            const src = img.getAttribute("src") || img.currentSrc || "";
-            // Evita double-wrapping
-            if (!img.parentElement || !img.parentElement.classList.contains("personale-photo-frame")) {
-                const frame = document.createElement("div");
-                frame.className = "personale-photo-frame";
-                img.parentElement && img.parentElement.insertBefore(frame, img);
-                frame.appendChild(img);
-            }
-            return src;
-        });
-
-        items.forEach((item, index) => {
-            const src = srcs[index];
-            if (!src) return;
-            const imgEl = item.querySelector("img");
-            const alt = imgEl ? (imgEl.getAttribute("alt") || "") : "";
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "gallery-strip-thumb";
-            btn.dataset.index = String(index);
-            btn.setAttribute("aria-label", "Vai all'immagine " + (index + 1) + (alt ? ": " + alt : ""));
-            const thumbImg = document.createElement("img");
-            thumbImg.src = src;
-            thumbImg.alt = "";
-            thumbImg.loading = "lazy";
-            thumbImg.decoding = "async";
-            btn.appendChild(thumbImg);
-            stripEl.appendChild(btn);
-        });
-
-        /* Event delegation: un listener sulla strip per tutti i thumbnail */
-        stripEl.addEventListener("click", (e) => {
-            const btn = e.target.closest(".gallery-strip-thumb");
-            if (!btn) return;
-            const index = parseInt(btn.dataset.index, 10);
-            if (isNaN(index) || index < 0 || index >= items.length) return;
-            items[index].scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-
-        let activeIndex = -1;
-        const thumbs = stripEl.querySelectorAll(".gallery-strip-thumb");
-
-        function setStates(idx) {
-            items.forEach((it) => it.classList.remove("is-active"));
-            if (idx >= 0 && idx < items.length) items[idx].classList.add("is-active");
-        }
-
-        // Stato iniziale
-        activeIndex = 0;
-        wrap.dataset.personaleActiveIndex = "0";
-        personaleStateByWrap.set(wrap, { items, activeIndex: 0 });
-        thumbs.forEach((t, i) => t.classList.toggle("active", i === 0));
-        setStates(0);
-
-        // Observer: attivo quando una foto entra nella “zona lettura” (centro-alto viewport)
-        const observerOptions = isMobileDevice()
-            ? { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
-            : { root: null, rootMargin: "-15% 0px -70% 0px", threshold: 0 };
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    const idx = items.indexOf(entry.target);
-                    if (idx === -1 || idx === activeIndex) return;
-                    activeIndex = idx;
-                    wrap.dataset.personaleActiveIndex = String(idx);
-                    const state = personaleStateByWrap.get(wrap);
-                    if (state) state.activeIndex = idx;
-                    thumbs.forEach((t, i) => t.classList.toggle("active", i === idx));
-                    setStates(idx);
-                });
-            },
-            observerOptions
-        );
-        items.forEach((el) => observer.observe(el));
-    });
-
-    // PERSONALE — Scroll “a step” tipo carosello (solo desktop)
-    if (isPersonalePage) {
-        let wheelAcc = 0;
-        let lastWrap = null;
-        let lockUntil = 0;
-        const WHEEL_THRESHOLD_PX = 48; // sensibilità: più alto = meno “scatti”
-        const LOCK_MS = 520; // evita salti multipli su trackpad/inertia
-
-        const toPixels = (e) => {
-            // deltaMode: 0=pixel, 1=line, 2=page
-            if (e.deltaMode === 1) return e.deltaY * 16;
-            if (e.deltaMode === 2) return e.deltaY * window.innerHeight;
-            return e.deltaY;
-        };
-
-        window.addEventListener(
-            "wheel",
-            (e) => {
-                if (isMobileDevice()) return;
-                if (e.ctrlKey || e.metaKey) return; // pinch-zoom / gesture
-
-                const targetEl = e.target instanceof Element ? e.target : null;
-                if (!targetEl) return;
-                const wrap = targetEl.closest(".personale-carousel-wrap");
-                if (!wrap) return; // fuori dalle serie: scroll normale pagina
-                if (wrap !== lastWrap) {
-                    lastWrap = wrap;
-                    wheelAcc = 0;
-                }
-
-                const state = personaleStateByWrap.get(wrap);
-                const items = state?.items;
-                if (!items || items.length < 2) return;
-
-                const now = performance.now();
-                if (now < lockUntil) {
-                    e.preventDefault();
-                    return;
-                }
-
-                const dy = toPixels(e);
-                // Se siamo ai bordi e l'utente vuole uscire dalla serie (verso sopra/sotto),
-                // lasciamo lo scroll nativo della pagina (così arrivi alla prossima sezione).
-                const idxNow = state?.activeIndex ?? (parseInt(wrap.dataset.personaleActiveIndex || "0", 10) || 0);
-                if ((idxNow <= 0 && dy < 0) || (idxNow >= items.length - 1 && dy > 0)) {
-                    wheelAcc = 0;
-                    return;
-                }
-                wheelAcc += dy;
-
-                if (Math.abs(wheelAcc) < WHEEL_THRESHOLD_PX) {
-                    // Blocca lo scroll “libero” mentre accumuliamo gesto
-                    e.preventDefault();
-                    return;
-                }
-
-                const dir = wheelAcc > 0 ? 1 : -1;
-                wheelAcc = 0;
-
-                const idx = state?.activeIndex ?? (parseInt(wrap.dataset.personaleActiveIndex || "0", 10) || 0);
-                const next = Math.max(0, Math.min(items.length - 1, idx + dir));
-                if (next === idx) {
-                    // ai bordi: lasciamo lo scroll pagina (non “incolliamo” l'utente)
-                    return;
-                }
-
-                lockUntil = now + LOCK_MS;
-                e.preventDefault();
-                items[next].scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-            { passive: false }
-        );
-    }
-    }
-
-    // Nota: su Personale lo scroll è nativo della pagina.
-
 });

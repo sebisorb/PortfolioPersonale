@@ -50,61 +50,8 @@
         </video>
     </div>
     <!-- Header con navigazione -->
-    <header role="banner">
-        <div class="header-left">
-            <button type="button" class="header-lavori" aria-label="Apri menu Lavori" aria-expanded="false" aria-controls="mobileMenuPanel">LAVORI</button>
-        </div>
-        <div class="logo-container">
-            <a href="index.html" aria-label="Torna alla homepage" title="Torna alla homepage">
-                <img class="logo" src="img/ph/sebisorbX.png" alt="sebisorb Logo - Sebastiano Sorbello">
-            </a>
-        </div>
-        <div class="header-right">
-            <a href="Contatti.html" class="bottone header-contatti" aria-label="Vai alla pagina contatti"><h1 class="nav-evidenziata">CONTATTI</h1></a>
-        </div>
-        <nav class="navigazione" role="navigation" aria-label="Navigazione principale">
-            <div class="bottone bottone-dropdown" aria-label="Menu personale">
-                <h1>PERSONALE</h1>
-                <div class="bottone-dropdown-menu" role="menu">
-                    <a href="Personale.html" role="menuitem" aria-label="Vai alle foto personali">FOTO</a>
-                    <a href="Video.html" role="menuitem" aria-label="Vai ai video personali">VIDEO</a>
-                </div>
-            </div>
-            <div class="bottone bottone-dropdown" aria-label="Menu professionale">
-                <h1>PROFESSIONALE</h1>
-                <div class="bottone-dropdown-menu" role="menu">
-                    <a href="food.html" role="menuitem" aria-label="Vai alla food photography">FOOD</a>
-                    <a href="editoriali.html" role="menuitem" aria-label="Vai alle editoriali">EDITORIALI</a>
-                    <a href="product.html" role="menuitem" aria-label="Vai alla product photography">PRODUCT</a>
-                </div>
-            </div>
-            <a href="Contatti.html" class="bottone" aria-label="Vai alla pagina contatti">
-                <h1>CONTATTI</h1>
-            </a>
-        </nav>
-        <button type="button" class="mobile-menu-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenuPanel">
-            <span class="mobile-menu-toggle-bar"></span>
-            <span class="mobile-menu-toggle-bar"></span>
-            <span class="mobile-menu-toggle-bar"></span>
-        </button>
-    </header>
-    <div class="mobile-menu-panel" id="mobileMenuPanel" aria-hidden="true">
-        <div class="mobile-menu-columns">
-            <div class="mobile-menu-col">
-                <div class="mobile-menu-category">PROFESSIONALE</div>
-                <a href="food.html" class="mobile-menu-link">FOOD</a>
-                <a href="editoriali.html" class="mobile-menu-link">EDITORIALI</a>
-                <a href="product.html" class="mobile-menu-link">PRODUCT</a>
-            </div>
-            <div class="mobile-menu-col">
-                <div class="mobile-menu-category">PERSONALE</div>
-                <a href="Personale.html" class="mobile-menu-link">FOTO</a>
-                <a href="Video.html" class="mobile-menu-link">VIDEO</a>
-                <span class="mobile-menu-spacer" aria-hidden="true"></span>
-            </div>
-        </div>
-        <a href="Contatti.html" class="mobile-menu-link mobile-menu-contatti" aria-label="Vai alla pagina contatti">CONTATTI</a>
-    </div>
+    <div id="header-placeholder"></div>
+
     <!-- Main Content -->
     <main role="main">
         <h1 class="sr-only">Contatti - Sebastiano Sorbello</h1>
@@ -146,6 +93,5 @@
     <script src="page-loader.js"></script>
     <script src="image-dimensions.js" defer></script>
     <script src="components-loader.js"></script>
-    <script src="grain-sequence.js" defer></script>
 </body>
 </html>
