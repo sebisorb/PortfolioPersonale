@@ -311,10 +311,10 @@ main {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 40px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(100, 172, 97, 0.2) 0%, rgba(100, 172, 97, 0.05) 40%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(100, 172, 97, 0.15) 0%, rgba(100, 172, 97, 0.1) 40%, transparent 70%);
     pointer-events: none;
     opacity: 0;
     z-index: 0;
@@ -524,55 +524,6 @@ body.pagina-gallery main {
     z-index: 10;
 }
 
-/* Barra verde sotto il box: ::before sul wrapper, così è sempre dietro al box e non può apparire sopra */
-@keyframes backlightFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.backlight-wrapper {
-    position: relative;
-}
-
-.backlight-wrapper::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    width: 88%;
-    max-width: 420px;
-    height: 6px;
-    transform: translate(-50%, 0);
-    pointer-events: none;
-    z-index: 0;
-    background: var(--primary-green);
-    visibility: hidden;
-    opacity: 0;
-}
-
-.backlight-wrapper.backlight-ready::before {
-    visibility: visible;
-    animation: backlightFadeIn 1.2s ease-out 1.2s forwards;
-}
-
-.backlight-wrapper .profilo,
-.backlight-wrapper .contatti-hero {
-    position: relative;
-    z-index: 1;
-}
-
-.backlight-wrapper.backlight-y-40::before {
-    top: 40%;
-}
-
-@media (max-width: 1023px) {
-    .backlight-wrapper::before {
-        width: 70%;
-        max-width: none;
-    }
-}
-
 .profilo-img {
     border-radius: var(--radius-lg);
     width: 150px;
@@ -585,7 +536,6 @@ body.pagina-gallery main {
 
 .profilo-img:hover {
     transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 /* Home: solo niente luminosità bianca su hover (profilo e categorie), transform invariato */
@@ -1731,12 +1681,6 @@ html.personale-page {
     --personale-strip-viewport-w: 328px;
 }
 
-html.personale-page .backlight-wrapper::before,
-html.food-page .backlight-wrapper::before,
-html.has-panel-menu .backlight-wrapper::before {
-    display: none;
-}
-
 html.has-panel-menu .gallery-title::after {
     display: none;
 }
@@ -1792,6 +1736,10 @@ html.has-panel-menu .gallery-section {
 /* ==================
    GALLERY GRID - LAYOUT ZIGZAG (ALTERNATO SX/DX)
    ================== */
+.editoriali-page .gallery-grid-container {
+    margin-top: 60px;
+}
+
 .gallery-grid-container {
     width: 100%;
     max-width: min(1200px, 100%);
@@ -2005,6 +1953,7 @@ html.has-panel-menu .gallery-section {
     /* MAIN DESKTOP — layout max 1920×1080 */
     main {
         max-width: min(1920px, 100%);
+        margin: 0 auto;
         padding: 0 20px;
     }
 
