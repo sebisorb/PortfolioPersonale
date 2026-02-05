@@ -1,3 +1,58 @@
+@media only screen and (max-width: 1023px) {
+    /* Box bottoni contatti più stretti su mobile */
+    .contatti .coppia-link {
+        max-width: 200px;
+    }
+    .coppia {
+        max-width: 200px;
+    }
+    .contatti {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+    /* Disabilita barra verde animata sotto il tasto Contatti nell'header su hover mobile */
+    .header-contatti:hover::after,
+    .header-contatti:active::after,
+    .header-contatti.nav-evidenziata::after {
+        display: none !important;
+        background: none !important;
+        animation: none !important;
+    }
+}
+    .gallery-title {
+        font-size: 32px;
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+    }
+    .gallery-title::after {
+        width: 50px;
+        height: 2px;
+    }
+    .gallery-section-description {
+        font-size: 15px;
+        margin-top: 16px;
+        margin-bottom: 28px;
+    }
+}
+/* --- UNIFORMITÀ BASE DESKTOP --- */
+.gallery-title {
+    text-align: center;
+    font-size: 52px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    line-height: 1.05;
+    user-select: none;
+    position: relative;
+    color: #fff;
+}
+.gallery-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+}
 /* ==============================================
    MOBILE FIRST - STILE.CSS
    Obiettivo: solidità, responsività, esperienza visiva ottimale.
@@ -59,7 +114,7 @@
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Oswald", "Arial", sans-serif;
-    font-optical-sizing: auto;
+    /* font-optical-sizing: auto; RIMOSSO per compatibilità */
     font-weight: normal;
     font-style: normal;
     font-size: 16px;
@@ -87,7 +142,7 @@ html {
     min-height: 100%;
     overflow-x: hidden; /* Responsive: evita scroll orizzontale su tutti i device */
     scroll-behavior: smooth; /* Smooth scrolling globale */
-    scrollbar-gutter: stable both-edges; /* Evita shift quando compare la scrollbar */
+    /* scrollbar-gutter: stable both-edges; RIMOSSO per compatibilità */
 }
 
 /* =====================================
@@ -147,8 +202,11 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     /* Safe area: notch / isola (iOS, Android) */
+    padding-left: 0px;
     padding-left: env(safe-area-inset-left);
+    padding-right: 0px;
     padding-right: env(safe-area-inset-right);
+    padding-bottom: 0px;
     padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -272,7 +330,8 @@ header {
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: none;
-    padding: max(8px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 8px max(18px, env(safe-area-inset-left));
+    padding: 8px 18px 8px 18px;
+    /* padding: max(8px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 8px max(18px, env(safe-area-inset-left)); */
     position: fixed;
     top: 0;
     left: 0;
@@ -795,13 +854,24 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
 .contatti {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 40px;
     width: 100%;
-    max-width: min(1200px, 100%);
+    max-width: calc(2 * 400px + 40px); /* 2 colonne da 400px + 1 gap da 40px */
     margin: 0 auto 80px;
-    padding: 0 20px;
+    padding: 0;
     box-sizing: border-box;
     align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+    .contatti {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: calc(2 * 400px + 40px);
+        gap: 40px;
+        margin-bottom: 100px;
+        padding: 0;
+        align-items: stretch;
+    }
 }
 
 .contatti .coppia-link {
@@ -1107,7 +1177,7 @@ html.has-panel-menu main {
 
 .gallery-cta-actions {
     display: flex;
-    gap: 12px;
+    gap: 4px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -1590,11 +1660,7 @@ html::-webkit-scrollbar-button {
     display: none;
     width: 0;
     height: 0;
-}
-
-html::-webkit-scrollbar-button:start:decrement,
-html::-webkit-scrollbar-button:end:increment {
-    display: none;
+    /* RIMOSSE pseudo-classi non standard :start, :decrement, :end, :increment */
 }
 
 html {
@@ -1625,9 +1691,6 @@ html.has-panel-menu .gallery-title {
     margin-bottom: 0;
 }
 
-html.has-panel-menu .gallery-section-description {
-    margin-top: 0;
-}
 
 html.has-panel-menu .gallery-section {
     scroll-margin-top: var(--header-h, 150px);
@@ -1863,7 +1926,8 @@ html.has-panel-menu .gallery-section {
         max-width: 1920px;
         margin-left: auto;
         margin-right: auto;
-        padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left));
+        padding: 5px 60px 5px 60px;
+        /* padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left)); */
         min-height: 48px;
     }
 
@@ -1922,6 +1986,7 @@ html.has-panel-menu .gallery-section {
 
     .profilo-dati {
         font-size: 13px;
+        display: block;
         margin: 0;
         padding: 0;
         opacity: 0.85;
@@ -2096,33 +2161,60 @@ html.has-panel-menu .gallery-section {
         margin-bottom: 12px;
     }
 
-    .contatti-title {
-        width: 100%;
-        text-align: center;
-        font-size: 80px;
-        letter-spacing: 6px;
-        line-height: 1.1;
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
+        .contatti-title {
+                width: 100%;
+                text-align: center;
+                font-size: 80px;
+                letter-spacing: 6px;
+                line-height: 1.1;
+                margin-top: 0;
+                margin-bottom: 10px;
+        }
 
-    .contatti-subtitle {
-        width: 100%;
+        .contatti-subtitle {
+                width: 100%;
+                text-align: center;
+                font-size: 22px;
+                margin-top: 0;
+        }
+
+@media only screen and (max-width: 1023px) {
+    .contatti-title {
         text-align: center;
-        font-size: 22px;
-        margin-top: 0;
+        font-size: 52px;
+        letter-spacing: 3px;
+        margin-bottom: 4px;
+        padding-bottom: 8px;
+        line-height: 1.05;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        cursor: default;
+        position: relative;
     }
+    .contatti-subtitle {
+        text-align: center;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 0;
+        margin-bottom: 40px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+    }
+}
 
     .contatti {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
         margin-bottom: 100px;
-        padding: 0 40px;
+        padding: 0;
         align-items: stretch;
     }
 
     .contatti .coppia-link {
-        max-width: 500px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
@@ -2158,14 +2250,6 @@ html.has-panel-menu .gallery-section {
         min-height: 160px;
     }
 
-    /* Contatti desktop: colonna fissa per le icone così restano tutte sulla stessa verticale */
-    .contatti .coppia {
-        min-height: 180px;
-        display: grid;
-        grid-template-columns: 56px 1fr;
-        align-items: center;
-        gap: 30px;
-    }
 
     .socialz {
         width: 60px;
@@ -2275,7 +2359,8 @@ html.has-panel-menu .gallery-section {
         align-items: center;
         justify-items: center;
         justify-content: center;
-        padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left));
+        padding: 5px 60px 5px 60px;
+        /* padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left)); */
         min-height: 48px;
     }
     html.personale-page .header-left,
@@ -2340,17 +2425,7 @@ html.has-panel-menu .gallery-section {
         font-size: 20px;
         margin: 0;
     }
-    html.personale-page .header-contatti:hover,
-    html.food-page .header-contatti:hover,
-    html.has-panel-menu .header-contatti:hover {
-        color: var(--primary-green);
-        background: rgba(255, 255, 255, 0.06);
-    }
-    html.personale-page .header-contatti::after,
-    html.food-page .header-contatti::after,
-    html.has-panel-menu .header-contatti::after {
-        display: none;
-    }
+    /* RIMOSSA barra verde animata sotto il tasto Contatti nell'header mobile */
     html.personale-page .navigazione,
     html.food-page .navigazione,
     html.has-panel-menu .navigazione {
@@ -2537,7 +2612,7 @@ html.has-panel-menu .gallery-section {
     }
 
     .gallery-cta-actions {
-        gap: 16px;
+        gap: 4px;
     }
 
     /* Frecce navigazione carosello desktop - posizionate sul wrapper */
@@ -2916,17 +2991,9 @@ html.has-panel-menu .gallery-section {
     }
     /* Viewport > 1920px: pannello allineato all'area contenuto 1920px (60px dal bordo sinistro di quell'area) */
     @media only screen and (min-width: 1921px) {
-        html.has-panel-menu .mobile-menu-panel {
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(420px, calc(1920px - 120px));
+        .contatti .coppia-link {
+            max-width: 240px;
         }
-    }
-    /* Stesso layout e stile del menu mobile: due colonne, categorie, link; colonne giustificate a sx */
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-columns {
-        display: flex;
-        flex-direction: row;
-        gap: 0;
     }
     html.has-panel-menu .mobile-menu-panel .mobile-menu-col {
         flex: 1 1 50%;

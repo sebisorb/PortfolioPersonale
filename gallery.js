@@ -580,43 +580,65 @@ document.addEventListener("DOMContentLoaded", () => {
             // Evita listener duplicati (init viene chiamata anche su resize)
             if (carousel.dataset.navInitialized === "true") return;
             carousel.dataset.navInitialized = "true";
-            
-            const prevBtn = document.querySelector(`.gallery-nav-prev[data-carousel="${carouselId}"]`);
-            const nextBtn = document.querySelector(`.gallery-nav-next[data-carousel="${carouselId}"]`);
-            
-            if (!prevBtn || !nextBtn) return;
-            
+
+            // Trova o crea le frecce prev/next se mancanti
+            let prevBtn = document.querySelector(`.gallery-nav-prev[data-carousel="${carouselId}"]`);
+            let nextBtn = document.querySelector(`.gallery-nav-next[data-carousel="${carouselId}"]`);
+
+            // Se mancano, creale e inseriscile nel DOM
+            const wrapper = carousel.closest('.gallery-carousel-wrapper') || carousel.parentElement;
+            if (!prevBtn) {
+                prevBtn = document.createElement('button');
+                prevBtn.className = 'gallery-nav-arrow gallery-nav-prev';
+                prevBtn.setAttribute('data-carousel', carouselId);
+                prevBtn.setAttribute('type', 'button');
+                prevBtn.setAttribute('aria-label', 'Precedente');
+                prevBtn.innerHTML = '<span>‹</span>';
+                if (wrapper) wrapper.insertBefore(prevBtn, wrapper.firstChild);
+            }
+            if (!nextBtn) {
+                nextBtn = document.createElement('button');
+                nextBtn.className = 'gallery-nav-arrow gallery-nav-next';
+                nextBtn.setAttribute('data-carousel', carouselId);
+                nextBtn.setAttribute('type', 'button');
+                nextBtn.setAttribute('aria-label', 'Successivo');
+                nextBtn.innerHTML = '<span>›</span>';
+                if (wrapper) wrapper.appendChild(nextBtn);
+            }
+
             // Mostra/nascondi frecce: in base alla foto centrata (così si può centrare prima e ultima)
             function updateArrows() {
-                const photos = carousel.querySelectorAll(".gallery-photo");
+                const photos = carousel.querySelectorAll('.gallery-photo');
                 if (photos.length <= 1) {
-                    prevBtn.style.display = "none";
-                    nextBtn.style.display = "none";
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
                     return;
                 }
                 const idx = getClosestPhotoIndex(carousel);
-                prevBtn.style.display = idx <= 0 ? "none" : "flex";
-                nextBtn.style.display = idx >= photos.length - 1 ? "none" : "flex";
+                prevBtn.style.display = idx <= 0 ? 'none' : 'flex';
+                nextBtn.style.display = idx >= photos.length - 1 ? 'none' : 'flex';
             }
-            
+
             // Frecce: centra la foto successiva/precedente nel carousel
             nextBtn.addEventListener('click', () => {
                 const idx = getClosestPhotoIndex(carousel);
                 scrollToCenterPhoto(carousel, idx + 1);
             });
-            
+
             prevBtn.addEventListener('click', () => {
                 const idx = getClosestPhotoIndex(carousel);
                 scrollToCenterPhoto(carousel, idx - 1);
             });
-            
+
             carousel.addEventListener('scroll', updateArrows, { passive: true });
 
             /* Centramento prima/ultima foto: gestito dal sistema centrale di layout (attesa immagini + load/resize). */
             /* Inizializza scroll e frecce senza toccare padding (evita layout shift prima che immagini siano pronte). */
             requestAnimationFrame(() => {
                 carousel.scrollLeft = 0;
+                // Forza l'aggiornamento delle frecce due volte per sicurezza (dopo layout e dopo eventuale scroll)
                 updateArrows();
+                setTimeout(updateArrows, 100);
             });
         }
         
