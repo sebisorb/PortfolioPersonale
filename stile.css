@@ -1,132 +1,76 @@
-@media only screen and (max-width: 1023px) {
-    /* Box bottoni contatti più stretti su mobile */
-    .contatti .coppia-link {
-        max-width: 200px;
-    }
-    .coppia {
-        max-width: 200px;
-    }
-    .contatti {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-    /* Disabilita barra verde animata sotto il tasto Contatti nell'header su hover mobile */
-    .header-contatti:hover::after,
-    .header-contatti:active::after,
-    .header-contatti.nav-evidenziata::after {
-        display: none !important;
-        background: none !important;
-        animation: none !important;
-    }
-}
-    .gallery-title {
-        font-size: 32px;
-        margin-bottom: 6px;
-        padding-bottom: 6px;
-    }
-    .gallery-title::after {
-        width: 50px;
-        height: 2px;
-    }
-    .gallery-section-description {
-        font-size: 15px;
-        margin-top: 16px;
-        margin-bottom: 28px;
-    }
-}
-/* --- UNIFORMITÀ BASE DESKTOP --- */
-.gallery-title {
-    text-align: center;
-    font-size: 52px;
-    letter-spacing: 3px;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
-    line-height: 1.05;
-    user-select: none;
-    position: relative;
-    color: #fff;
-}
-.gallery-title::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-}
 /* ==============================================
-   MOBILE FIRST - STILE.CSS
-   Obiettivo: solidità, responsività, esperienza visiva ottimale.
-   Breakpoint univoci: 600 | 768 | 1024 (frecce) | 1920 (max contenuto).
+   STILE.CSS OTTIMIZZATO
+   Mobile First | Ottimizzazioni Performance | Mantenimento Funzionalità
    ============================================== */
 
 /* ==================
-   VARIABILI
+   VARIABILI CSS
    ================== */
 :root {
+    /* Layout */
     --max-width: 1200px;
+    
+    /* Colori */
     --primary-green: #64ac61;
+    --primary-green-hover: #7bc178;
+    --primary-green-active: #5a9a57;
+    
+    /* Backgrounds */
     --glass-bg: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.15) 100%);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
     --bg-overlay: rgba(10, 10, 10, 0.9);
     --footer-bg: rgba(255, 255, 255, 0.65);
+    
+    /* Timing */
     --transition-speed: 0.3s;
-    /* Spaziatura fissa per gruppi di elementi “attaccati” */
+    --animation-curve: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Spacing */
     --gap-attached: 10px;
+    
+    /* Border radius */
     --radius-sm: 6px;
     --radius-lg: 12px;
-    /* Shadow system */
+    
+    /* Shadows */
     --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.5);
     --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.6);
     --shadow-focus: 0 0 0 2px var(--primary-green);
-
-    /* Carousel: container = unica fonte. Altezza container per breakpoint; slot/wrapper/carousel/foto = 100% derivato. */
-}
-
-@media (min-width: 1024px) {
-    :root {
-        --gap-attached: 20px;
-    }
+    
+    /* Carousel */
+    --personale-strip-viewport-w: 328px;
 }
 
 /* ==================
-   UTILITY — GRUPPI “ATTACCATI”
-   Usa gap invece dei margin (più stabile, niente somme/collassi)
+   RESET MODERNO
    ================== */
-.ui-attach {
-    display: flex;
-    gap: var(--gap-attached);
-}
-.ui-attach--col { flex-direction: column; }
-.ui-attach--row { flex-direction: row; }
-/* Quando un gruppo è “attaccato”, azzera i margin dei figli diretti */
-.ui-attach > * { margin: 0; }
-
-/* ==================
-   RESET E GLOBALI - MOBILE BASE
-   ================== */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    caret-color: transparent; /* Cursore di digitazione nascosto su tutto il sito (nessun input/textarea) */
 }
 
+/* ==================
+   TIPOGRAFIA BASE
+   ================== */
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Oswald", "Arial", sans-serif;
-    /* font-optical-sizing: auto; RIMOSSO per compatibilità */
+    font-family: "Oswald", Arial, sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 16px;
 }
 
 p {
-    font-family: "Montserrat", "Arial", sans-serif;
+    font-family: "Montserrat", Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     cursor: default;
 }
 
+/* ==================
+   ELEMENTI BASE
+   ================== */
 img {
     max-width: 100%;
     height: auto;
@@ -135,26 +79,106 @@ img {
     display: block;
 }
 
+a, input, textarea, button {
+    user-select: text;
+}
+
 /* ==================
-   BODY - MOBILE
+   UTILITY CLASSES
+   ================== */
+.no-select {
+    user-select: none;
+}
+
+.select-text {
+    user-select: text;
+}
+
+.ui-attach {
+    display: flex;
+    gap: var(--gap-attached);
+}
+
+.ui-attach--col { 
+    flex-direction: column; 
+}
+
+.ui-attach--row { 
+    flex-direction: row; 
+}
+
+.ui-attach > * { 
+    margin: 0; 
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ==================
+   HTML & BODY BASE
    ================== */
 html {
     min-height: 100%;
-    overflow-x: hidden; /* Responsive: evita scroll orizzontale su tutti i device */
-    scroll-behavior: smooth; /* Smooth scrolling globale */
-    /* scrollbar-gutter: stable both-edges; RIMOSSO per compatibilità */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color: #000;
 }
 
-/* =====================================
+html::-webkit-scrollbar {
+    width: 6px;
+}
+
+html::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-green-hover);
+}
+
+html::-webkit-scrollbar-thumb:active {
+    background: var(--primary-green-active);
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) transparent;
+}
+
+/* Hide scrollbar for panel pages */
+html.has-panel-menu {
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+}
+
+html.has-panel-menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* ==================
    PAGE LOADING STATE
-   Prevent flickering and layout shifts
-   ===================================== */
+   ================== */
 html.page-loading,
 html.page-loading body {
     overflow: hidden;
 }
 
-/* Hide content during initial load to prevent flashing */
 html.page-loading .gallery-photo,
 html.page-loading .gallery-photo img,
 html.page-loading .gallery-grid-item,
@@ -172,7 +196,6 @@ html.page-loading main > section {
     transform: translateY(12px);
 }
 
-/* Smooth reveal when page is ready */
 html.page-ready .gallery-photo,
 html.page-ready .gallery-photo img,
 html.page-ready .gallery-grid-item,
@@ -188,10 +211,13 @@ html.page-ready main > section {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1),
-                transform 520ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 520ms var(--animation-curve),
+                transform 520ms var(--animation-curve);
 }
 
+/* ==================
+   BODY
+   ================== */
 body {
     background-color: transparent;
     position: relative;
@@ -201,25 +227,20 @@ body {
     color: #ffffff;
     line-height: 1.6;
     overflow-x: hidden;
-    /* Safe area: notch / isola (iOS, Android) */
-    padding-left: 0px;
-    padding-left: env(safe-area-inset-left);
-    padding-right: 0px;
-    padding-right: env(safe-area-inset-right);
-    padding-bottom: 0px;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
-/* Header e nav: niente selezione (menu, voci, logo) */
+/* Prevent selection on header */
 header,
 header * {
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
-/* Wrapper unico fissato: nero + video stanno qui, niente scivolamento allo scroll */
+/* ==================
+   BACKGROUND SYSTEM
+   ================== */
 .bg-fixed-wrapper {
     position: fixed;
     top: 0;
@@ -233,14 +254,13 @@ header * {
     pointer-events: none;
 }
 
-/* Layer nero: copre viewport e si estende sotto (evita striscia bianca/glitch allo scroll) */
 .bg-fixed-black {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     min-height: 100vh;
-    height: 200vh; /* Estensione sotto scroll per content dinamico; absolute, resta dentro wrapper fixed */
+    height: 200vh;
     background-color: #000;
 }
 
@@ -254,7 +274,6 @@ header * {
     pointer-events: none;
 }
 
-/* Overlay leggero sullo sfondo video per migliorare leggibilità testi (tutti i device) */
 .bg-fixed-wrapper::after {
     content: "";
     position: absolute;
@@ -262,18 +281,16 @@ header * {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.15) 100%);
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.1) 0%, 
+        transparent 30%, 
+        transparent 70%, 
+        rgba(0, 0, 0, 0.15) 100%);
     pointer-events: none;
     z-index: 0;
 }
 
-@media (min-width: 1024px) {
-    .bg-fixed-wrapper::after {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.25) 100%);
-    }
-}
-
-/* Fallback se il wrapper non c’è (pagina senza JS o vecchia struttura) */
+/* Fallback background */
 body::before {
     content: '';
     position: fixed;
@@ -285,41 +302,16 @@ body::before {
     height: 100vh;
     min-height: 100%;
     background-color: #000;
-    background-image: none;
     z-index: -999;
     pointer-events: none;
 }
 
-/* Quando c’è il wrapper, nascondi il pseudo-elemento nero per evitare doppio layer */
 body:has(.bg-fixed-wrapper)::before {
     display: none;
 }
 
-/* Utility class per user-select */
-.no-select {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-
-.select-text {
-    user-select: text;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-}
-
-/* Permetti selezione su link, input e textarea (per email, form, contenuti) */
-a, input, textarea, button {
-    user-select: text;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-}
-
 /* ==================
-   HEADER - MOBILE
+   HEADER
    ================== */
 header {
     display: flex;
@@ -328,10 +320,8 @@ header {
     align-items: center;
     background: var(--glass-bg);
     backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: none;
-    padding: 8px 18px 8px 18px;
-    /* padding: max(8px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 8px max(18px, env(safe-area-inset-left)); */
+    padding: 8px 18px;
     position: fixed;
     top: 0;
     left: 0;
@@ -341,11 +331,6 @@ header {
     width: 100%;
     backface-visibility: hidden;
     transform: translateZ(0);
-}
-
-/* Spazio per compensare l'header fixed */
-main {
-    padding-top: 95px;
 }
 
 .logo-container {
@@ -363,7 +348,6 @@ main {
                 transform var(--transition-speed) ease-in-out;
 }
 
-/* Luce fioca verde al centro, dietro il logo (hover) */
 .logo-container a::before {
     content: '';
     position: absolute;
@@ -373,7 +357,10 @@ main {
     width: 160px;
     height: 40px;
     border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(100, 172, 97, 0.15) 0%, rgba(100, 172, 97, 0.1) 40%, transparent 70%);
+    background: radial-gradient(ellipse, 
+        rgba(100, 172, 97, 0.15) 0%, 
+        rgba(100, 172, 97, 0.1) 40%, 
+        transparent 70%);
     pointer-events: none;
     opacity: 0;
     z-index: 0;
@@ -381,10 +368,6 @@ main {
 }
 
 .logo-container a:hover::before {
-    opacity: 1;
-}
-
-.logo-container a:hover {
     opacity: 1;
 }
 
@@ -409,6 +392,7 @@ main {
     gap: 16px;
 }
 
+/* Navigation buttons */
 .bottone {
     text-decoration: none;
     color: #ffffff;
@@ -447,7 +431,7 @@ main {
 }
 
 /* ==================
-   DROPDOWN MENU - LAVORI
+   DROPDOWN MENU
    ================== */
 .bottone-dropdown {
     position: relative;
@@ -482,43 +466,19 @@ main {
     text-decoration: none;
     transition: background-color var(--transition-speed) ease-in-out,
                 color var(--transition-speed) ease-in-out;
-    font-family: "Oswald", "Arial", sans-serif;
+    font-family: "Oswald", Arial, sans-serif;
     font-size: 15px;
     text-align: center;
     cursor: pointer;
     pointer-events: auto;
-    -webkit-user-select: none;
     user-select: none;
     border-radius: var(--radius-sm);
     margin: 2px 6px;
 }
 
-.bottone-dropdown-menu a:first-child {
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    margin-top: 0;
-}
-
-.bottone-dropdown-menu a:last-child {
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    margin-bottom: 0;
-}
-
-.bottone-dropdown-menu a:only-child {
-    border-radius: var(--radius-sm);
-}
-
 .bottone-dropdown-menu a:hover {
     background-color: rgba(100, 172, 97, 0.2);
     color: var(--primary-green);
-}
-
-@media (min-width: 1024px) {
-    .bottone-dropdown:hover .bottone-dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateX(-50%) translateY(0);
-    }
 }
 
 .bottone-dropdown-menu.is-open {
@@ -528,23 +488,18 @@ main {
     transform: translateX(-50%) translateY(0);
 }
 
-.bottone-dropdown h1 {
-    margin: 0;
-}
-
 /* ==================
-   MAIN - MOBILE
+   MAIN CONTENT
    ================== */
 main {
     flex: 1;
     width: 100%;
     max-width: 100%;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 0 15px;
+    padding: 95px 15px 0;
     overflow-x: hidden;
     position: relative;
     z-index: 1;
@@ -557,13 +512,11 @@ main.gallery-main {
 body.pagina-gallery main {
     background-color: transparent;
     padding-top: 120px;
-    /* IMPORTANT: le frecce desktop sono posizionate fuori dal carosello (valori negativi).
-       Se il main ha overflow-x:hidden vengono tagliate ai margini esterni. */
     overflow-x: visible;
 }
 
 /* ==================
-   HOME - PROFILO - MOBILE
+   PROFILE SECTION
    ================== */
 .profilo {
     margin: 20px auto 30px;
@@ -574,7 +527,6 @@ body.pagina-gallery main {
     padding: 30px 25px;
     background: var(--glass-bg);
     backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: none;
     border-radius: var(--radius-lg);
     box-shadow: var(--glass-shadow);
@@ -588,7 +540,7 @@ body.pagina-gallery main {
     width: 150px;
     height: auto;
     margin: 0 auto 15px;
-    border: none; /* Rimosso bordo bianco */
+    border: none;
     transition: transform var(--transition-speed) ease-in-out,
                 box-shadow var(--transition-speed) ease-in-out;
 }
@@ -597,11 +549,7 @@ body.pagina-gallery main {
     transform: scale(1.03);
 }
 
-/* Home: solo niente luminosità bianca su hover (profilo e categorie), transform invariato */
 body:not(.pagina-gallery) .profilo .profilo-img:hover {
-    box-shadow: var(--shadow-sm);
-}
-body:not(.pagina-gallery) .collegamento .collegata:hover {
     box-shadow: var(--shadow-sm);
 }
 
@@ -631,30 +579,21 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", "Arial", sans-serif;
+    font-family: "Montserrat", Arial, sans-serif;
 }
 
-.profilo-dati {
-    font-size: 13px;
-    display: block;
-    margin: 0;
-    padding: 0;
-    opacity: 0.85;
-    line-height: 1.6;
-    font-family: "Montserrat", "Arial", sans-serif;
-}
-
+.profilo-dati,
 .profilo-skills {
     font-size: 13px;
-    opacity: 0.85;
+    display: block;
     margin: 0;
     padding: 0;
+    opacity: 0.85;
     line-height: 1.6;
-    display: block;
-    font-family: "Montserrat", "Arial", sans-serif;
+    font-family: "Montserrat", Arial, sans-serif;
 }
 
-
+/* Skills section */
 .skills {
     max-width: 300px;
     margin-top: 35px;
@@ -679,9 +618,7 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     height: auto;
 }
 
-/* ==================
-   PROFILO PAGE - MOBILE
-   ================== */
+/* Profile page specific */
 .profilo-text {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -710,7 +647,7 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
 }
 
 /* ==================
-   LAVORI - COLLEGAMENTI - MOBILE
+   COLLEGAMENTI (WORK LINKS)
    ================== */
 .collegamento {
     margin-top: 20px;
@@ -721,7 +658,6 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
 }
 
 .collegamento article {
@@ -734,7 +670,6 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
-
 
 .collegata,
 .collegata2 {
@@ -752,33 +687,8 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     margin-bottom: 0;
 }
 
-.collegamento article:first-of-type .collegata {
-    margin-bottom: 0;
-}
-
 .collegamento article:last-of-type {
     margin-top: 20px;
-}
-
-/* Pagina Editoriali: intestazione e intro */
-.editoriali-intestazione {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    padding: 0 1rem;
-}
-.editoriali-titolo {
-    font-size: 1.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-.editoriali-intro {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
 }
 
 .collegata2 {
@@ -792,12 +702,17 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     box-shadow: 0 12px 24px rgba(255, 255, 255, 0.2);
 }
 
+body:not(.pagina-gallery) .collegamento .collegata:hover {
+    box-shadow: var(--shadow-sm);
+}
+
 .frame {
     box-shadow: var(--shadow-sm);
     width: 85vw;
     margin-bottom: 20px;
 }
 
+/* Project descriptions */
 .about-text {
     padding: 15px 15px 0 15px;
     margin-top: 15px;
@@ -820,7 +735,6 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     padding: 0;
 }
 
-/* Sottocollegamenti in home (es. Video sotto Portfolio Personale, Editoriali sotto Food) */
 .progetto-preview:has(.progetto-sublink) .progetto-desc {
     margin-bottom: 12px;
 }
@@ -848,30 +762,42 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     max-width: 800px;
 }
 
+/* Editoriali page */
+.editoriali-intestazione {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+.editoriali-titolo {
+    font-size: 1.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.editoriali-intro {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
 /* ==================
-   CONTATTI - MOBILE & DESKTOP OTTIMIZZATO
+   CONTATTI (CONTACTS)
    ================== */
 .contatti {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
     width: 100%;
-    max-width: calc(2 * 400px + 40px); /* 2 colonne da 400px + 1 gap da 40px */
+    max-width: calc(2 * 400px + 40px);
     margin: 0 auto 80px;
     padding: 0;
     box-sizing: border-box;
     align-items: stretch;
-}
-
-@media (min-width: 1024px) {
-    .contatti {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: calc(2 * 400px + 40px);
-        gap: 40px;
-        margin-bottom: 100px;
-        padding: 0;
-        align-items: stretch;
-    }
 }
 
 .contatti .coppia-link {
@@ -888,9 +814,6 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
 .contatti .coppia-link * {
     cursor: pointer;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
 .coppia-link:hover {
@@ -907,7 +830,6 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     padding: 30px 25px;
     background: var(--glass-bg);
     backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: none;
     border-radius: var(--radius-lg);
     box-shadow: var(--glass-shadow);
@@ -993,11 +915,11 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     color: var(--primary-green) !important;
 }
 
-/* Box Contatti: feedback "✓ Copiato!" senza cambiare dimensione (solo classe + ::after) */
 .contatti .coppia-link.email-copied .socialinfo {
     position: relative;
     color: transparent;
 }
+
 .contatti .coppia-link.email-copied .socialinfo::after {
     content: "✓ Copiato!";
     position: absolute;
@@ -1010,7 +932,7 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
 }
 
 /* ==================
-   FOOTER - MOBILE
+   FOOTER
    ================== */
 footer {
     background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
@@ -1087,9 +1009,8 @@ footer {
 }
 
 /* ==================
-   GALLERIE - BASE (MOBILE FIRST)
+   GALLERY BASE
    ================== */
-
 .gallery-main {
     background-color: transparent;
     margin: 0 auto 40px;
@@ -1102,36 +1023,37 @@ footer {
     box-sizing: border-box;
 }
 
-html.has-panel-menu .logo {
-    width: 120px;
+.gallery-title {
+    text-align: center;
+    font-size: 52px;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    line-height: 1.05;
+    user-select: none;
+    cursor: default;
+    position: relative;
+    color: #fff;
 }
 
-/* Spazio sotto header fisso per tutte le pagine con panel */
-html.has-panel-menu main {
-    padding-top: 160px;
-}
-
-.gallery-cta-button {
-    display: inline-block;
-    padding: 12px 30px;
+.gallery-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 2px;
     background-color: var(--primary-green);
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: var(--radius-lg);
-    font-size: 16px;
-    font-weight: 600;
-    font-family: "Oswald", "Arial", sans-serif;
-    transition: background-color var(--transition-speed) ease-in-out,
-                transform var(--transition-speed) ease-in-out,
-                box-shadow var(--transition-speed) ease-in-out;
-    border: 2px solid var(--primary-green);
 }
 
-.gallery-cta-button:hover {
-    background-color: #7bc178;
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(100, 172, 97, 0.4);
+html.has-panel-menu .gallery-title::after {
+    display: none;
+}
+
+html.has-panel-menu .gallery-title {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .gallery-section-description {
@@ -1146,6 +1068,17 @@ html.has-panel-menu main {
     line-height: 1.7;
 }
 
+.gallery-section {
+    margin-bottom: clamp(40px, 8vh, 80px);
+    scroll-margin-top: 100px;
+}
+
+html.has-panel-menu .gallery-section {
+    scroll-margin-top: var(--header-h, 150px);
+    margin-bottom: clamp(50px, 8vh, 100px);
+}
+
+/* Gallery CTA */
 .gallery-cta-section {
     text-align: center;
     padding: 60px 20px;
@@ -1158,9 +1091,6 @@ html.has-panel-menu main {
     margin-bottom: 15px;
     color: #ffffff;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     cursor: default;
 }
 
@@ -1168,6 +1098,29 @@ html.has-panel-menu main {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 30px;
+}
+
+.gallery-cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-green);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Oswald", Arial, sans-serif;
+    transition: background-color var(--transition-speed) ease-in-out,
+                transform var(--transition-speed) ease-in-out,
+                box-shadow var(--transition-speed) ease-in-out;
+    border: 2px solid var(--primary-green);
+}
+
+.gallery-cta-button:hover {
+    background-color: var(--primary-green-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 172, 97, 0.4);
 }
 
 .gallery-cta-button-large {
@@ -1198,13 +1151,7 @@ html.has-panel-menu main {
     color: #ffffff;
 }
 
-/* Sezioni gallery: spacing in vh per stesso peso visivo (clamp per min/max) */
-.gallery-section {
-    margin-bottom: clamp(40px, 8vh, 80px);
-    scroll-margin-top: 100px;
-}
-
-/* Pagina Video: container e sezioni titolo+descrizione+video (come Food per i carousel) */
+/* Video page */
 .video-page-container {
     width: 100%;
     max-width: min(1200px, 100%);
@@ -1237,65 +1184,15 @@ html.has-panel-menu main {
     border: none;
 }
 
-.gallery-title {
-    text-align: center;
-    font-size: 52px;
-    letter-spacing: 3px;
-    margin-bottom: 4px;
-    padding-bottom: 8px;
-    line-height: 1.05;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: default;
-    position: relative;
-}
+/* ========================================
+   CAROUSEL SYSTEM - CONSOLIDATED
+   ======================================== */
 
-.gallery-title::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 2px;
-    background-color: var(--primary-green);
-}
-
-/* ========== CAROUSEL SYSTEM — CONSOLIDATO E OTTIMIZZATO ==========
-   
-   STRUTTURA:
-   .gallery-carousel-container (alias per compatibilità)
-   ├─ .gallery-carousel-wrapper
-   │  ├─ .gallery-carousel
-   │  │  └─ .gallery-photo > <img> (border-radius: 12px qui!)
-   │  └─ frecce navigazione
-    └─ .gallery-strip-viewport
-        └─ .gallery-carousel-strip
-            └─ .gallery-strip-thumb
-
-   NOMENCLATURA UNIFICATA:
-   - gallery-carousel-container = contenitore principale (uso su TUTTE le pagine)
-   - gallery-carousel-wrapper = wrapper (uso su TUTTE le pagine)
-   - gallery-carousel = carosello orizzontale (uso su TUTTE le pagine)
-   - gallery-photo = slot foto (uso su TUTTE le pagine)
-    - carousel-strip-layout = layout con strip sotto (Food/Personale/Product)
-
-   FORMATO RESPONSIVE (clamp min, preferito, max):
-   - Mobile ≤479px:    180px, 42vh, 260px
-   - Mobile 480-599px: 275px, 56vh, 415px
-   - Mobile 600-767px: 350px, 65vh, 515px
-   - Tablet 768-1023px: 480px, 75vh, 650px
-   - Desktop ≥1024px:   500px, 78vh, 95vh
-   ============================================== */
-
-/* === BASE: TUTTE LE PAGINE === */
-
+/* Container - Single source of truth for height */
 .gallery-carousel-container {
     width: 100%;
     max-width: 100%;
-    height: clamp(275px, 56vh, 415px); /* fallback mobile */
+    height: clamp(275px, 56vh, 415px);
     overflow: visible;
     position: relative;
     padding: 0;
@@ -1311,8 +1208,7 @@ html.has-panel-menu main {
     position: relative;
 }
 
-/* === STRIP LAYOUT: FLEX COLUMN PER STRIP SOTTO === */
-
+/* Strip layout - flex column for strip below carousel */
 .carousel-strip-layout {
     display: flex;
     flex-direction: column;
@@ -1329,9 +1225,7 @@ html.has-panel-menu main {
     height: 100%;
 }
 
-
-/* === STRIP VIEWPORT (Caroselli con strip) === */
-
+/* Strip viewport */
 .gallery-strip-viewport {
     flex: 0 0 auto;
     width: min(var(--personale-strip-viewport-w, 328px), 95vw);
@@ -1352,8 +1246,7 @@ html.has-panel-menu main {
     50% { transform: translateX(4px); }
 }
 
-/* === CAROUSEL PRINCIPALE === */
-
+/* Main carousel */
 .gallery-carousel {
     display: flex;
     align-items: center;
@@ -1376,14 +1269,12 @@ html.has-panel-menu main {
     flex: 1;
 }
 
-/* Nascondi scrollbar webkit */
 .gallery-carousel::-webkit-scrollbar {
     height: 0;
     display: none;
 }
 
-/* === FOTO SLOT === */
-
+/* Photo slot */
 .gallery-photo {
     flex: 0 0 auto;
     height: 100%;
@@ -1402,21 +1293,18 @@ html.has-panel-menu main {
     background: transparent;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
 }
 
 .gallery-photo:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px var(--primary-green);
+    box-shadow: var(--shadow-focus);
 }
 
 .gallery-photo:active {
     transform: scale(0.97);
 }
 
-/* === FOTO IMAGE (UNICO LUOGO PER BORDER-RADIUS!) === */
-
+/* Photo image - ONLY place for border-radius */
 .gallery-photo img {
     height: 100%;
     width: 100%;
@@ -1431,8 +1319,7 @@ html.has-panel-menu main {
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
 }
 
-/* === STRIP CAROUSEL (Personale sotto) === */
-
+/* Strip carousel (thumbnail strip) */
 .gallery-carousel-strip {
     display: flex;
     flex-direction: row;
@@ -1497,16 +1384,10 @@ html.has-panel-menu main {
 .gallery-carousel-strip .gallery-strip-thumb:focus-visible,
 .gallery-carousel-strip .gallery-strip-thumb.active {
     outline: none;
-    box-shadow: var(--shadow-focus);
-}
-
-.gallery-carousel-strip .gallery-strip-thumb.active,
-.gallery-carousel-strip .gallery-strip-thumb:focus-visible {
     box-shadow: inset 0 0 0 2px var(--primary-green);
 }
 
-/* === CARICAMENTO E ANIMAZIONI === */
-
+/* Loading and animations */
 .gallery-carousel-container:not(.loaded) .gallery-photo,
 .gallery-carousel-container:not(.loaded) .gallery-photo img {
     opacity: 0 !important;
@@ -1535,14 +1416,14 @@ html.has-panel-menu main {
 }
 
 .carousel-strip-layout.animate-initial .gallery-carousel-wrapper {
-    animation: personaleCarouselIn 1.25s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    animation: personaleCarouselIn 1.25s var(--animation-curve) forwards;
     will-change: opacity, transform;
 }
 
 .carousel-strip-layout.animate-initial .gallery-strip-thumb {
     opacity: 0;
     transform: translateX(-16px);
-    animation: personaleThumbIn 0.55s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    animation: personaleThumbIn 0.55s var(--animation-curve) forwards;
     animation-delay: var(--thumb-delay, 1s);
     will-change: opacity, transform;
 }
@@ -1575,128 +1456,7 @@ html.has-panel-menu main {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .carousel-strip-layout.carousel-animate-pending .gallery-carousel-wrapper,
-    .carousel-strip-layout.animate-initial .gallery-carousel-wrapper,
-    .carousel-strip-layout.animate-initial .gallery-strip-thumb,
-    .carousel-strip-layout.animate-initial .gallery-carousel-strip {
-        animation: none;
-        opacity: 1;
-        transform: none;
-    }
-}
-
-/* === RESPONSIVE HEIGHTS === */
-
-@media (max-width: 479px) {
-    .gallery-carousel-container {
-        height: clamp(260px, 60vh, 375px);
-    }
-}
-
-@media (min-width: 600px) {
-    .gallery-carousel-container {
-        height: clamp(350px, 65vh, 515px);
-    }
-}
-
-@media (min-width: 768px) {
-    .gallery-carousel-container {
-        height: clamp(480px, 75vh, 650px);
-    }
-}
-
-@media (max-width: 1023px) {
-    .gallery-carousel-strip .gallery-strip-thumb {
-        width: 56px !important;
-        min-width: 56px !important;
-        height: 56px !important;
-        min-height: 56px !important;
-    }
-    
-    /* Fix centraggio verticale carousel mobile: wrapper prende spazio rimanente */
-    .carousel-strip-layout .gallery-carousel-wrapper {
-        flex: 1 1 0%;
-        min-height: 0;
-        height: auto;
-    }
-}
-
-@media (min-width: 1024px) {
-    .gallery-carousel-container {
-        height: clamp(500px, 78vh, 95vh);
-    }
-}
-
-/* Scrollbar nativa personalizzata */
-html::-webkit-scrollbar {
-    width: 6px;
-}
-
-html::-webkit-scrollbar-track {
-    background: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-html::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: var(--radius-sm);
-    transition: background-color 0.2s ease;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: none;
-}
-
-html::-webkit-scrollbar-thumb:hover {
-    background: #7bc178;
-}
-
-html::-webkit-scrollbar-thumb:active {
-    background: #5a9a57;
-}
-
-html::-webkit-scrollbar-button {
-    display: none;
-    width: 0;
-    height: 0;
-    /* RIMOSSE pseudo-classi non standard :start, :decrement, :end, :increment */
-}
-
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-green) transparent;
-}
-
-html.has-panel-menu {
-    scrollbar-width: none;
-    scrollbar-color: transparent transparent;
-}
-
-html.has-panel-menu::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-html.personale-page {
-    --personale-strip-viewport-w: 328px;
-}
-
-html.has-panel-menu .gallery-title::after {
-    display: none;
-}
-
-html.has-panel-menu .gallery-title {
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-
-html.has-panel-menu .gallery-section {
-    scroll-margin-top: var(--header-h, 150px);
-    margin-bottom: clamp(50px, 8vh, 100px);
-}
-
+/* Personale scrollbar */
 .personale-scrollbar {
     position: fixed;
     top: 0;
@@ -1724,15 +1484,8 @@ html.has-panel-menu .gallery-section {
     cursor: grabbing;
 }
 
-@media (min-width: 1024px) {
-    .gallery-main {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
 /* ==================
-   GALLERY GRID - LAYOUT ZIGZAG (ALTERNATO SX/DX)
+   GALLERY GRID
    ================== */
 .editoriali-page .gallery-grid-container {
     margin-top: 60px;
@@ -1765,7 +1518,6 @@ html.has-panel-menu .gallery-section {
     box-sizing: border-box;
 }
 
-/* Alternanza sinistra/destra: dispari = sinistra, pari = destra - una foto per riga */
 .gallery-grid-item:nth-child(odd) {
     justify-content: flex-start;
     align-items: flex-start;
@@ -1797,46 +1549,17 @@ html.has-panel-menu .gallery-section {
     transform: translateZ(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-
-/* Foto "hero" più grandi per varietà */
 .gallery-grid-item.hero img {
     max-width: 85%;
 }
 
-/* Animazione fade-in sequenziale */
-.gallery-grid-item:nth-child(1) img {
-    animation-delay: 0.1s;
-}
-
-.gallery-grid-item:nth-child(2) img {
-    animation-delay: 0.2s;
-}
-
-.gallery-grid-item:nth-child(3) img {
-    animation-delay: 0.3s;
-}
-
-.gallery-grid-item:nth-child(4) img {
-    animation-delay: 0.4s;
-}
-
-.gallery-grid-item:nth-child(5) img {
-    animation-delay: 0.5s;
-}
-
-.gallery-grid-item:nth-child(n+6) img {
-    animation-delay: 0.6s;
-}
+/* Staggered animations */
+.gallery-grid-item:nth-child(1) img { animation-delay: 0.1s; }
+.gallery-grid-item:nth-child(2) img { animation-delay: 0.2s; }
+.gallery-grid-item:nth-child(3) img { animation-delay: 0.3s; }
+.gallery-grid-item:nth-child(4) img { animation-delay: 0.4s; }
+.gallery-grid-item:nth-child(5) img { animation-delay: 0.5s; }
+.gallery-grid-item:nth-child(n+6) img { animation-delay: 0.6s; }
 
 @keyframes fadeInUp {
     from {
@@ -1849,7 +1572,6 @@ html.has-panel-menu .gallery-section {
     }
 }
 
-/* Spazio maggiore dopo chiusure serie */
 .gallery-grid-item.series-end {
     margin-bottom: 60px;
 }
@@ -1868,51 +1590,101 @@ html.has-panel-menu .gallery-section {
 }
 
 /* ==================
-   PRELOADER IMMAGINI
+   RESPONSIVE HEIGHTS
    ================== */
-/* Screen reader only (accessibilità) */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+@media (max-width: 479px) {
+    .gallery-carousel-container {
+        height: clamp(260px, 60vh, 375px);
+    }
 }
 
-/* ==============================================
-   DESKTOP - MIN-WIDTH 1024px
-   ============================================== */
-@media only screen and (min-width: 1024px) {
+@media (min-width: 600px) {
+    .gallery-carousel-container {
+        height: clamp(350px, 65vh, 515px);
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-carousel-container {
+        height: clamp(480px, 75vh, 650px);
+    }
+}
+
+@media (max-width: 1023px) {
+    .gallery-carousel-strip .gallery-strip-thumb {
+        width: 56px !important;
+        min-width: 56px !important;
+        height: 56px !important;
+        min-height: 56px !important;
+    }
     
-    /* BODY DESKTOP - Nascondi pseudo-elemento; sfondo nero di base, video come unico background visivo */
-    html {
-        background-color: #000;
+    .carousel-strip-layout .gallery-carousel-wrapper {
+        flex: 1 1 0%;
+        min-height: 0;
+        height: auto;
+    }
+    
+    /* Mobile carousel adjustments */
+    .gallery-carousel-container {
+        margin: 0 auto;
+        padding: 0;
     }
 
-    /* Desktop: larghezza strip viewport per 9 thumbnail completi */
+    .gallery-carousel-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        padding: 0;
+        height: 100%;
+        overflow: visible;
+    }
+
+    .gallery-carousel {
+        flex: 1;
+        min-height: 0;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px 0;
+        width: 100%;
+    }
+
+    .gallery-photo {
+        height: 100%;
+        min-height: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 90vw;
+    }
+
+    .carousel-strip-layout .gallery-strip-viewport {
+        align-self: center;
+    }
+    
+    /* Hide desktop arrows */
+    .gallery-carousel-wrapper .gallery-nav-arrow {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   DESKTOP STYLES - MIN-WIDTH 1024px
+   ======================================== */
+@media (min-width: 1024px) {
+    /* Variables */
+    :root {
+        --gap-attached: 20px;
+    }
+    
     html.personale-page,
     html.food-page,
     html.has-panel-menu {
         --personale-strip-viewport-w: 724px;
     }
     
-    body::before {
-        display: none;
-    }
-    
-    body {
-        background-color: transparent;
-        background-image: none;
-        background-attachment: scroll;
-    }
-    
-    /* Wrapper e .bg-fixed-black estesi (base) valgono anche su desktop: video visibile, nero sotto allo scroll */
-    
-    /* GLOBALI DESKTOP */
+    /* Typography */
     h1, h2, h3, h4, h5, h6 {
         font-size: 28px;
     }
@@ -1920,229 +1692,190 @@ html.has-panel-menu .gallery-section {
     p {
         font-size: 24px;
     }
-
-    /* HEADER DESKTOP — max width e responsive padding */
+    
+    /* Background overlay */
+    .bg-fixed-wrapper::after {
+        background: linear-gradient(to bottom, 
+            rgba(0, 0, 0, 0.15) 0%, 
+            transparent 30%, 
+            transparent 70%, 
+            rgba(0, 0, 0, 0.25) 100%);
+    }
+    
+    /* Header */
     header {
         max-width: 1920px;
         margin-left: auto;
         margin-right: auto;
-        padding: 5px 60px 5px 60px;
-        /* padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left)); */
+        padding: 5px 60px;
         min-height: 48px;
     }
-
+    
     .logo {
         width: 95px;
     }
-
+    
     .navigazione {
         gap: clamp(28px, 3vw, 50px);
         margin-right: 24px;
     }
-
+    
     .bottone h1 {
         font-size: 28px;
         letter-spacing: 0.5px;
     }
-
+    
     .bottone::after {
         bottom: -5px;
     }
-
-    /* MAIN DESKTOP — layout max 1920×1080 */
+    
+    /* Dropdown hover for desktop */
+    .bottone-dropdown:hover .bottone-dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    /* Main */
     main {
         max-width: min(1920px, 100%);
         margin: 0 auto;
         padding: 0 20px;
     }
-
-    /* PROFILO DESKTOP */
+    
+    /* Profile */
     .profilo {
         margin: 20px auto 40px;
         padding: 40px 30px;
-        max-width: 700px; /* Aumentato per evitare che "autoriali" vada a capo */
+        max-width: 700px;
     }
-
+    
     .profilo-img {
         width: 220px;
         margin-bottom: 25px;
     }
-
-    .profilo-info {
-        line-height: 1;
-    }
-
+    
     .profilo-nome {
         font-size: 22px;
         letter-spacing: 1.5px;
         margin: 0 0 10px 0;
-        padding: 0;
-        line-height: 1;
     }
-
-    .profilo-dati-container {
-        line-height: 1.6;
-    }
-
-    .profilo-dati {
-        font-size: 13px;
-        display: block;
-        margin: 0;
-        padding: 0;
-        opacity: 0.85;
-        line-height: 1.6;
-    }
-
-    .profilo-skills {
-        font-size: 13px;
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-    }
-
-
+    
     .skills {
         max-width: 500px;
         margin-top: 45px;
         margin-bottom: 50px;
         width: 50vw;
-        gap: 2px;
     }
-
+    
     .skills-intro {
         font-size: 18px;
-        margin-bottom: 0;
     }
-
+    
+    /* Collegamenti */
     .collegamento {
         margin-top: 30px;
         margin-bottom: 50px;
-    }
-
-    .about-text {
-        padding: 20px 20px 0 20px;
-        margin-top: 20px;
-        margin-bottom: 0;
-        font-size: 24px;
-        line-height: 1.2;
-    }
-
-    .progetto-desc {
-        font-size: 18px;
-        line-height: 1.4;
-        max-width: 40vw;
-        margin-top: 8px;
-        margin-bottom: 50px;
-        padding: 0;
-    }
-
-    /* PROFILO PAGE DESKTOP */
-    .profilo-text {
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-
-    .profilo-text2 {
-        width: 100%;
-        max-width: 100%;
-        margin-top: 30px;
-        box-sizing: border-box;
-    }
-
-    /* LAVORI DESKTOP */
-    .collegamento {
-        margin-bottom: 40px;
-        flex-direction: row; /* Affianca le card su desktop */
+        flex-direction: row;
         flex-wrap: wrap;
-        gap: 40px; /* Spazio tra le card */
+        gap: 40px;
         justify-content: center;
-        align-items: stretch; /* Allinea tutte le card alla stessa altezza */
+        align-items: stretch;
     }
-
+    
     .collegamento article {
         flex: 0 1 auto;
-        max-width: 600px; /* Aumentato da 500px */
+        max-width: 600px;
         display: flex;
         flex-direction: column;
     }
-
-    /* Home: 4 card in 2 righe (Portfolio Personale, Video, Food, Editoriali) – titoli/descrizioni sulla stessa riga */
+    
+    /* Home 4-card layout */
     .collegamento:has(article:nth-child(4)) article {
         flex: 0 1 calc(50% - 20px);
         max-width: 480px;
-        display: flex;
-        flex-direction: column;
     }
-
-    /* Stessa altezza area immagine così i testi (titolo+desc) sono allineati in orizzontale tra le due card della stessa riga */
+    
     .collegamento:has(article:nth-child(4)) article a {
         display: block;
         aspect-ratio: 4/3;
         overflow: hidden;
     }
-
+    
     .collegamento:has(article:nth-child(4)) article a img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-
-    .collegata {
-        width: 100%;
-        max-width: 600px; /* Aumentato da 500px */
-        margin-bottom: 0;
-    }
-
-    .collegamento article:last-of-type {
-        margin-top: 0; /* Rimuove il margin-top su desktop */
-    }
-
-    /* Allinea i titoli alla stessa altezza */
-    .collegamento article .about-text {
-        min-height: 60px; /* Altezza minima per allineare i titoli */
+    
+    .collegamento:has(article:nth-child(4)) article .about-text {
+        min-height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
-    /* Sezione VIDEO con 4 card: layout più compatto */
+    
+    .collegata {
+        width: 100%;
+        max-width: 600px;
+    }
+    
+    .collegamento article:last-of-type {
+        margin-top: 0;
+    }
+    
+    /* Video section 4-card compact layout */
     #video .collegamento {
-        flex-wrap: wrap; /* Permette il wrap se necessario */
-        gap: 30px; /* Gap leggermente ridotto */
+        flex-wrap: wrap;
+        gap: 30px;
     }
-
+    
     #video .collegamento article {
-        max-width: 450px; /* Card leggermente più piccole per 4 elementi */
-        flex: 0 1 calc(25% - 23px); /* 4 card per riga con gap */
+        max-width: 450px;
+        flex: 0 1 calc(25% - 23px);
     }
-
-    /* Su schermi più piccoli, 2 card per riga */
-    @media only screen and (min-width: 1024px) and (max-width: 1200px) {
-        #video .collegamento article {
-            flex: 0 1 calc(50% - 15px); /* 2 card per riga */
-            max-width: 500px;
-        }
-    }
-
+    
     .collegata2 {
         width: 70vw;
         max-width: 900px;
-        margin-bottom: 20px;
     }
-
+    
     .frame {
         width: 60vw;
         max-width: 800px;
         margin-bottom: 50px;
     }
-
+    
+    .about-text {
+        padding: 20px 20px 0 20px;
+        margin-top: 20px;
+        font-size: 24px;
+    }
+    
+    .progetto-desc {
+        font-size: 18px;
+        max-width: 40vw;
+        margin-top: 8px;
+        margin-bottom: 50px;
+    }
+    
     .about-text2 {
         padding: 20px;
         margin-bottom: 40px;
         width: 75vw;
     }
-
-    /* CONTATTI DESKTOP */
+    
+    .profilo-text {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    
+    .profilo-text2 {
+        margin-top: 30px;
+    }
+    
+    /* Contacts */
     .contatti-hero {
         display: flex;
         flex-direction: column;
@@ -2154,334 +1887,183 @@ html.has-panel-menu .gallery-section {
         margin-right: auto;
         margin-bottom: 60px;
     }
+    
     .contatti-hero > *:first-child {
         margin-top: 12px;
     }
+    
     .contatti-hero > *:last-child {
         margin-bottom: 12px;
     }
-
-        .contatti-title {
-                width: 100%;
-                text-align: center;
-                font-size: 80px;
-                letter-spacing: 6px;
-                line-height: 1.1;
-                margin-top: 0;
-                margin-bottom: 10px;
-        }
-
-        .contatti-subtitle {
-                width: 100%;
-                text-align: center;
-                font-size: 22px;
-                margin-top: 0;
-        }
-
-@media only screen and (max-width: 1023px) {
+    
     .contatti-title {
+        width: 100%;
         text-align: center;
-        font-size: 52px;
-        letter-spacing: 3px;
-        margin-bottom: 4px;
-        padding-bottom: 8px;
-        line-height: 1.05;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        cursor: default;
-        position: relative;
-    }
-    .contatti-subtitle {
-        text-align: center;
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.85);
+        font-size: 80px;
+        letter-spacing: 6px;
+        line-height: 1.1;
         margin-top: 0;
-        margin-bottom: 40px;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.7;
+        margin-bottom: 10px;
     }
-}
-
+    
+    .contatti-subtitle {
+        width: 100%;
+        text-align: center;
+        font-size: 22px;
+        margin-top: 0;
+    }
+    
     .contatti {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
         margin-bottom: 100px;
-        padding: 0;
-        align-items: stretch;
     }
-
-    .contatti .coppia-link {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        text-decoration: none;
-        color: inherit;
-        transition: transform var(--transition-speed) ease-in-out;
-        cursor: pointer;
-    }
-
+    
     .coppia {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        gap: 25px;
-        padding: 30px 25px;
-        background: var(--glass-bg);
-        backdrop-filter: blur(30px) saturate(180%);
-        -webkit-backdrop-filter: blur(30px) saturate(180%);
-        border: none;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--glass-shadow);
-        transition: transform var(--transition-speed) ease-in-out,
-                    box-shadow var(--transition-speed) ease-in-out;
-        width: 100%;
         max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-        box-sizing: border-box;
-        position: relative;
-        z-index: 10;
-        min-height: 160px;
     }
-
-
+    
     .socialz {
         width: 60px;
     }
-
-    .contatti .socialz {
-        width: 56px;
-        height: 56px;
-        object-fit: contain;
-        justify-self: start;
-    }
-
+    
     .socialinfo {
-        margin-left: 0;
         font-size: 20px;
     }
-
+    
     .socialinfo a {
         min-width: 250px;
         padding: 8px 15px;
     }
-
-    /* FOOTER DESKTOP — elementi limitati a layout max 1920 */
+    
+    /* Footer */
     footer {
         padding: 34px 70px;
     }
-
+    
     .footer-content {
         max-width: 1920px;
         margin-left: auto;
         margin-right: auto;
-        width: 100%;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
         gap: 32px;
     }
-
+    
     .contact-info {
         text-align: left;
     }
-
+    
     .contact-info p {
         font-size: 14px;
         margin: 4px 0;
     }
-
+    
     .contact-info p:first-child {
         font-size: 16px;
         margin-bottom: 8px;
     }
-
+    
     .social-icons {
         gap: 22px;
         justify-content: flex-end;
     }
-
+    
     .social-icons img {
         width: 36px;
     }
-
-    /* GALLERIE DESKTOP */
+    
+    /* Gallery */
     .gallery-main {
-        background-color: transparent;
         margin: 0 auto 60px;
         padding: 40px 30px;
-        border-radius: var(--radius-lg);
         width: calc(100% - 80px);
         max-width: 1800px;
-        box-sizing: border-box;
+        padding-left: 20px;
+        padding-right: 20px;
     }
-
+    
     .gallery-section {
         margin-bottom: 100px;
         scroll-margin-top: 120px;
     }
-
-    /* GALLERY GRID - DESKTOP (override base) */
-    .gallery-grid-container {
-        max-width: 1800px;
-        padding: 0 100px;
-    }
-    .gallery-grid {
-        flex-direction: column;
-        gap: 100px;
-    }
-    .gallery-grid-item img {
-        max-width: 65%;
-        width: auto;
-    }
-    .gallery-grid-item.hero img {
-        max-width: 75%;
-        width: auto;
-    }
-    .gallery-grid-item.series-end {
-        margin-bottom: 80px;
-    }
-
-    /* Personale: sezioni allineate all’header sticky (desktop) */
-    /* Personale: header (+ ~10px altezza senza toccare il logo) */
-    html.personale-page header,
-    html.food-page header,
-    html.has-panel-menu header {
-        display: grid;
-        grid-template-columns: auto auto auto;
-        column-gap: 40px;
-        align-items: center;
-        justify-items: center;
-        justify-content: center;
-        padding: 5px 60px 5px 60px;
-        /* padding: max(5px, env(safe-area-inset-top)) max(60px, env(safe-area-inset-right)) 5px max(60px, env(safe-area-inset-left)); */
-        min-height: 48px;
-    }
-    html.personale-page .header-left,
-    html.food-page .header-left,
-    html.has-panel-menu .header-left {
-        display: flex;
-        justify-self: center;
-    }
-    html.personale-page .header-right,
-    html.food-page .header-right,
-    html.has-panel-menu .header-right {
-        display: flex;
-        justify-self: center;
-    }
-    html.personale-page .header-lavori,
-    html.food-page .header-lavori,
-    html.has-panel-menu .header-lavori {
-        font-family: "Oswald", "Arial", sans-serif;
-        font-size: 20px;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.03);
-        border: none;
-        border-radius: var(--radius-lg);
-        cursor: pointer;
-        padding: 4px 12px;
-        margin: 0;
-        min-height: 32px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: color var(--transition-speed) ease-in-out,
-                    background-color var(--transition-speed) ease-in-out;
-    }
-    html.personale-page .header-lavori:hover,
-    html.personale-page .header-lavori[aria-expanded="true"],
-    html.food-page .header-lavori:hover,
-    html.food-page .header-lavori[aria-expanded="true"],
-    html.has-panel-menu .header-lavori:hover,
-    html.has-panel-menu .header-lavori[aria-expanded="true"] {
-        color: var(--primary-green);
-        background: rgba(255, 255, 255, 0.06);
-    }
-    html.personale-page .header-contatti,
-    html.food-page .header-contatti,
-    html.has-panel-menu .header-contatti {
-        font-family: "Oswald", "Arial", sans-serif;
-        padding: 4px 12px;
-        min-height: 32px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-lg);
-        border: none;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.03);
-        transition: color var(--transition-speed) ease-in-out,
-                    background-color var(--transition-speed) ease-in-out;
-    }
-    html.personale-page .header-contatti h1,
-    html.food-page .header-contatti h1,
-    html.has-panel-menu .header-contatti h1 {
-        font-size: 20px;
-        margin: 0;
-    }
-    /* RIMOSSA barra verde animata sotto il tasto Contatti nell'header mobile */
-    html.personale-page .navigazione,
-    html.food-page .navigazione,
-    html.has-panel-menu .navigazione {
-        display: none;
-    }
-    html.personale-page .logo,
-    html.food-page .logo,
-    html.has-panel-menu .logo {
-        width: 108px;
-    }
-
-    html.personale-page .gallery-section,
-    html.food-page .gallery-section,
-    html.has-panel-menu .gallery-section {
-        scroll-margin-top: var(--header-h, 110px);
-        margin-bottom: clamp(60px, 10vh, 120px);
-    }
-
-    html.personale-page .gallery-main,
-    html.food-page .gallery-main,
-    html.has-panel-menu main {
-        padding-top: 120px;
-    }
-
-    /* Personale desktop: più spazio tra titolo e carousel, titolo proporzionato */
-    html.personale-page .gallery-title,
-    html.food-page .gallery-title,
-    html.has-panel-menu .gallery-title {
-        font-size: 72px;
-        letter-spacing: 3px;
-        margin-bottom: 6px;
-    }
-
-    /* Personale / Food desktop: altezza carousel 600px, slot fisso (un slide per volta) */
-
+    
     .gallery-title {
         font-size: 84px;
         letter-spacing: 4px;
         margin-bottom: 6px;
         padding-bottom: 14px;
-        line-height: 1.05;
     }
-
+    
     .gallery-title::after {
         width: 100px;
         height: 3px;
     }
-
-    /* Desktop: container = unica fonte — altezza 78vh (clamp 500–95vh); slot 100%. Padding laterale 0: box verde e rosso coincidono. */
+    
+    .gallery-section-description {
+        font-size: 16px;
+    }
+    
+    .gallery-cta-section {
+        padding: 80px 40px;
+        margin-top: 60px;
+    }
+    
+    .gallery-cta-title {
+        font-size: 36px;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+    }
+    
+    .gallery-cta-text {
+        font-size: 18px;
+        margin-bottom: 40px;
+    }
+    
+    .gallery-cta-button {
+        padding: 14px 35px;
+        font-size: 18px;
+    }
+    
+    .gallery-cta-button-large {
+        padding: 18px 50px;
+        font-size: 20px;
+    }
+    
+    .gallery-cta-actions .gallery-cta-button {
+        min-width: 200px;
+    }
+    
+    /* Gallery Grid Desktop */
+    .gallery-grid-container {
+        max-width: 1800px;
+        padding: 0 100px;
+    }
+    
+    .gallery-grid {
+        gap: 100px;
+    }
+    
+    .gallery-grid-item img {
+        max-width: 65%;
+    }
+    
+    .gallery-grid-item.hero img {
+        max-width: 75%;
+    }
+    
+    .gallery-grid-item.series-end {
+        margin-bottom: 80px;
+    }
+    
+    /* Carousel Desktop */
     .gallery-carousel-container {
         max-width: 1920px;
         margin: 0 auto;
         padding: 0;
         height: clamp(500px, 78vh, 95vh);
     }
-
+    
     .gallery-carousel-wrapper {
         position: relative;
         display: flex;
@@ -2489,133 +2071,66 @@ html.has-panel-menu .gallery-section {
         gap: 0;
         padding: 0;
         height: 100%;
-        align-self: stretch;
         overflow: visible;
     }
-
-    /* Layout desktop: strip a sinistra (verticale), carousel a destra */
+    
+    /* Strip layout desktop: horizontal */
     .carousel-strip-layout {
         flex-direction: row;
         gap: 20px;
         align-items: stretch;
     }
-
-    /* Personale/Food desktop: wrapper prende spazio rimanente (flex: 1) così la strip resta dentro il box verde */
+    
     .carousel-strip-layout .gallery-carousel-wrapper {
         flex: 1 1 0%;
         min-height: 0;
     }
-
-    /* Personale / Food desktop 1024–1200: padding laterale 0. */
-    @media only screen and (min-width: 1024px) and (max-width: 1200px) {
-        .gallery-carousel-container {
-            padding: 0;
-        }
-        .carousel-strip-layout .gallery-carousel-wrapper {
-            padding: 0;
-        }
-        .carousel-strip-layout .gallery-carousel {
-            padding: 20px 0;
-        }
-    }
-
-    /* Personale/Food desktop: altezza da container, larghezza auto = box aderente alla foto */
+    
     .carousel-strip-layout .gallery-photo {
         height: 100%;
         width: auto;
         min-width: 0;
         max-width: min(90vw, 1400px);
         padding: 0;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.4s var(--animation-curve);
         will-change: transform;
     }
-
+    
     .gallery-carousel {
         flex: 1;
         display: flex;
         align-items: center;
         gap: 12px;
-        overflow-x: auto;
-        overflow-y: visible;
-        scroll-behavior: smooth;
         padding: 20px 0;
         height: 100%;
-        box-sizing: border-box;
-        scrollbar-width: thin;
-        scrollbar-color: var(--primary-green) rgba(255, 255, 255, 0.1);
         justify-content: flex-start;
-        scroll-snap-type: none; /* Disabilita snap su desktop per permettere scroll fluido */
+        scroll-snap-type: none;
         position: relative;
-        will-change: scroll-position; /* Ottimizza le performance dello scroll */
-        -webkit-overflow-scrolling: touch; /* Scroll fluido su iOS */
+        will-change: scroll-position;
     }
-
-    /* Personale/Food desktop: niente scrollbar sul carousel (come in precedenza) */
+    
     .carousel-strip-layout .gallery-carousel {
         scrollbar-width: none;
         scrollbar-color: transparent transparent;
     }
+    
     .carousel-strip-layout .gallery-carousel::-webkit-scrollbar {
         height: 0;
         width: 0;
         display: none;
     }
-
-    /* Altre gallery desktop: altezza da container, larghezza auto = box aderente alla foto */
+    
     .gallery-photo {
         height: 100%;
         width: auto;
         min-width: 0;
         max-width: min(90vw, 1400px);
         padding: 0;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.4s var(--animation-curve);
         will-change: transform;
     }
-
-
-    /* Preloader Desktop */
-
-    .gallery-cta-button {
-        padding: 14px 35px;
-        font-size: 18px;
-    }
-
-    .gallery-section-description {
-        font-size: 16px;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    .gallery-cta-section {
-        padding: 80px 40px;
-        margin-top: 60px;
-    }
-
-    .gallery-cta-title {
-        font-size: 36px;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-    }
-
-    .gallery-cta-text {
-        font-size: 18px;
-        margin-bottom: 40px;
-    }
-
-    .gallery-cta-button-large {
-        padding: 18px 50px;
-        font-size: 20px;
-    }
-
-    .gallery-cta-actions .gallery-cta-button {
-        min-width: 200px;
-    }
-
-    .gallery-cta-actions {
-        gap: 4px;
-    }
-
-    /* Frecce navigazione carosello desktop - posizionate sul wrapper */
+    
+    /* Navigation arrows */
     .gallery-carousel-wrapper .gallery-nav-arrow {
         position: absolute;
         top: 50%;
@@ -2634,47 +2149,40 @@ html.has-panel-menu .gallery-section {
                     opacity 0.3s ease;
         font-size: 24px;
         color: #ffffff;
-        font-family: "Oswald", "Arial", sans-serif;
+        font-family: "Oswald", Arial, sans-serif;
         padding: 0;
         z-index: 100;
         pointer-events: auto;
         user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
     }
-
+    
     .gallery-carousel-wrapper .gallery-nav-prev {
         left: -10px;
     }
-
+    
     .gallery-carousel-wrapper .gallery-nav-next {
         right: -10px;
     }
-
+    
     .gallery-carousel-wrapper .gallery-nav-arrow:hover {
         background: rgba(0, 0, 0, 0.6);
         color: #ffffff;
     }
-
-    .gallery-carousel-wrapper .gallery-nav-arrow:active {
-        background: rgba(0, 0, 0, 0.6);
-    }
-
+    
     .gallery-carousel-wrapper .gallery-nav-arrow span {
         display: block;
         line-height: 1;
     }
-
+    
     .gallery-carousel-wrapper .gallery-nav-prev span {
         transform: translateX(4px);
     }
-
+    
     .gallery-carousel-wrapper .gallery-nav-next span {
         transform: translateX(-4px);
     }
-
-    /* Personale / Food desktop: strip verticale a destra */
+    
+    /* Strip vertical on desktop */
     .carousel-strip-layout .gallery-strip-viewport {
         flex: 0 0 auto;
         width: 80px;
@@ -2685,6 +2193,7 @@ html.has-panel-menu .gallery-section {
         display: block;
         align-self: center;
     }
+    
     .carousel-strip-layout .gallery-carousel-strip {
         display: flex;
         flex-direction: column;
@@ -2703,10 +2212,11 @@ html.has-panel-menu .gallery-section {
         -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
     }
+    
     .carousel-strip-layout .gallery-carousel-strip::-webkit-scrollbar {
         display: none;
     }
-
+    
     .carousel-strip-layout .gallery-carousel-strip .gallery-strip-thumb {
         flex: 0 0 auto;
         width: 64px;
@@ -2714,61 +2224,290 @@ html.has-panel-menu .gallery-section {
         height: 64px;
         min-height: 64px;
     }
-}
-
-/* Nascondi frecce su mobile e tablet portrait (sotto 1024px) */
-@media only screen and (max-width: 1023px) {
-    .gallery-carousel-wrapper .gallery-nav-arrow {
-        display: none !important;
-    }
-
-    /* Comportamento unico carousel sotto 1024px: padding laterale 0 (box verde e rosso coincidono). */
-    /* Comportamento unico carousel sotto 1024px: padding laterale 0 (box verde e rosso coincidono). */
-    .gallery-carousel-container {
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    .gallery-carousel-wrapper {
-        position: relative;
-        display: flex;
+    
+    /* Panel pages header */
+    html.personale-page header,
+    html.food-page header,
+    html.has-panel-menu header {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 40px;
         align-items: center;
-        gap: 0;
-        padding: 0;
-        height: 100%;
-        overflow: visible;
+        justify-items: center;
+        justify-content: center;
+        padding: 5px 60px;
+        min-height: 48px;
     }
-
-    .carousel-strip-layout .gallery-carousel-wrapper {
-        flex: 1 1 0%;
-        min-height: 0;
-    }
-
-    .gallery-carousel {
-        flex: 1;
-        min-height: 0;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 12px 0;
-        width: 100%;
-    }
-
-    /* Slot e immagine: stesso comportamento ovunque sotto 1024px */
-    .gallery-photo {
-        height: 100%;
-        min-height: 0;
-        padding: 0;
+    
+    html.personale-page .header-left,
+    html.food-page .header-left,
+    html.has-panel-menu .header-left {
         display: flex;
+        justify-self: center;
+    }
+    
+    html.personale-page .header-right,
+    html.food-page .header-right,
+    html.has-panel-menu .header-right {
+        display: flex;
+        justify-self: center;
+    }
+    
+    html.personale-page .header-lavori,
+    html.food-page .header-lavori,
+    html.has-panel-menu .header-lavori {
+        font-family: "Oswald", Arial, sans-serif;
+        font-size: 20px;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.03);
+        border: none;
+        border-radius: var(--radius-lg);
+        cursor: pointer;
+        padding: 4px 12px;
+        margin: 0;
+        min-height: 32px;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        max-width: 90vw;
+        transition: color var(--transition-speed) ease-in-out,
+                    background-color var(--transition-speed) ease-in-out;
     }
-
-    .carousel-strip-layout .gallery-strip-viewport {
-        align-self: center;
+    
+    html.personale-page .header-lavori:hover,
+    html.personale-page .header-lavori[aria-expanded="true"],
+    html.food-page .header-lavori:hover,
+    html.food-page .header-lavori[aria-expanded="true"],
+    html.has-panel-menu .header-lavori:hover,
+    html.has-panel-menu .header-lavori[aria-expanded="true"] {
+        color: var(--primary-green);
+        background: rgba(255, 255, 255, 0.06);
     }
+    
+    html.personale-page .header-contatti,
+    html.food-page .header-contatti,
+    html.has-panel-menu .header-contatti {
+        font-family: "Oswald", Arial, sans-serif;
+        padding: 4px 12px;
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-lg);
+        border: none;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.03);
+        transition: color var(--transition-speed) ease-in-out,
+                    background-color var(--transition-speed) ease-in-out;
+    }
+    
+    html.personale-page .header-contatti h1,
+    html.food-page .header-contatti h1,
+    html.has-panel-menu .header-contatti h1 {
+        font-size: 20px;
+        margin: 0;
+    }
+    
+    html.personale-page .navigazione,
+    html.food-page .navigazione,
+    html.has-panel-menu .navigazione {
+        display: none;
+    }
+    
+    html.personale-page .logo,
+    html.food-page .logo,
+    html.has-panel-menu .logo {
+        width: 108px;
+    }
+    
+    html.has-panel-menu .logo {
+        width: 120px;
+    }
+    
+    html.personale-page .gallery-section,
+    html.food-page .gallery-section,
+    html.has-panel-menu .gallery-section {
+        scroll-margin-top: var(--header-h, 110px);
+        margin-bottom: clamp(60px, 10vh, 120px);
+    }
+    
+    html.personale-page .gallery-main,
+    html.food-page .gallery-main,
+    html.has-panel-menu main {
+        padding-top: 120px;
+    }
+    
+    html.has-panel-menu main {
+        padding-top: 160px;
+    }
+    
+    html.personale-page .gallery-title,
+    html.food-page .gallery-title,
+    html.has-panel-menu .gallery-title {
+        font-size: 72px;
+        letter-spacing: 3px;
+        margin-bottom: 6px;
+    }
+    
+    /* Mobile menu toggle (hidden on desktop) */
+    html.personale-page .mobile-menu-toggle,
+    html.food-page .mobile-menu-toggle,
+    html.has-panel-menu .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    /* Panel menu desktop */
+    html.personale-page .mobile-menu-panel,
+    html.food-page .mobile-menu-panel,
+    html.has-panel-menu .mobile-menu-panel {
+        display: block !important;
+        position: fixed;
+        top: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(300px, calc(100vw - 120px));
+        max-height: 0;
+        overflow: hidden;
+        margin: 0;
+        border-radius: var(--radius-lg);
+        transition: max-height 0.35s ease-out;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.2) 100%);
+        backdrop-filter: blur(30px) saturate(180%);
+        box-shadow: var(--glass-shadow);
+        z-index: 999;
+        pointer-events: none;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel.is-open {
+        max-height: 70vh;
+        overflow-y: auto;
+        pointer-events: auto;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-columns {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        align-items: flex-start;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-col {
+        flex: 1 1 50%;
+        min-width: 0;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-col:first-child {
+        text-align: left;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-col:last-child {
+        text-align: right;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-category {
+        font-family: "Oswald", Arial, sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.6);
+        padding: 18px 16px 8px;
+        margin: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+    
+    html:is(.personale-page, .food-page, .has-panel-menu) .mobile-menu-panel .mobile-menu-link {
+        display: block;
+        font-family: "Oswald", Arial, sans-serif;
+        font-size: 18px;
+        letter-spacing: 1px;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 14px 16px;
+        border-radius: var(--radius-lg);
+        margin: 0 8px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+        pointer-events: auto;
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-link:where(:hover, :focus-visible) {
+        color: var(--primary-green);
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-contatti {
+        display: none !important;
+    }
+}
 
-    /* Personale / Food: menu mobile — LAVORI/CONTATTI visibili; hamburger nascosto */
+/* ========================================
+   MOBILE SPECIFIC < 1024px
+   ======================================== */
+@media (max-width: 1023px) {
+    /* Mobile typography */
+    .gallery-title {
+        font-size: 32px;
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+    }
+    
+    .gallery-title::after {
+        width: 50px;
+        height: 2px;
+    }
+    
+    .gallery-section-description {
+        font-size: 15px;
+        margin-top: 16px;
+        margin-bottom: 28px;
+    }
+    
+    /* Contacts mobile */
+    .contatti .coppia-link {
+        max-width: 200px;
+    }
+    
+    .coppia {
+        max-width: 200px;
+    }
+    
+    .contatti {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .contatti-title {
+        text-align: center;
+        font-size: 52px;
+        letter-spacing: 3px;
+        margin-bottom: 4px;
+        padding-bottom: 8px;
+        line-height: 1.05;
+        user-select: none;
+        cursor: default;
+        position: relative;
+    }
+    
+    .contatti-subtitle {
+        text-align: center;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 0;
+        margin-bottom: 40px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+    }
+    
+    /* No hover effects on mobile for header Contatti */
+    .header-contatti:hover::after,
+    .header-contatti:active::after,
+    .header-contatti.nav-evidenziata::after {
+        display: none !important;
+        background: none !important;
+        animation: none !important;
+    }
+    
+    /* Panel pages mobile header */
     html.personale-page header,
     html.food-page header,
     html.has-panel-menu header {
@@ -2777,9 +2516,9 @@ html.has-panel-menu .gallery-section {
         justify-content: flex-start;
         align-items: center;
         user-select: none;
-        -webkit-user-select: none;
         -webkit-tap-highlight-color: transparent;
     }
+    
     html.personale-page header button,
     html.personale-page header a,
     html.food-page header button,
@@ -2789,6 +2528,7 @@ html.has-panel-menu .gallery-section {
         outline: none;
         -webkit-tap-highlight-color: transparent;
     }
+    
     html.personale-page .header-left,
     html.food-page .header-left,
     html.has-panel-menu .header-left {
@@ -2798,12 +2538,14 @@ html.has-panel-menu .gallery-section {
         order: 2;
         margin-left: auto;
     }
+    
     html.personale-page .logo-container,
     html.food-page .logo-container,
     html.has-panel-menu .logo-container {
         order: 1;
         flex-shrink: 0;
     }
+    
     html.personale-page .header-right,
     html.food-page .header-right,
     html.has-panel-menu .header-right {
@@ -2813,10 +2555,11 @@ html.has-panel-menu .gallery-section {
         order: 3;
         margin-left: 6px;
     }
+    
     html.personale-page .header-lavori,
     html.food-page .header-lavori,
     html.has-panel-menu .header-lavori {
-        font-family: "Oswald", "Arial", sans-serif;
+        font-family: "Oswald", Arial, sans-serif;
         font-size: 15px;
         color: #ffffff;
         background: rgba(255, 255, 255, 0.03);
@@ -2834,10 +2577,11 @@ html.has-panel-menu .gallery-section {
         pointer-events: auto;
         z-index: 10;
     }
+    
     html.personale-page .header-contatti,
     html.food-page .header-contatti,
     html.has-panel-menu .header-contatti {
-        font-family: "Oswald", "Arial", sans-serif;
+        font-family: "Oswald", Arial, sans-serif;
         padding: 8px 14px;
         min-height: 38px;
         display: inline-flex;
@@ -2851,22 +2595,27 @@ html.has-panel-menu .gallery-section {
                     background-color var(--transition-speed) ease-in-out;
         text-decoration: none;
     }
+    
     html.personale-page .header-contatti h1,
     html.food-page .header-contatti h1,
     html.has-panel-menu .header-contatti h1 {
         font-size: 15px;
         margin: 0;
     }
+    
     html.personale-page .navigazione,
     html.food-page .navigazione,
     html.has-panel-menu .navigazione {
         display: none;
     }
+    
     html.personale-page .mobile-menu-toggle,
     html.food-page .mobile-menu-toggle,
     html.has-panel-menu .mobile-menu-toggle {
         display: none;
     }
+    
+    /* Mobile menu panel */
     html.has-panel-menu .mobile-menu-panel {
         position: fixed;
         top: 70px;
@@ -2878,38 +2627,42 @@ html.has-panel-menu .gallery-section {
         overflow: hidden;
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.2) 100%);
         backdrop-filter: blur(30px) saturate(180%);
-        -webkit-backdrop-filter: blur(30px) saturate(180%);
         box-shadow: var(--glass-shadow);
         border-radius: var(--radius-lg);
         transition: max-height 0.35s ease-out;
     }
+    
     html.has-panel-menu .mobile-menu-panel.is-open {
         max-height: 75vh;
         overflow-y: auto;
     }
+    
     html.has-panel-menu .mobile-menu-panel .mobile-menu-columns {
         display: flex;
         flex-direction: row;
         gap: 0;
         align-items: flex-start;
     }
+    
     html.personale-page .mobile-menu-panel .mobile-menu-col,
     html.food-page .mobile-menu-panel .mobile-menu-col,
     html.has-panel-menu .mobile-menu-panel .mobile-menu-col {
         flex: 1 1 50%;
         min-width: 0;
     }
-    /* Impaginazione: sinistra a sinistra, destra a destra (come desktop) */
+    
     html.has-panel-menu .mobile-menu-panel .mobile-menu-col:first-child {
         text-align: left;
     }
+    
     html.has-panel-menu .mobile-menu-panel .mobile-menu-col:last-child {
         text-align: right;
     }
+    
     html.personale-page .mobile-menu-panel .mobile-menu-category,
     html.food-page .mobile-menu-panel .mobile-menu-category,
     html.has-panel-menu .mobile-menu-panel .mobile-menu-category {
-        font-family: "Oswald", "Arial", sans-serif;
+        font-family: "Oswald", Arial, sans-serif;
         font-size: 13px;
         letter-spacing: 2px;
         color: rgba(255, 255, 255, 0.6);
@@ -2918,9 +2671,10 @@ html.has-panel-menu .gallery-section {
         cursor: default;
         pointer-events: none;
     }
+    
     html.has-panel-menu .mobile-menu-panel .mobile-menu-link {
         display: block;
-        font-family: "Oswald", "Arial", sans-serif;
+        font-family: "Oswald", Arial, sans-serif;
         font-size: 18px;
         letter-spacing: 1px;
         color: #ffffff;
@@ -2931,6 +2685,7 @@ html.has-panel-menu .gallery-section {
         transition: background-color 0.2s ease, color 0.2s ease;
         -webkit-tap-highlight-color: transparent;
     }
+    
     html.personale-page .mobile-menu-panel .mobile-menu-link:hover,
     html.personale-page .mobile-menu-panel .mobile-menu-link:focus-visible,
     html.food-page .mobile-menu-panel .mobile-menu-link:hover,
@@ -2939,7 +2694,7 @@ html.has-panel-menu .gallery-section {
     html.has-panel-menu .mobile-menu-panel .mobile-menu-link:focus-visible {
         color: var(--primary-green);
     }
-    /* Spacer per allineare il fondo della colonna destra (2 voci) a quella sinistra (3 voci) — distanza CONTATTI uguale sopra PRODUCT e VIDEO */
+    
     html.has-panel-menu .mobile-menu-panel .mobile-menu-spacer {
         display: block;
         padding: 14px 16px;
@@ -2947,93 +2702,66 @@ html.has-panel-menu .gallery-section {
         visibility: hidden;
         pointer-events: none;
     }
-    /* CONTATTI nascosto anche su mobile (come desktop) */
+    
     html.has-panel-menu .mobile-menu-panel .mobile-menu-contatti {
         display: none !important;
     }
+    
     html.has-panel-menu body.mobile-menu-open {
         overflow: hidden;
     }
 }
 
-@media only screen and (min-width: 1024px) {
-    html.personale-page .mobile-menu-toggle,
-    html.food-page .mobile-menu-toggle,
-    html.has-panel-menu .mobile-menu-toggle {
-        display: none !important;
+/* ========================================
+   SMALLER DESKTOP BREAKPOINT
+   ======================================== */
+@media (min-width: 1024px) and (max-width: 1200px) {
+    #video .collegamento article {
+        flex: 0 1 calc(50% - 15px);
+        max-width: 500px;
     }
-    /* Panel aperto da LAVORI su desktop: sotto l'header, allineato a sinistra; max 1920×1080 */
-    html.personale-page .mobile-menu-panel,
-    html.food-page .mobile-menu-panel,
-    html.has-panel-menu .mobile-menu-panel {
-        display: block !important;
-        position: fixed;
-        top: 85px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(300px, calc(100vw - 120px));
-        max-height: 0;
-        overflow: hidden;
-        margin: 0;
-        border-radius: var(--radius-lg);
-        transition: max-height 0.35s ease-out;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.2) 100%);
-        backdrop-filter: blur(30px) saturate(180%);
-        -webkit-backdrop-filter: blur(30px) saturate(180%);
-        box-shadow: var(--glass-shadow);
-        z-index: 999;
-        pointer-events: none;
+    
+    .gallery-carousel-container {
+        padding: 0;
     }
-    html.has-panel-menu .mobile-menu-panel.is-open {
-        max-height: 70vh;
-        overflow-y: auto;
-        pointer-events: auto;
+    
+    .carousel-strip-layout .gallery-carousel-wrapper {
+        padding: 0;
     }
-    /* Viewport > 1920px: pannello allineato all'area contenuto 1920px (60px dal bordo sinistro di quell'area) */
-    @media only screen and (min-width: 1921px) {
-        .contatti .coppia-link {
-            max-width: 240px;
-        }
+    
+    .carousel-strip-layout .gallery-carousel {
+        padding: 20px 0;
     }
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-col {
-        flex: 1 1 50%;
-        min-width: 0;
+}
+
+/* ========================================
+   LARGER VIEWPORT
+   ======================================== */
+@media (min-width: 1921px) {
+    .contatti .coppia-link {
+        max-width: 240px;
     }
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-col:first-child {
-        text-align: left;
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-col:last-child {
-        text-align: right;
+    
+    * {
+        animation: none !important;
+        transition: none !important;
     }
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-category {
-        font-family: "Oswald", "Arial", sans-serif;
-        font-size: 13px;
-        letter-spacing: 2px;
-        color: rgba(255, 255, 255, 0.6);
-        padding: 18px 16px 8px;
-        margin: 0;
-        cursor: default;
-        pointer-events: none;
-    }
-    html:is(.personale-page, .food-page, .has-panel-menu) .mobile-menu-panel .mobile-menu-link {
-        display: block;
-        font-family: "Oswald", "Arial", sans-serif;
-        font-size: 18px;
-        letter-spacing: 1px;
-        color: #ffffff;
-        text-decoration: none;
-        padding: 14px 16px;
-        border-radius: var(--radius-lg);
-        margin: 0 8px;
-        transition: background-color 0.2s ease, color 0.2s ease;
-        cursor: pointer;
-        pointer-events: auto;
-    }
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-link:where(:hover, :focus-visible) {
-        color: var(--primary-green);
-    }
-    /* CONTATTI nel panel: solo su mobile; su desktop è in header */
-    html.has-panel-menu .mobile-menu-panel .mobile-menu-contatti {
-        display: none !important;
+    
+    .carousel-strip-layout.carousel-animate-pending .gallery-carousel-wrapper,
+    .carousel-strip-layout.animate-initial .gallery-carousel-wrapper,
+    .carousel-strip-layout.animate-initial .gallery-strip-thumb,
+    .carousel-strip-layout.animate-initial .gallery-carousel-strip {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }
