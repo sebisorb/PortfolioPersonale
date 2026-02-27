@@ -1,3 +1,22 @@
+/* Uniformazione titoli e descrizioni sezioni */
+.section-title {
+    font-family: 'Oswald', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 3.3rem;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    margin: 0 0 0.5em 0;
+    text-transform: uppercase;
+}
+
+.section-desc {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #fff;
+    margin: 0 0 1.5em 0;
+    font-weight: 400;
+}
 /* ==============================================
    STILE.CSS OTTIMIZZATO
    Mobile First | Ottimizzazioni Performance | Mantenimento Funzionalità
@@ -410,24 +429,8 @@ header {
     color: var(--primary-green);
 }
 
-.bottone::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -3px;
-    left: 50%;
-    background-color: var(--primary-green);
-    transition: width var(--transition-speed) ease-in-out;
-    transform: translateX(-50%);
-}
-
 .bottone:hover {
-    color: var(--primary-green);
-}
-
-.bottone:hover::after {
-    width: 100%;
+    color: #fff;
 }
 
 /* ==================
@@ -471,7 +474,7 @@ header {
     text-align: center;
     cursor: pointer;
     pointer-events: auto;
-    user-select: none;
+    /* user-select: none; RIMOSSO: già coperto da header */
     border-radius: var(--radius-sm);
     margin: 2px 6px;
 }
@@ -546,30 +549,7 @@ body.pagina-gallery main {
 }
 
 .profilo-img:hover {
-    transform: scale(1.03);
-}
-
-body:not(.pagina-gallery) .profilo .profilo-img:hover {
-    box-shadow: var(--shadow-sm);
-}
-
-.profilo-info {
-    line-height: 1;
-}
-
-.profilo-info p {
-    margin: 0;
-    padding: 0;
-}
-
-.profilo-nome {
-    font-size: 18px;
-    letter-spacing: 1px;
-    font-weight: 600;
-    display: block;
-    margin: 0 0 8px 0;
-    padding: 0;
-    line-height: 1;
+    transform: scale(1.02);
 }
 
 .profilo-dati-container {
@@ -579,17 +559,6 @@ body:not(.pagina-gallery) .profilo .profilo-img:hover {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", Arial, sans-serif;
-}
-
-.profilo-dati,
-.profilo-skills {
-    font-size: 13px;
-    display: block;
-    margin: 0;
-    padding: 0;
-    opacity: 0.85;
-    line-height: 1.6;
     font-family: "Montserrat", Arial, sans-serif;
 }
 
@@ -622,28 +591,6 @@ body:not(.pagina-gallery) .profilo .profilo-img:hover {
 .profilo-text {
     margin-top: 30px;
     margin-bottom: 30px;
-}
-
-.profilo-text2 {
-    width: 100%;
-    max-width: 100%;
-    text-align: justify;
-    hyphens: auto;
-    line-height: 1.8;
-    margin-top: 25px;
-    box-sizing: border-box;
-}
-
-.profbas {
-    opacity: 0.7;
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    display: block;
-    padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
 }
 
 /* ==================
@@ -702,10 +649,6 @@ body:not(.pagina-gallery) .profilo .profilo-img:hover {
     box-shadow: 0 12px 24px rgba(255, 255, 255, 0.2);
 }
 
-body:not(.pagina-gallery) .collegamento .collegata:hover {
-    box-shadow: var(--shadow-sm);
-}
-
 .frame {
     box-shadow: var(--shadow-sm);
     width: 85vw;
@@ -755,36 +698,6 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
     text-decoration: underline;
 }
 
-.about-text2 {
-    padding: 15px;
-    margin-bottom: 30px;
-    width: 85vw;
-    max-width: 800px;
-}
-
-/* Editoriali page */
-.editoriali-intestazione {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    padding: 0 1rem;
-}
-
-.editoriali-titolo {
-    font-size: 1.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-.editoriali-intro {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
-}
-
 /* ==================
    CONTATTI (CONTACTS)
    ================== */
@@ -813,7 +726,7 @@ body:not(.pagina-gallery) .collegamento .collegata:hover {
 
 .contatti .coppia-link * {
     cursor: pointer;
-    user-select: none;
+    /* user-select: none; RIMOSSO: già coperto da header */
 }
 
 .coppia-link:hover {
@@ -1030,7 +943,7 @@ footer {
     margin-bottom: 4px;
     padding-bottom: 8px;
     line-height: 1.05;
-    user-select: none;
+    /* user-select: none; RIMOSSO: già coperto da header */
     cursor: default;
     position: relative;
     color: #fff;
@@ -1090,7 +1003,7 @@ html.has-panel-menu .gallery-section {
     letter-spacing: 2px;
     margin-bottom: 15px;
     color: #ffffff;
-    user-select: none;
+    /* user-select: none; RIMOSSO: già coperto da header */
     cursor: default;
 }
 
@@ -1292,7 +1205,7 @@ html.has-panel-menu .gallery-section {
     box-sizing: border-box;
     background: transparent;
     -webkit-tap-highlight-color: transparent;
-    user-select: none;
+    /* user-select: none; RIMOSSO: già coperto da header */
 }
 
 .gallery-photo:focus-visible {
@@ -1725,10 +1638,6 @@ html.has-panel-menu .gallery-section {
         letter-spacing: 0.5px;
     }
     
-    .bottone::after {
-        bottom: -5px;
-    }
-    
     /* Dropdown hover for desktop */
     .bottone-dropdown:hover .bottone-dropdown-menu {
         opacity: 1;
@@ -2153,7 +2062,7 @@ html.has-panel-menu .gallery-section {
         padding: 0;
         z-index: 100;
         pointer-events: auto;
-        user-select: none;
+        user-select: none; /* Mantieni: necessario per evitare selezione sulle frecce carosello */
     }
     
     .gallery-carousel-wrapper .gallery-nav-prev {
@@ -2239,132 +2148,85 @@ html.has-panel-menu .gallery-section {
         min-height: 48px;
     }
     
-    html.personale-page .header-left,
-    html.food-page .header-left,
-    html.has-panel-menu .header-left {
+    .header-left {
+        display: flex;
+        justify-self: center;
+    }
+
+    .header-right {
         display: flex;
         justify-self: center;
     }
     
-    html.personale-page .header-right,
-    html.food-page .header-right,
-    html.has-panel-menu .header-right {
-        display: flex;
-        justify-self: center;
-    }
+.header-lavori {
+    font-family: "Oswald", Arial, sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    padding: 4px 12px;
+    margin: 0;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-speed) ease-in-out,
+                background-color var(--transition-speed) ease-in-out;
+}
     
-    html.personale-page .header-lavori,
-    html.food-page .header-lavori,
-    html.has-panel-menu .header-lavori {
-        font-family: "Oswald", Arial, sans-serif;
-        font-size: 20px;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.03);
-        border: none;
-        border-radius: var(--radius-lg);
-        cursor: pointer;
-        padding: 4px 12px;
-        margin: 0;
-        min-height: 32px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: color var(--transition-speed) ease-in-out,
-                    background-color var(--transition-speed) ease-in-out;
-    }
+/* Hover/active styles for .header-lavori */
+.header-lavori:hover,
+.header-lavori:active,
+.header-lavori[aria-expanded="true"] {
+    background: rgba(255,255,255,0.12);
+}
+ 
+/* Hover/active styles for .header-contatti */
+.header-contatti:hover,
+.header-contatti:active,
+.header-contatti[aria-expanded="true"] {
+    background: rgba(255,255,255,0.12);
+}
     
-    html.personale-page .header-lavori:hover,
-    html.personale-page .header-lavori[aria-expanded="true"],
-    html.food-page .header-lavori:hover,
-    html.food-page .header-lavori[aria-expanded="true"],
-    html.has-panel-menu .header-lavori:hover,
-    html.has-panel-menu .header-lavori[aria-expanded="true"] {
-        color: var(--primary-green);
-        background: rgba(255, 255, 255, 0.06);
-    }
+.header-contatti {
+    font-family: "Oswald", Arial, sans-serif;
+    padding: 4px 12px;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    border: none;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+    transition: color var(--transition-speed) ease-in-out,
+                background-color var(--transition-speed) ease-in-out;
+    text-decoration: none;
+}
     
-    html.personale-page .header-contatti,
-    html.food-page .header-contatti,
-    html.has-panel-menu .header-contatti {
-        font-family: "Oswald", Arial, sans-serif;
-        padding: 4px 12px;
-        min-height: 32px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-lg);
-        border: none;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.03);
-        transition: color var(--transition-speed) ease-in-out,
-                    background-color var(--transition-speed) ease-in-out;
-    }
-    
-    html.personale-page .header-contatti h1,
-    html.food-page .header-contatti h1,
-    html.has-panel-menu .header-contatti h1 {
+    .header-contatti h1 {
         font-size: 20px;
         margin: 0;
     }
     
-    html.personale-page .navigazione,
-    html.food-page .navigazione,
-    html.has-panel-menu .navigazione {
+    .navigazione {
         display: none;
     }
     
-    html.personale-page .logo,
-    html.food-page .logo,
-    html.has-panel-menu .logo {
-        width: 108px;
-    }
-    
-    html.has-panel-menu .logo {
-        width: 120px;
-    }
-    
-    html.personale-page .gallery-section,
-    html.food-page .gallery-section,
-    html.has-panel-menu .gallery-section {
-        scroll-margin-top: var(--header-h, 110px);
-        margin-bottom: clamp(60px, 10vh, 120px);
-    }
-    
-    html.personale-page .gallery-main,
-    html.food-page .gallery-main,
-    html.has-panel-menu main {
-        padding-top: 120px;
-    }
-    
-    html.has-panel-menu main {
-        padding-top: 160px;
-    }
-    
-    html.personale-page .gallery-title,
-    html.food-page .gallery-title,
-    html.has-panel-menu .gallery-title {
-        font-size: 72px;
-        letter-spacing: 3px;
-        margin-bottom: 6px;
-    }
-    
-    /* Mobile menu toggle (hidden on desktop) */
-    html.personale-page .mobile-menu-toggle,
-    html.food-page .mobile-menu-toggle,
-    html.has-panel-menu .mobile-menu-toggle {
+    .mobile-menu-toggle {
         display: none !important;
     }
     
-    /* Panel menu desktop */
-    html.personale-page .mobile-menu-panel,
-    html.food-page .mobile-menu-panel,
+    /* Mobile menu panel */
     html.has-panel-menu .mobile-menu-panel {
-        display: block !important;
         position: fixed;
-        top: 85px;
+        top: 70px;
         left: 50%;
         transform: translateX(-50%);
-        width: min(300px, calc(100vw - 120px));
+        width: min(300px, calc(100vw - 40px));
+        z-index: 999;
         max-height: 0;
         overflow: hidden;
         margin: 0;
@@ -2373,14 +2235,13 @@ html.has-panel-menu .gallery-section {
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.2) 100%);
         backdrop-filter: blur(30px) saturate(180%);
         box-shadow: var(--glass-shadow);
-        z-index: 999;
-        pointer-events: none;
+        border-radius: var(--radius-lg);
+        transition: max-height 0.35s ease-out;
     }
     
     html.has-panel-menu .mobile-menu-panel.is-open {
-        max-height: 70vh;
+        max-height: 75vh;
         overflow-y: auto;
-        pointer-events: auto;
     }
     
     html.has-panel-menu .mobile-menu-panel .mobile-menu-columns {
@@ -2414,7 +2275,7 @@ html.has-panel-menu .gallery-section {
         pointer-events: none;
     }
     
-    html:is(.personale-page, .food-page, .has-panel-menu) .mobile-menu-panel .mobile-menu-link {
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-link {
         display: block;
         font-family: "Oswald", Arial, sans-serif;
         font-size: 18px;
@@ -2431,6 +2292,14 @@ html.has-panel-menu .gallery-section {
     
     html.has-panel-menu .mobile-menu-panel .mobile-menu-link:where(:hover, :focus-visible) {
         color: var(--primary-green);
+    }
+    
+    html.has-panel-menu .mobile-menu-panel .mobile-menu-spacer {
+        display: block;
+        padding: 14px 16px;
+        margin: 0 8px;
+        visibility: hidden;
+        pointer-events: none;
     }
     
     html.has-panel-menu .mobile-menu-panel .mobile-menu-contatti {
@@ -2515,7 +2384,7 @@ html.has-panel-menu .gallery-section {
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        user-select: none;
+        /* user-select: none; RIMOSSO: già coperto da header */
         -webkit-tap-highlight-color: transparent;
     }
     
@@ -2529,26 +2398,20 @@ html.has-panel-menu .gallery-section {
         -webkit-tap-highlight-color: transparent;
     }
     
-    html.personale-page .header-left,
-    html.food-page .header-left,
-    html.has-panel-menu .header-left {
+    .header-left {
         display: flex;
         gap: 0;
         align-items: center;
         order: 2;
         margin-left: auto;
     }
-    
-    html.personale-page .logo-container,
-    html.food-page .logo-container,
-    html.has-panel-menu .logo-container {
+
+    .logo-container {
         order: 1;
         flex-shrink: 0;
     }
-    
-    html.personale-page .header-right,
-    html.food-page .header-right,
-    html.has-panel-menu .header-right {
+
+    .header-right {
         display: flex;
         gap: 0;
         align-items: center;
@@ -2556,62 +2419,52 @@ html.has-panel-menu .gallery-section {
         margin-left: 6px;
     }
     
-    html.personale-page .header-lavori,
-    html.food-page .header-lavori,
-    html.has-panel-menu .header-lavori {
-        font-family: "Oswald", Arial, sans-serif;
-        font-size: 15px;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.03);
-        border: none;
-        border-radius: var(--radius-lg);
-        cursor: pointer;
-        padding: 8px 14px;
-        margin: 0;
-        min-height: 38px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: color var(--transition-speed) ease-in-out,
-                    background-color var(--transition-speed) ease-in-out;
-        pointer-events: auto;
-        z-index: 10;
-    }
+.header-lavori {
+    font-family: "Oswald", Arial, sans-serif;
+    font-size: 15px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    padding: 8px 14px;
+    margin: 0;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-speed) ease-in-out,
+                background-color var(--transition-speed) ease-in-out;
+    pointer-events: auto;
+    z-index: 10;
+}
     
-    html.personale-page .header-contatti,
-    html.food-page .header-contatti,
-    html.has-panel-menu .header-contatti {
-        font-family: "Oswald", Arial, sans-serif;
-        padding: 8px 14px;
-        min-height: 38px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-lg);
-        border: none;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.03);
-        transition: color var(--transition-speed) ease-in-out,
-                    background-color var(--transition-speed) ease-in-out;
-        text-decoration: none;
-    }
+.header-contatti {
+    font-family: "Oswald", Arial, sans-serif;
+    padding: 8px 14px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    border: none;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+    transition: color var(--transition-speed) ease-in-out,
+                background-color var(--transition-speed) ease-in-out;
+    text-decoration: none;
+}
     
-    html.personale-page .header-contatti h1,
-    html.food-page .header-contatti h1,
-    html.has-panel-menu .header-contatti h1 {
+    .header-contatti h1 {
         font-size: 15px;
         margin: 0;
     }
     
-    html.personale-page .navigazione,
-    html.food-page .navigazione,
-    html.has-panel-menu .navigazione {
+    .navigazione {
         display: none;
     }
     
-    html.personale-page .mobile-menu-toggle,
-    html.food-page .mobile-menu-toggle,
-    html.has-panel-menu .mobile-menu-toggle {
+    .mobile-menu-toggle {
         display: none;
     }
     

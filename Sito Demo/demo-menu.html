@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <!-- Favicon -->
+<link rel="icon" type="image/png" href="img/ph/ristorante-favicon.png">
+<link rel="apple-touch-icon" href="img/ph/ristorante-favicon.png">
+<meta name="theme-color" content="#a67c52">
+
+<!-- Preload principali risorse -->
+<link rel="preload" href="demo-stile.css" as="style">
+<link rel="preload" href="img/ph/demo-piatto.webp" as="image">
+
+<!-- Preconnect per Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Font per ristorante demo -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Stylesheet -->
+<link rel="stylesheet" type="text/css" href="demo-stile.css">
+
+<!-- Title -->
+<title>Sorbello's Restaurant - Sito di esempio</title>
+
+<!-- Tilewind -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <!-- BODY -->
+  <body class="bg-amber-200">
+
+    <!-- HEADER -->
+    <header class="bg-white/30 backdrop-blur border-b border-white/10 shadow
+     text-black p-4 flex justify-between items-center
+     sticky top-0 z-50">
+    <div class="flex items-center w-full">
+      <h1 class="text-2xl font-bold"><a href="demo-home.html">Sorbello's Restaurant</a></h1>
+      <div class="flex-1"></div>
+      <button class="block md:hidden ml-2" id="menu-toggle">
+        <span>☰</span>
+      </button>
+      <nav class="hidden md:flex space-x-4 ml-4">
+        <a href="demo-menu.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Menu</a>
+        <a href="demo-about.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">About</a>
+        <a href="demo-contact.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Menu mobile dinamico -->
+    </header>
+    <div id="mobile-menu-container"></div>
+
+    <!-- Segnaposto Menu -->
+    <script>
+      fetch('demo-mobile-menu.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('mobile-menu-container').innerHTML = html;
+          const script = document.createElement('script');
+          script.src = 'demo-mobile-menu.js';
+          script.onload = function() {
+            if (typeof initMobileMenu === 'function') initMobileMenu();
+          };
+          document.body.appendChild(script);
+        });
+    </script>
+
+    <!-- MAIN -->
+    <main class="min-h-screen p-8">
+
+      <!-- Barra delle Categorie-->
+      <div id="menu-categories" 
+        class="flex gap-1 p-2 w-full md:w-max mx-auto rounded-xl -mt-6
+        overflow-x-auto whitespace-nowrap hide-scrollbar
+        bg-white/30 backdrop-blur border-b border-white/10 shadow">
+
+        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="antipasti">SFIZIO</button>
+        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="primi">PIZZA</button>
+        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="secondi">PANINO</button>
+        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="dolci">DOLCE</button>
+        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="bevande">BEVANDA</button>
+      </div>
+
+
+        <!-- Barra delle Categorie 2-->
+        <div id="menu-categories" 
+         class="flex gap-1 p-2 w-max mx-auto rounded-xl mt-2
+         bg-white/30 backdrop-blur border-b border-white/10 shadow">
+
+          <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="veg">
+            <img src="img/menu icons/vegetale.svg" alt="Vegetale" class="w-5 h-5">
+          </button>
+         <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="carne">
+          <img src="img/menu icons/carne.svg" alt="Carne" class="w-5 h-5">
+          </button>
+         <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="pollo">
+          <img src="img/menu icons/pollo.svg" alt="Pollo" class="w-5 h-5">
+          </button>
+         <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="pesce">
+          <img src="img/menu icons/pesce.svg" alt="Pesce" class="w-5 h-5">
+          </button>
+        </div>
+
+      <!-- Introduzione Menu -->
+      <div id="menu-intro" class="text-center flex items-center justify-center mt-6 p-10
+       bg-white/20 backdrop-blur rounded-xl shadow md:w-max mx-auto">
+       <h2 class="text-xl">Benvenuto!<br>Seleziona una categoria.<br>Puoi scegliere se visualizzare le immagini e i piatti in base al contenuto.<br>Se sei indeciso, puoi mettere like ai piatti e scegliere in seguito nella lista preferiti!
+       </h2>
+      </div>
+
+      <!-- Sezioni Menu-->
+       <div class="mt-8" id="menu-sections">
+
+        <!-- antipasti -->
+        <div class="menu-section" data-category="antipasti" style="display:none;">
+          <h2 class="text-3xl font-bold text-white text-center mb-4">Antipasti</h2>
+          <p class="text-white mt-4 text-center">Scopri la nostra selezione di antipasti, perfetti per iniziare il pasto.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Bruschetta al Pomodoro</h3>
+              <p class="text-white">Pane tostato con pomodoro fresco e basilico.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Tagliere di Salumi</h3>
+              <p class="text-white">Selezione di salumi locali.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Olive all'Ascolana</h3>
+              <p class="text-white">Olive farcite e fritte.</p>
+            </div>
+          </div>
+         </div>
+        </div>
+
+        <!-- primi -->
+        <div class="menu-section" data-category="primi" style="display:none;">
+          <h2 class="text-3xl font-bold text-white text-center mb-4">Primi Piatti</h2>
+          <p class="text-white mt-4 text-center">Scopri la nostra selezione di primi piatti, preparati con ingredienti freschi e di alta qualità.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Spaghetti alla Carbonara</h3>
+              <p class="text-white">Classico piatto romano con guanciale, uova e pecorino.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Risotto ai Funghi Porcini</h3>
+              <p class="text-white">Cremoso risotto con funghi porcini freschi e parmigiano.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Lasagna alla Bolognese</h3>
+              <p class="text-white">Strati di pasta fresca, ragù di carne e besciamella.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- secondi -->
+        <div class="menu-section" data-category="secondi" style="display:none;">
+          <h2 class="text-3xl font-bold text-white text-center mb-4">Secondi Piatti</h2>
+          <p class="text-white mt-4 text-center">Scopri la nostra selezione di secondi piatti, preparati con ingredienti freschi e di alta qualità.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Bistecca alla Fiorentina</h3>
+              <p class="text-white">Taglio di carne pregiato cotto alla brace.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Pollo al Limone</h3>
+              <p class="text-white">Pollo marinato e cotto con limone fresco.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Branzino al Forno</h3>
+              <p class="text-white">Branzino fresco cotto al forno con erbe aromatiche.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- dolci -->
+        <div class="menu-section" data-category="dolci" style="display:none;">
+          <h2 class="text-3xl font-bold text-white text-center mb-4">Dolci</h2>
+          <p class="text-white mt-4 text-center">Scopri la nostra selezione di dolci, preparati con ingredienti freschi e di alta qualità.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Tiramisù</h3>
+              <p class="text-white">Dolce al cucchiaio con caffè, mascarpone e cacao.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Panna Cotta</h3>
+              <p class="text-white">Dessert cremoso servito con coulis di frutta.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Crostata di Frutta</h3>
+              <p class="text-white">Pasta frolla con crema e frutta fresca.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- bevande -->
+        <div class="menu-section" data-category="bevande" style="display:none;"> 
+          <h2 class="text-3xl font-bold text-white text-center mb-4">Bevande</h2>
+          <p class="text-white mt-4 text-center">Scopri la nostra selezione di bevande, fresche e dissetanti.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Acqua Naturale</h3>
+              <p class="text-white">Acqua minerale naturale.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Vino Rosso</h3>
+              <p class="text-white">Selezione di vini rossi locali.</p>
+            </div>
+            <div class="bg-white/20 p-4 rounded-xl shadow">
+              <h3 class="text-xl font-semibold mb-2">Birra Artigianale</h3>
+              <p class="text-white">Birra prodotta localmente.</p>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+        <!-- Barra selettore sticky in basso -->
+        <div class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 bg-white/30 border-white/10 shadow backdrop-blur rounded-xl flex justify-center gap-2 p-2
+        md:left-auto md:right-8 md:translate-x-0">
+
+          <!-- Freccia Su -->
+          <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+            </svg>
+          </button>
+
+          <!-- Camera -->
+          <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+            </svg>
+          </button>
+
+          <!-- Cuore -->
+          <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
+          </button>
+      </div>
+    </main>
+    <!-- JS -->
+     <script src="menu-piatti.js"></script>
+  </body>
