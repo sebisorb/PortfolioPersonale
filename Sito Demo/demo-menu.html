@@ -26,11 +26,17 @@
 <!-- Tilewind -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #2c2c2c;
+        --color-premium: #d3d3d3;
+      }
+    </style>
   </head>
 
   <!-- BODY -->
-  <body class="bg-amber-200">
+  <body class="bg-premium">
 
     <!-- HEADER -->
     <header class="bg-white/30 backdrop-blur border-b border-white/10 shadow
@@ -70,37 +76,34 @@
 
     <!-- MAIN -->
     <main class="min-h-screen p-8">
+        <!-- Categorie Principali -->
+        <div id="main-categories" 
+          class="flex gap-1 p-1 w-full md:w-max mx-auto rounded-3xl -mt-6
+          overflow-x-auto whitespace-nowrap hide-scrollbar">
 
-      <!-- Barra delle Categorie-->
-      <div id="menu-categories" 
-        class="flex gap-1 p-2 w-full md:w-max mx-auto rounded-xl -mt-6
-        overflow-x-auto whitespace-nowrap hide-scrollbar
-        bg-white/30 backdrop-blur border-b border-white/10 shadow">
-
-        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="antipasti">SFIZIO</button>
-        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="primi">PIZZA</button>
-        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="secondi">PANINO</button>
-        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="dolci">DOLCE</button>
-        <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="bevande">BEVANDA</button>
-      </div>
+          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="antipasti">SFIZIO</button>
+          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="primi">PIZZA</button>
+          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="secondi">BURGHER</button>
+          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="dolci">DOLCE</button>
+          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="bevande">BEVANDA</button>
+        </div>
 
 
-        <!-- Barra delle Categorie 2-->
-        <div id="menu-categories" 
-         class="flex gap-1 p-2 w-max mx-auto rounded-xl mt-2
-         bg-white/30 backdrop-blur border-b border-white/10 shadow">
+        <!-- Sotto-Categorie -->
+        <div id="sub-categories" 
+         class="flex gap-1 p-2 w-max mx-auto rounded-3xl">
 
-          <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="veg">
-            <img src="img/menu icons/vegetale.svg" alt="Vegetale" class="w-5 h-5">
+          <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="veg">
+            <img src="img/menu icons/vegetale.svg" alt="Vegetale" class="w-6 h-6">
           </button>
-         <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="carne">
-          <img src="img/menu icons/carne.svg" alt="Carne" class="w-5 h-5">
+         <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="carne">
+          <img src="img/menu icons/carne.svg" alt="Carne" class="w-6 h-6">
           </button>
-         <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="pollo">
-          <img src="img/menu icons/pollo.svg" alt="Pollo" class="w-5 h-5">
+         <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="pollo">
+          <img src="img/menu icons/pollo.svg" alt="Pollo" class="w-6 h-6">
           </button>
-         <button class="category-btn flex item-center justify-center px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300" data-category="pesce">
-          <img src="img/menu icons/pesce.svg" alt="Pesce" class="w-5 h-5">
+         <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="pesce">
+          <img src="img/menu icons/pesce.svg" alt="Pesce" class="w-6 h-6">
           </button>
         </div>
 
@@ -112,138 +115,468 @@
       </div>
 
       <!-- Sezioni Menu-->
-       <div class="mt-8" id="menu-sections">
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 justify-items-center">
 
-        <!-- antipasti -->
-        <div class="menu-section" data-category="antipasti" style="display:none;">
-          <h2 class="text-3xl font-bold text-white text-center mb-4">Antipasti</h2>
-          <p class="text-white mt-4 text-center">Scopri la nostra selezione di antipasti, perfetti per iniziare il pasto.</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Bruschetta al Pomodoro</h3>
-              <p class="text-white">Pane tostato con pomodoro fresco e basilico.</p>
+          <!-- ANTIPASTI -->
+          <!-- Bruschetta -->
+            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="bruschetta-pomodoro" data-category="antipasti" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Bruschette al Pomodoro" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Bruschette al Pomodoro</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Tagliere di Salumi</h3>
-              <p class="text-white">Selezione di salumi locali.</p>
-            </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Olive all'Ascolana</h3>
-              <p class="text-white">Olive farcite e fritte.</p>
-            </div>
-          </div>
-         </div>
-        </div>
 
-        <!-- primi -->
-        <div class="menu-section" data-category="primi" style="display:none;">
-          <h2 class="text-3xl font-bold text-white text-center mb-4">Primi Piatti</h2>
-          <p class="text-white mt-4 text-center">Scopri la nostra selezione di primi piatti, preparati con ingredienti freschi e di alta qualità.</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Spaghetti alla Carbonara</h3>
-              <p class="text-white">Classico piatto romano con guanciale, uova e pecorino.</p>
+            <!-- Tagliere di Salumi -->
+            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="tagliere-salumi" data-category="antipasti" data-sub-category="carne">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Tagliere di Salumi" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Tagliere di Salumi</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€20</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Risotto ai Funghi Porcini</h3>
-              <p class="text-white">Cremoso risotto con funghi porcini freschi e parmigiano.</p>
+
+            <!-- Olive all'Ascolana -->
+            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="olive-ascolana" data-category="antipasti" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Olive all'Ascolana" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Olive all'Ascolana</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€6</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Lasagna alla Bolognese</h3>
-              <p class="text-white">Strati di pasta fresca, ragù di carne e besciamella.</p>
+            
+            <!-- Polpettine di Pollo -->
+            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="polpettine-pollo" data-category="antipasti" data-sub-category="pollo">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Polpettine di Pollo" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Polpettine di Pollo</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+
+              <!-- Alici Marinate -->
+            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="alici-marinate" data-category="antipasti" data-sub-category="pesce">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Alici Marinate" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Alici Marinate</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€20</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+        
+
+        <!-- PRIMI -->
+        
+            
+            <!-- Spaghetti alla Carbonara -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="spaghetti-alla-carbonara" data-category="primi" data-sub-category="carne">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Spaghetti alla Carbonara" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Spaghetti alla Carbonara</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Risotto ai Funghi Porcini -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="risotto-ai-funghi-porcini" data-category="primi" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Risotto ai Funghi Porcini" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Risotto ai Funghi Porcini</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€20</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+              <!-- Lasagna alla Bolognese -->
+               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="lasagna-bolognese" data-category="primi" data-sub-category="carne">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Lasagna alla Bolognese" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Lasagna alla Bolognese</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€20</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pasta al Pollo -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="pasta-al-pollo" data-category="primi" data-sub-category="pollo">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Pasta al Pollo" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Pasta al Pollo</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+              <!-- Linguine allo Scoglio --> 
+               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="linguine-allo-scoglio" data-category="primi" data-sub-category="pesce">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Linguine allo Scoglio" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Linguine allo Scoglio</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€22</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
 
         <!-- secondi -->
-        <div class="menu-section" data-category="secondi" style="display:none;">
-          <h2 class="text-3xl font-bold text-white text-center mb-4">Secondi Piatti</h2>
-          <p class="text-white mt-4 text-center">Scopri la nostra selezione di secondi piatti, preparati con ingredienti freschi e di alta qualità.</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Bistecca alla Fiorentina</h3>
-              <p class="text-white">Taglio di carne pregiato cotto alla brace.</p>
+
+            <!-- Bistecca alla Fiorentina -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="bistecca-alla-fiorentina" data-category="secondi" data-sub-category="carne">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Bistecca alla Fiorentina" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Bistecca alla Fiorentina</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€22</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Pollo al Limone</h3>
-              <p class="text-white">Pollo marinato e cotto con limone fresco.</p>
+
+              <!-- Pollo al Limone -->
+               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="pollo-al-limone" data-category="secondi" data-sub-category="pollo">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Pollo al Limone" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Pollo al Limone</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€16</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Branzino al Forno</h3>
-              <p class="text-white">Branzino fresco cotto al forno con erbe aromatiche.</p>
+
+              <!-- Branzino al Forno -->
+               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="branzino-al-forno" data-category="secondi" data-sub-category="pesce">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Branzino al Forno" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Branzino al Forno</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€24</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+
+              <!-- Parmigiana di Melanzane -->
+               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="parmigiana-di-melanzane" data-category="secondi" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Parmigiana di Melanzane" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Parmigiana di Melanzane</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
 
         <!-- dolci -->
-        <div class="menu-section" data-category="dolci" style="display:none;">
-          <h2 class="text-3xl font-bold text-white text-center mb-4">Dolci</h2>
-          <p class="text-white mt-4 text-center">Scopri la nostra selezione di dolci, preparati con ingredienti freschi e di alta qualità.</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Tiramisù</h3>
-              <p class="text-white">Dolce al cucchiaio con caffè, mascarpone e cacao.</p>
+
+            <!-- Tiramisù -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="tiramisu" data-category="dolci" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Tiramisù" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Tiramisù</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Panna Cotta</h3>
-              <p class="text-white">Dessert cremoso servito con coulis di frutta.</p>
+
+            <!-- Panna Cotta -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="panna-cotta" data-category="dolci" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Panna Cotta" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Panna Cotta</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Crostata di Frutta</h3>
-              <p class="text-white">Pasta frolla con crema e frutta fresca.</p>
+
+            <!-- Crostata di Frutta -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="crostata-di-frutta" data-category="dolci" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Crostata di Frutta" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Crostata di Frutta</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
         <!-- bevande -->
-        <div class="menu-section" data-category="bevande" style="display:none;"> 
-          <h2 class="text-3xl font-bold text-white text-center mb-4">Bevande</h2>
-          <p class="text-white mt-4 text-center">Scopri la nostra selezione di bevande, fresche e dissetanti.</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Acqua Naturale</h3>
-              <p class="text-white">Acqua minerale naturale.</p>
+
+            <!-- Acqua Naturale -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="acqua-naturale" data-category="bevande" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Acqua Naturale" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Acqua Naturale</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€6</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Vino Rosso</h3>
-              <p class="text-white">Selezione di vini rossi locali.</p>
+
+            <!-- Vino Rosso -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="vino-rosso" data-category="bevande" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Vino Rosso" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Vino Rosso</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€12</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white/20 p-4 rounded-xl shadow">
-              <h3 class="text-xl font-semibold mb-2">Birra Artigianale</h3>
-              <p class="text-white">Birra prodotta localmente.</p>
+
+            <!-- Birra Artigianale -->
+             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+             data-id="birra-artigianale" data-category="bevande" data-sub-category="veg">
+             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Birra Artigianale" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Birra Artigianale</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€6</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
         
-      </div>
-        <!-- Barra selettore sticky in basso -->
-        <div class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 bg-white/30 border-white/10 shadow backdrop-blur rounded-xl flex justify-center gap-2 p-2
-        md:left-auto md:right-8 md:translate-x-0">
+         </div>
+           <!-- Barra selettore sticky in basso -->
+           <div class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 rounded-xl flex justify-center gap-2 p-2
+             md:left-auto md:right-8 md:translate-x-0">
 
-          <!-- Freccia Su -->
-          <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-            </svg>
-          </button>
+              <!-- Freccia Su -->
+             <button id="scroll-top-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                </svg>
+              </button>
 
-          <!-- Camera -->
-          <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-            </svg>
-          </button>
+              <!-- Camera -->
+              <button id="toggle-photos-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                </svg>
+              </button>
 
-          <!-- Cuore -->
-          <button class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-            </svg>
-          </button>
-      </div>
-    </main>
-    <!-- JS -->
+              <!-- Cuore -->
+             <button id="favorites-panel-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+             </button>
+            </div>
+     </main>
+     <!-- JS -->
      <script src="menu-piatti.js"></script>
-  </body>
+ </body>

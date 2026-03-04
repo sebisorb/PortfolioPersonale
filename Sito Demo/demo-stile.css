@@ -5,8 +5,6 @@ body {
   font-family: 'Roboto', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #fff8f0;
-  color: #2d2d2d;
 }
 
 h1, h2 {
@@ -26,4 +24,17 @@ h1, h2 {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+/* Stato selezionato per tutte le category-btn */
+.category-btn.is-active {
+  /* scegli tu i valori, esempio: */
+  background-color: rgba(255, 255, 255, 0.85);
+  /* se vuoi cambiare anche il testo: */
+  color: #000;
+}
+
+/* Facoltativo: per rendere evidente anche i bottoni icona (sub e sticky) */
+.category-btn.is-active img {
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
 }
