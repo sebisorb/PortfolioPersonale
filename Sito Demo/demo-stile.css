@@ -38,3 +38,15 @@ h1, h2 {
 .category-btn.is-active img {
   filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
 }
+
+/* Cuore Stato base: solo contorno */
+.like-btn svg {
+  fill: none;
+  stroke: currentColor;
+}
+
+/* Stato preferito: cuore pieno */
+.like-btn.is-active svg {
+  fill: currentColor;      /* riempie il cuore */
+  stroke: currentColor;    /* mantiene il bordo dello stesso colore */
+}
