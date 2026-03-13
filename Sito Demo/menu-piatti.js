@@ -50,6 +50,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+   // Limita lo scroll della barra categorie su mobile (8px margine)
+   (function limitCategoryScrollMobile() {
+   const container = document.getElementById('main-categories');
+   if (!container) return;
+   // Solo su mobile
+   if (window.innerWidth > 768) return;
+   const buttons = container.querySelectorAll('button');
+   if (!buttons.length) return;
+   const margin = 16;
+   container.addEventListener('scroll', function () {
+    const scrollLeft = container.scrollLeft;
+    const firstBtn = buttons[0];
+    const lastBtn = buttons[buttons.length - 1];
+    const firstBtnLeft = firstBtn.offsetLeft;
+    const lastBtnRight = lastBtn.offsetLeft + lastBtn.offsetWidth;
+    const maxScroll = lastBtnRight - container.clientWidth + margin;
+    if (scrollLeft < firstBtnLeft - margin) {
+      container.scrollLeft = firstBtnLeft - margin;
+    }
+    if (scrollLeft > maxScroll) {
+      container.scrollLeft = maxScroll;
+    }
+   });
+   })();
+
   // --- Gestione sotto-categorie ---
   subCategoryButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -257,21 +282,40 @@ document.addEventListener('DOMContentLoaded', function () {
       backdrop = document.createElement('div');
       backdrop.id = 'favorites-panel-backdrop';
       backdrop.className =
-        'fixed inset-0 z-40 bg-black/50'; // personalizza le classi come vuoi
+        'fixed inset-0 z-40 bg-black/20 backdrop-blur-lg flex items-center justify-center px-4';
       document.body.appendChild(backdrop);
 
-      backdrop.addEventListener('click', () => {
-        closeFavoritesPanel();
+      backdrop.addEventListener('click', (event) => {
+        // Chiudi solo se clicchi fuori dal pannello
+        if (event.target === backdrop) {
+          closeFavoritesPanel();
+        }
       });
     }
 
     if (!panel) {
-      panel = document.createElement('div');
-      panel.id = 'favorites-panel';
-      panel.className =
-        // puoi cambiare le classi / layout come preferisci
-        'fixed inset-x-4 bottom-4 top-20 z-50 overflow-y-auto rounded-2xl bg-white/90 backdrop-blur p-4 shadow-xl';
-      document.body.appendChild(panel);
+      // Carica il template HTML del pannello preferiti
+      fetch('favorites-panel.html')
+        .then(response => response.text())
+        .then(html => {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = html;
+          panel = tempDiv.firstElementChild;
+          // Append il pannello dentro il backdrop per centrarlo con flex
+          backdrop.appendChild(panel);
+
+          // Aggiungi evento al bottone Chiudi
+          const closeBtn = panel.querySelector('#favorites-close-btn');
+          if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+              closeFavoritesPanel();
+            });
+          }
+
+          // Popola la lista preferiti
+          rebuildFavoritesPanelContent();
+        });
+      return; // esci, rebuildFavoritesPanelContent verrà chiamato dopo fetch
     }
 
     // Icona/stato visivo del bottone sticky
@@ -306,66 +350,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const panel = document.getElementById('favorites-panel');
     if (!panel) return;
 
-    // Svuota contenuto
-    panel.innerHTML = '';
+    // Trova il contenitore lista e messaggio vuoto nel template
+    const listContainer = panel.querySelector('#favorites-list');
+    const emptyMsg = panel.querySelector('#favorites-empty-msg');
+    if (!listContainer) return;
 
-    // Header semplice con titolo + pulsante chiusura
-    const header = document.createElement('div');
-    header.className = 'flex items-center justify-between mb-4';
-
-    const title = document.createElement('h2');
-    title.textContent = 'Piatti preferiti';
-    title.className = 'text-xl font-semibold';
-    header.appendChild(title);
-
-    const closeBtn = document.createElement('button');
-    closeBtn.type = 'button';
-    closeBtn.className =
-      'px-3 py-1 rounded-full bg-black/10 hover:bg-black/20 transition-colors';
-    closeBtn.textContent = 'Chiudi';
-    closeBtn.addEventListener('click', () => {
-      closeFavoritesPanel();
-    });
-
-    header.appendChild(closeBtn);
-    panel.appendChild(header);
-
-    // Contenitore card preferite
-    const listContainer = document.createElement('div');
-    listContainer.className = 'flex flex-col gap-4';
+    // Svuota la lista (ma lascia il messaggio vuoto se serve)
+    listContainer.innerHTML = '';
 
     const favArray = Array.from(favoriteIds);
 
     if (favArray.length === 0) {
-      const emptyMsg = document.createElement('p');
-      emptyMsg.textContent = 'Nessun piatto preferito selezionato.';
-      emptyMsg.className = 'text-sm text-gray-600';
-      listContainer.appendChild(emptyMsg);
+      if (emptyMsg) {
+        emptyMsg.style.display = '';
+        listContainer.appendChild(emptyMsg);
+      }
     } else {
+      if (emptyMsg) emptyMsg.style.display = 'none';
       favArray.forEach((id) => {
-        const originalCard = menuCards.find(
-          (card) => getCardId(card) === id
-        );
+        const originalCard = menuCards.find((card) => getCardId(card) === id);
         if (!originalCard) return;
 
         // Cloniamo la card per il pannello
         const clone = originalCard.cloneNode(true);
         clone.classList.add('favorite-card');
+        clone.classList.remove('hidden');
 
-        // Importante: il like dentro il pannello deve togliere il preferito "globale"
+        // Like nel pannello aggiorna stato globale
         const likeBtn = clone.querySelector('.like-btn');
         if (likeBtn) {
           likeBtn.addEventListener('click', () => {
-            // Aggiorna stato globale
             const isNowFavorite = toggleFavorite(id);
             saveFavoritesToStorage();
-
-            // Aggiorna card originale
-            if (originalCard) {
-              updateCardFavoriteState(originalCard, isNowFavorite);
-            }
-
-            // Ricarica contenuto pannello
+            if (originalCard) updateCardFavoriteState(originalCard, isNowFavorite);
             rebuildFavoritesPanelContent();
           });
         }
@@ -383,7 +400,68 @@ document.addEventListener('DOMContentLoaded', function () {
         listContainer.appendChild(clone);
       });
     }
-
-    panel.appendChild(listContainer);
   }
+});
+
+// --- Gestione overlay intro ---
+document.addEventListener('DOMContentLoaded', () => {
+  // Mostra solo la prima volta
+ // if (localStorage.getItem('menuIntroShown') === 'true') return;
+
+  const overlay = document.getElementById('intro-overlay');
+  const btnClose = document.getElementById('intro-close');
+  const btnSkip  = document.getElementById('intro-skip');
+
+  const mainCategories = document.getElementById('main-categories');
+  const subCategories  = document.getElementById('sub-categories');
+  const bottomBar      = document.getElementById('bottom-actions-bar');
+
+  const highlightClass = ['ring-4', 'ring-yellow-300', 'ring-offset-0', 'ring-offset-transparent'];
+
+  function addHighlights() {
+    [mainCategories, subCategories, bottomBar].forEach(el => {
+      if (!el) return;
+      el.classList.add(...highlightClass);
+    });
+  }
+
+  function removeHighlights() {
+    [mainCategories, subCategories, bottomBar].forEach(el => {
+      if (!el) return;
+      el.classList.remove(...highlightClass);
+    });
+  }
+
+  function closeOverlay(save) {
+    if (overlay) {
+      overlay.classList.add('hidden');
+    }
+    const targets = [mainCategories, subCategories, bottomBar];
+    
+    // fade-out del contorno (opacity)
+    targets.forEach(el => {
+      if (!el) return;
+      el.classList.add('opacity-0');
+    });
+    // dopo la transizione, rimuovi il ring e ripristina l'opacity
+    setTimeout(() => {
+      removeHighlights();
+      targets.forEach(el => {
+        if (!el) return;
+        el.classList.remove('opacity-0');
+      });
+    }, 500);
+    if (save) {
+      localStorage.setItem('menuIntroShown', 'true');
+    }
+  }
+
+  if (!overlay) return;
+
+  // mostra overlay + highlight
+  overlay.classList.remove('hidden');
+  addHighlights();
+
+  if (btnClose) btnClose.addEventListener('click', () => closeOverlay(true));
+  if (btnSkip)  btnSkip.addEventListener('click', () => closeOverlay(true));
 });

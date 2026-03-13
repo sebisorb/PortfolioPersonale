@@ -2,37 +2,43 @@
 <html lang="it">
   <head>
     <!-- Favicon -->
-<link rel="icon" type="image/png" href="img/ph/ristorante-favicon.png">
-<link rel="apple-touch-icon" href="img/ph/ristorante-favicon.png">
-<meta name="theme-color" content="#a67c52">
+    <link rel="icon" type="image/png" href="img/ph/ristorante-favicon.png">
+    <link rel="apple-touch-icon" href="img/ph/ristorante-favicon.png">
+    <meta name="theme-color" content="#a67c52">
 
-<!-- Preload principali risorse -->
-<link rel="preload" href="demo-stile.css" as="style">
-<link rel="preload" href="img/ph/demo-piatto.webp" as="image">
+    <!-- Preload principali risorse -->
+    <link rel="preload" href="demo-stile.css" as="style">
+    <link rel="preload" href="img/ph/demo-piatto.webp" as="image">
 
-<!-- Preconnect per Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preconnect per Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Font per ristorante demo -->
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font per ristorante demo -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- Stylesheet -->
-<link rel="stylesheet" type="text/css" href="demo-stile.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="demo-stile.css">
 
-<!-- Title -->
-<title>Sorbello's Restaurant - Sito di esempio</title>
+    <!-- Title -->
+    <title>Sorbello's Restaurant - Sito di esempio</title>
 
-<!-- Tilewind -->
+    <!-- Tailwind -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #2c2c2c;
-        --color-premium: #d3d3d3;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#2c2c2c',
+              premium: '#d3d3d3',
+            }
+          }
+        }
       }
-    </style>
+    </script>
   </head>
 
   <!-- BODY -->
@@ -75,47 +81,52 @@
     </script>
 
     <!-- MAIN -->
-    <main class="min-h-screen p-8">
+    <main class="min-h-screen">
+
         <!-- Categorie Principali -->
-        <div id="main-categories" 
-          class="flex gap-1 p-1 w-full md:w-max mx-auto rounded-3xl -mt-6
-          overflow-x-auto whitespace-nowrap hide-scrollbar">
+        
+          <div id="main-categories" 
+            class="flex gap-1 px-4 py-1 w-full md:w-max md:mx-auto mt-2
+            overflow-x-auto whitespace-nowrap hide-scrollbar
+            transition-opacity duration-1000">
 
-          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="antipasti">SFIZIO</button>
-          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="primi">PIZZA</button>
-          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="secondi">BURGHER</button>
-          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="dolci">DOLCE</button>
-          <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/80 transition-colors duration-300" data-category="bevande">BEVANDA</button>
-        </div>
+            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="antipasti">SFIZIO</button>
+            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="primi">PIZZA</button>
+            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="secondi">BURGHER</button>
+            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="dolci">DOLCE</button>
+            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="bevande">BEVANDA</button>
+          </div>
 
 
-        <!-- Sotto-Categorie -->
-        <div id="sub-categories" 
-         class="flex gap-1 p-2 w-max mx-auto rounded-3xl">
+          <!-- Sotto-Categorie -->
+          <div id="sub-categories" 
+            class="flex justify-between gap-1 px-4 py-1 w-full rounded-3xl
+            md:w-max md:mx-auto
+            transition-opacity duration-1000">
 
-          <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="veg">
-            <img src="img/menu icons/vegetale.svg" alt="Vegetale" class="w-6 h-6">
-          </button>
-         <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="carne">
-          <img src="img/menu icons/carne.svg" alt="Carne" class="w-6 h-6">
-          </button>
-         <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="pollo">
-          <img src="img/menu icons/pollo.svg" alt="Pollo" class="w-6 h-6">
-          </button>
-         <button class="category-btn flex item-center justify-center px-6 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 transition-colors duration-300" data-category="pesce">
-          <img src="img/menu icons/pesce.svg" alt="Pesce" class="w-6 h-6">
-          </button>
-        </div>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="veg">
+              <img src="img/menu icons/vegetale.svg" alt="Vegetale" class="w-6 h-6">
+            </button>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="carne">
+              <img src="img/menu icons/carne.svg" alt="Carne" class="w-6 h-6">
+            </button>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="pollo">
+              <img src="img/menu icons/pollo.svg" alt="Pollo" class="w-6 h-6">
+            </button>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="pesce">
+              <img src="img/menu icons/pesce.svg" alt="Pesce" class="w-6 h-6">
+            </button>
+          </div>
 
       <!-- Introduzione Menu -->
-      <div id="menu-intro" class="text-center flex items-center justify-center mt-6 p-10
-       bg-white/20 backdrop-blur rounded-xl shadow md:w-max mx-auto">
+      <div id="menu-intro" class="text-center flex items-center justify-center mt-6 p-10 mx-4
+       bg-white/20 backdrop-blur rounded-xl shadow md:w-max md:mx-auto">
        <h2 class="text-xl">Benvenuto!<br>Seleziona una categoria.<br>Puoi scegliere se visualizzare le immagini e i piatti in base al contenuto.<br>Se sei indeciso, puoi mettere like ai piatti e scegliere in seguito nella lista preferiti!
        </h2>
       </div>
 
       <!-- Sezioni Menu-->
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 justify-items-center">
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 justify-items-center p-8">
 
           <!-- ANTIPASTI -->
           <!-- Bruschetta -->
@@ -551,8 +562,9 @@
         
          </div>
            <!-- Barra selettore sticky in basso -->
-           <div class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 rounded-xl flex justify-center gap-2 p-2
-             md:left-auto md:right-8 md:translate-x-0">
+           <div id="bottom-actions-bar" class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 rounded-xl flex justify-center gap-2 p-2
+             md:left-auto md:right-8 md:translate-x-0
+             transition-opacity duration-1000">
 
               <!-- Freccia Su -->
              <button id="scroll-top-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
@@ -577,6 +589,38 @@
              </button>
             </div>
      </main>
+     
+     <!-- Overlay -->
+     <div id="intro-overlay" class="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm hidden">
+      <div class="h-full flex items-center justify-center px-4">
+        <div class="max-w-md w-full bg-white rounded-3xl shadow-xl p-6 space-y-4 text-slate-900">
+          <h2 class="text-xl font-bold text-center">Come usare il menu</h2>
+          <div class="space-y-3 text-sm">
+            <div class="text-center">
+              <p class="font-semibold">Categorie principali</p>
+              <p>Scorri tra SFIZIO, PIZZA, BURGHER, DOLCE, BEVANDA per cambiare sezione.</p>
+            </div>
+            <div class="text-center">
+              <p class="font-semibold">Filtri veloci</p>
+              <p>Usa le icone (veg, carne, pollo, pesce) per filtrare velocemente i piatti.</p>
+            </div>
+            <div class="text-center">
+              <p class="font-semibold">Barra in basso</p>
+              <p>Freccia per tornare su, foto per mostrare le immagini, cuore per i preferiti.</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-center gap-2 pt-2">
+            <button id="intro-close" class="px-4 py-2 rounded-2xl bg-slate-900 text-white text-sm font-semibold">
+              Ho capito
+            </button>
+            <button id="intro-skip" class="text-xs text-slate-500 underline">
+              Non mostrare più
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
      <!-- JS -->
      <script src="menu-piatti.js"></script>
- </body>
+   </body>
+</html>
