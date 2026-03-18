@@ -48,7 +48,7 @@
     <header class="bg-white/30 backdrop-blur border-b border-white/10 shadow
      text-black p-4 flex justify-between items-center
      sticky top-0 z-50">
-    <div class="flex items-center w-full">
+    <div class="flex items-center w-full max-w-[1200px] mx-auto">
       <h1 class="text-2xl font-bold"><a href="demo-home.html">Sorbello's Restaurant</a></h1>
       <div class="flex-1"></div>
       <button class="block md:hidden ml-2" id="menu-toggle">
@@ -81,7 +81,7 @@
     </script>
 
     <!-- MAIN -->
-    <main class="min-h-screen">
+    <main class="min-h-screen max-w-[1200px] mx-auto">
 
         <!-- Categorie Principali -->
         
@@ -126,11 +126,11 @@
       </div>
 
       <!-- Sezioni Menu-->
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 justify-items-center p-8">
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 justify-items-center p-8">
 
           <!-- ANTIPASTI -->
           <!-- Bruschetta -->
-            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="bruschetta-pomodoro" data-category="antipasti" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -151,7 +151,7 @@
             </div>
 
             <!-- Tagliere di Salumi -->
-            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="tagliere-salumi" data-category="antipasti" data-sub-category="carne">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -172,7 +172,7 @@
             </div>
 
             <!-- Olive all'Ascolana -->
-            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="olive-ascolana" data-category="antipasti" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -193,7 +193,7 @@
             </div>
             
             <!-- Polpettine di Pollo -->
-            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="polpettine-pollo" data-category="antipasti" data-sub-category="pollo">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -214,7 +214,7 @@
             </div>
 
               <!-- Alici Marinate -->
-            <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="alici-marinate" data-category="antipasti" data-sub-category="pesce">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -239,7 +239,7 @@
         
             
             <!-- Spaghetti alla Carbonara -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="spaghetti-alla-carbonara" data-category="primi" data-sub-category="carne">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -260,7 +260,7 @@
             </div>
 
             <!-- Risotto ai Funghi Porcini -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="risotto-ai-funghi-porcini" data-category="primi" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -281,7 +281,7 @@
             </div>
 
               <!-- Lasagna alla Bolognese -->
-               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+               <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="lasagna-bolognese" data-category="primi" data-sub-category="carne">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -302,7 +302,7 @@
             </div>
 
             <!-- Pasta al Pollo -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="pasta-al-pollo" data-category="primi" data-sub-category="pollo">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -323,7 +323,7 @@
             </div>
 
               <!-- Linguine allo Scoglio --> 
-               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+               <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="linguine-allo-scoglio" data-category="primi" data-sub-category="pesce">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -346,7 +346,7 @@
         <!-- secondi -->
 
             <!-- Bistecca alla Fiorentina -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="bistecca-alla-fiorentina" data-category="secondi" data-sub-category="carne">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -367,7 +367,7 @@
             </div>
 
               <!-- Pollo al Limone -->
-               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+               <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="pollo-al-limone" data-category="secondi" data-sub-category="pollo">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -388,7 +388,7 @@
             </div>
 
               <!-- Branzino al Forno -->
-               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+               <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="branzino-al-forno" data-category="secondi" data-sub-category="pesce">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -409,7 +409,7 @@
             </div>
 
               <!-- Parmigiana di Melanzane -->
-               <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+               <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="parmigiana-di-melanzane" data-category="secondi" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -432,7 +432,7 @@
         <!-- dolci -->
 
             <!-- Tiramisù -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="tiramisu" data-category="dolci" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -453,7 +453,7 @@
             </div>
 
             <!-- Panna Cotta -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="panna-cotta" data-category="dolci" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -474,7 +474,7 @@
             </div>
 
             <!-- Crostata di Frutta -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="crostata-di-frutta" data-category="dolci" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -497,7 +497,7 @@
         <!-- bevande -->
 
             <!-- Acqua Naturale -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="acqua-naturale" data-category="bevande" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -518,7 +518,7 @@
             </div>
 
             <!-- Vino Rosso -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="vino-rosso" data-category="bevande" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -539,7 +539,7 @@
             </div>
 
             <!-- Birra Artigianale -->
-             <div class="menu-card group relative bg-white/20 p-4 m-4 max-w-lg w-full mx-auto
+             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
              data-id="birra-artigianale" data-category="bevande" data-sub-category="veg">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
@@ -598,15 +598,15 @@
           <div class="space-y-3 text-sm">
             <div class="text-center">
               <p class="font-semibold">Categorie principali</p>
-              <p>Scorri tra SFIZIO, PIZZA, BURGHER, DOLCE, BEVANDA per cambiare sezione.</p>
+              <p class="mx-8">Scorri tra SFIZIO, PIZZA, BURGHER, DOLCE, BEVANDA per cambiare sezione.</p>
             </div>
             <div class="text-center">
               <p class="font-semibold">Filtri veloci</p>
-              <p>Usa le icone (veg, carne, pollo, pesce) per filtrare velocemente i piatti.</p>
+              <p class="mx-8">Usa le icone (veg, carne, pollo, pesce) per filtrare velocemente i piatti.</p>
             </div>
             <div class="text-center">
               <p class="font-semibold">Barra in basso</p>
-              <p>Freccia per tornare su, foto per mostrare le immagini, cuore per i preferiti.</p>
+              <p class="mx-8">Freccia per tornare su, foto per mostrare le immagini, cuore per i preferiti.</p>
             </div>
           </div>
           <div class="flex flex-col items-center gap-2 pt-2">
