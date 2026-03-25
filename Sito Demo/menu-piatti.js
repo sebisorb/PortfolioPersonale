@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const subCategoryButtons = Array.from(
     document.querySelectorAll('#sub-categories .category-btn')
   );
+  // Gestione sottocategorie bevande (bibite, vini, birra, cocktail)
+  const subCategoryBevandeButtons = Array.from(
+    document.querySelectorAll('#sub-categories-bevande .category-btn')
+  );
 
   const scrollTopBtn = document.getElementById('scroll-top-btn');
   const togglePhotosBtn = document.getElementById('toggle-photos-btn');
@@ -39,10 +43,20 @@ document.addEventListener('DOMContentLoaded', function () {
       const category = btn.getAttribute('data-category');
 
       if (selectedMainCategory === category) {
-        // Deselect se clicchi di nuovo la stessa
         selectedMainCategory = null;
       } else {
         selectedMainCategory = category;
+      }
+
+      // Mostra/nasconde le sottocategorie corrette
+      const subCategories = document.getElementById('sub-categories');
+      const subCategoriesBevande = document.getElementById('sub-categories-bevande');
+      if (selectedMainCategory === 'bevande') {
+        if (subCategories) subCategories.classList.add('hidden');
+        if (subCategoriesBevande) subCategoriesBevande.classList.remove('hidden');
+      } else {
+        if (subCategories) subCategories.classList.remove('hidden');
+        if (subCategoriesBevande) subCategoriesBevande.classList.add('hidden');
       }
 
       updateActiveState(mainCategoryButtons, selectedMainCategory);
@@ -76,20 +90,22 @@ document.addEventListener('DOMContentLoaded', function () {
    })();
 
   // --- Gestione sotto-categorie ---
-  subCategoryButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const subCategory = btn.getAttribute('data-category');
-
-      if (selectedSubCategory === subCategory) {
-        selectedSubCategory = null;
-      } else {
-        selectedSubCategory = subCategory;
-      }
-
-      updateActiveState(subCategoryButtons, selectedSubCategory);
-      applyFilters();
+  function handleSubCategoryClick(btns) {
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const subCategory = btn.getAttribute('data-category');
+        if (selectedSubCategory === subCategory) {
+          selectedSubCategory = null;
+        } else {
+          selectedSubCategory = subCategory;
+        }
+        updateActiveState(btns, selectedSubCategory);
+        applyFilters();
+      });
     });
-  });
+  }
+  handleSubCategoryClick(subCategoryButtons);
+  handleSubCategoryClick(subCategoryBevandeButtons);
 
   // --- Freccia su: scroll morbido in cima ---
   if (scrollTopBtn) {
@@ -199,10 +215,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function applyPhotoState() {
-    menuCards.forEach((card) => {
+    const allCards = document.querySelectorAll('.menu-card');
+    allCards.forEach((card) => {
       const img = card.querySelector('.menu-card-img');
       if (!img) return;
-
       if (photosEnabled) {
         img.classList.remove('hidden');
       } else {
@@ -416,20 +432,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const subCategories  = document.getElementById('sub-categories');
   const bottomBar      = document.getElementById('bottom-actions-bar');
 
-  const highlightClass = ['ring-4', 'ring-yellow-300', 'ring-offset-0', 'ring-offset-transparent'];
 
+  // Le funzioni addHighlights e removeHighlights sono state rimosse per eliminare i contorni gialli.
   function addHighlights() {
-    [mainCategories, subCategories, bottomBar].forEach(el => {
-      if (!el) return;
-      el.classList.add(...highlightClass);
-    });
+    // Non fa nulla: contorni gialli rimossi
   }
 
   function removeHighlights() {
-    [mainCategories, subCategories, bottomBar].forEach(el => {
-      if (!el) return;
-      el.classList.remove(...highlightClass);
-    });
+    // Non fa nulla: contorni gialli rimossi
   }
 
   function closeOverlay(save) {

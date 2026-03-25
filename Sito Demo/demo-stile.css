@@ -29,7 +29,7 @@ h1, h2 {
 /* Stato selezionato per tutte le category-btn */
 .category-btn.is-active {
   /* scegli tu i valori, esempio: */
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.85) !important;
   /* se vuoi cambiare anche il testo: */
   color: #000;
 }

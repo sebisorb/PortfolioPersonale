@@ -45,24 +45,23 @@
   <body class="bg-premium">
 
     <!-- HEADER -->
-    <header class="bg-white/30 backdrop-blur border-b border-white/10 shadow
-     text-black p-4 flex justify-between items-center
-     sticky top-0 z-50">
-    <div class="flex items-center w-full max-w-[1200px] mx-auto">
-      <h1 class="text-2xl font-bold"><a href="demo-home.html">Sorbello's Restaurant</a></h1>
-      <div class="flex-1"></div>
-      <button class="block md:hidden ml-2" id="menu-toggle">
-        <span>☰</span>
-      </button>
-      <nav class="hidden md:flex space-x-4 ml-4">
-        <a href="demo-menu.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Menu</a>
-        <a href="demo-about.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">About</a>
-        <a href="demo-contact.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Contact</a>
-      </nav>
-    </div>
-
-    <!-- Menu mobile dinamico -->
+    <header class="bg-white/30 backdrop-blur border-b border-white/10 shadow text-black p-4 flex justify-between items-center sticky top-0 z-50">
+      <div class="flex items-center w-full max-w-[1200px] mx-auto">
+        <h1 class="text-2xl font-bold">
+          <a href="demo-home.html">Sorbello's Restaurant</a>
+        </h1>
+        <div class="flex-1"></div>
+        <button class="block md:hidden ml-2" id="menu-toggle" aria-label="Apri menu mobile">
+          <span>☰</span>
+        </button>
+        <nav class="hidden md:flex space-x-4 ml-4">
+          <a href="demo-menu.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Menu</a>
+          <a href="demo-about.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">About</a>
+          <a href="demo-contatti.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Contact</a>
+        </nav>
+      </div>
     </header>
+    <!-- Menu mobile dinamico -->
     <div id="mobile-menu-container"></div>
 
     <!-- Segnaposto Menu -->
@@ -92,7 +91,7 @@
 
             <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="antipasti">SFIZIO</button>
             <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="primi">PIZZA</button>
-            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="secondi">BURGHER</button>
+            <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="secondi">BURGER</button>
             <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="dolci">DOLCE</button>
             <button class="category-btn font-semibold px-4 py-4 rounded-2xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="bevande">BEVANDA</button>
           </div>
@@ -117,6 +116,26 @@
               <img src="img/menu icons/pesce.svg" alt="Pesce" class="w-6 h-6">
             </button>
           </div>
+
+          <!-- Sotto-Categoria-Bevande -->
+          <div id="sub-categories-bevande" class="flex justify-between gap-1 px-4 py-1 w-full rounded-3xl
+            md:w-max md:mx-auto
+            transition-opacity duration-1000 hidden">
+
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="bibite">
+              <img src="img/menu icons/bibite.png" alt="Bibite" class="w-6 h-6">
+            </button>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="birra">
+              <img src="img/menu icons/birra.png" alt="Birra" class="w-6 h-6">
+            </button>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" data-category="vini">
+              <img src="img/menu icons/vino.png" alt="Vini" class="w-6 h-6">
+            </button>
+            <button class="category-btn flex-1 flex item-center justify-center md:px-4 py-4 rounded-3xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300 " data-category="cocktail">
+              <img src="img/menu icons/cocktail.png" alt="Cocktail" class="w-6 h-6">
+            </button>
+          </div>
+
 
       <!-- Introduzione Menu -->
       <div id="menu-intro" class="text-center flex items-center justify-center mt-6 p-10 mx-4
@@ -499,7 +518,7 @@
             <!-- Acqua Naturale -->
              <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
-             data-id="acqua-naturale" data-category="bevande" data-sub-category="veg">
+             data-id="acqua-naturale" data-category="bevande" data-sub-category="bibite">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
               <img src="img/foto/food/studio1.webp" alt="Acqua Naturale" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
               <div class="flex justify-between items-center">
@@ -520,7 +539,7 @@
             <!-- Vino Rosso -->
              <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
-             data-id="vino-rosso" data-category="bevande" data-sub-category="veg">
+             data-id="vino-rosso" data-category="bevande" data-sub-category="vini">
              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
               <img src="img/foto/food/studio1.webp" alt="Vino Rosso" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
               <div class="flex justify-between items-center">
@@ -539,10 +558,10 @@
             </div>
 
             <!-- Birra Artigianale -->
-             <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
-             rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
-             data-id="birra-artigianale" data-category="bevande" data-sub-category="veg">
-             <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
+              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+              data-id="birra-artigianale" data-category="bevande" data-sub-category="birra">
+              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
               <img src="img/foto/food/studio1.webp" alt="Birra Artigianale" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
               <div class="flex justify-between items-center">
                 <!-- Nome piatto, cliccabile per dettagli -->
@@ -559,62 +578,76 @@
               </div>
             </div>
 
-        
-         </div>
-           <!-- Barra selettore sticky in basso -->
-           <div id="bottom-actions-bar" class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 rounded-xl flex justify-center gap-2 p-2
-             md:left-auto md:right-8 md:translate-x-0
-             transition-opacity duration-1000">
-
-              <!-- Freccia Su -->
-             <button id="scroll-top-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                </svg>
-              </button>
-
-              <!-- Camera -->
-              <button id="toggle-photos-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                </svg>
-              </button>
-
-              <!-- Cuore -->
-             <button id="favorites-panel-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white/60 focus:bg-white/60 transition-colors duration-300">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-             </button>
+            <!-- Cocktail -->
+            <div class="menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto
+              rounded-xl shadow-sm transition-all duration-500 overflow-hidden"
+              data-id="cocktail" data-category="bevande" data-sub-category="cocktail">
+              <!-- Foto piatto: di default nascosta, visibile se la card ha la classe 'show-photo' -->
+              <img src="img/foto/food/studio1.webp" alt="Cocktail" class="menu-card-img w-full h-40 object-cover rounded-t-xl transition-all duration-500 hidden cursor-pointer" /> 
+              <div class="flex justify-between items-center">
+                <!-- Nome piatto, cliccabile per dettagli -->
+                <span class="font-semibold text-lg cursor-pointer">Cocktail</span>
+                <div class="flex items-center">
+                  <span class="font-bold text-clifford text-base">€8</span>
+                  <!-- Simbolo cuore -->
+                  <button class="like-btn p-2 rounded-full hover:bg-white/40 transition" title="Aggiungi ai preferiti" aria-pressed="false">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
+
+        
+          </div>
+
+          <!-- Barra selettore sticky in basso -->
+          <div id="bottom-actions-bar" class="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 rounded-xl flex justify-center gap-2 p-2 md:left-auto md:right-8 md:translate-x-0 transition-opacity duration-1000">
+            <!-- Freccia Su -->
+            <button id="scroll-top-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" aria-label="Torna su">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+              </svg>
+            </button>
+            <!-- Camera -->
+            <button id="toggle-photos-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" aria-label="Mostra/nascondi foto">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+              </svg>
+            </button>
+            <!-- Cuore -->
+            <button id="favorites-panel-btn" class="category-btn font-semibold px-4 py-2 rounded-xl bg-white/40 backdrop-blur shadow-sm hover:bg-white transition-colors duration-300" aria-label="Preferiti">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+              </svg>
+            </button>
+          </div>
      </main>
      
-     <!-- Overlay -->
-     <div id="intro-overlay" class="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm hidden">
+    <!-- Overlay -->
+    <div id="intro-overlay" class="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm hidden">
       <div class="h-full flex items-center justify-center px-4">
-        <div class="max-w-md w-full bg-white rounded-3xl shadow-xl p-6 space-y-4 text-slate-900">
-          <h2 class="text-xl font-bold text-center">Come usare il menu</h2>
-          <div class="space-y-3 text-sm">
+        <div class="max-w-md w-full flex flex-col bg-white rounded-3xl shadow-xl p-6 space-y-12 text-slate-900">
+          <h2 class="text-2xl font-bold text-center">Come usare il menu</h2>
+          <div class="space-y-12 text-sm">
             <div class="text-center">
-              <p class="font-semibold">Categorie principali</p>
-              <p class="mx-8">Scorri tra SFIZIO, PIZZA, BURGHER, DOLCE, BEVANDA per cambiare sezione.</p>
+              <p class="font-semibold text-lg">Categorie principali</p>
+              <p class="mx-8">Scorri tra SFIZIO, PIZZA, BURGER, DOLCE, BEVANDA per cambiare sezione.</p>
             </div>
             <div class="text-center">
-              <p class="font-semibold">Filtri veloci</p>
+              <p class="font-semibold text-lg">Filtri veloci</p>
               <p class="mx-8">Usa le icone (veg, carne, pollo, pesce) per filtrare velocemente i piatti.</p>
             </div>
             <div class="text-center">
-              <p class="font-semibold">Barra in basso</p>
+              <p class="font-semibold text-lg">Barra in basso</p>
               <p class="mx-8">Freccia per tornare su, foto per mostrare le immagini, cuore per i preferiti.</p>
             </div>
           </div>
           <div class="flex flex-col items-center gap-2 pt-2">
-            <button id="intro-close" class="px-4 py-2 rounded-2xl bg-slate-900 text-white text-sm font-semibold">
+            <button id="intro-close" class="p-6 rounded-2xl bg-slate-900 text-white text-xl font-semibold">
               Ho capito
-            </button>
-            <button id="intro-skip" class="text-xs text-slate-500 underline">
-              Non mostrare più
             </button>
           </div>
         </div>
@@ -623,4 +656,10 @@
      <!-- JS -->
      <script src="menu-piatti.js"></script>
    </body>
+   <footer>
+     <!-- Footer con eventuali info o link -->
+     <div class="text-center text-sm text-gray-500 py-4">
+       &copy; 2024 Ristorante Italiano. Tutti i diritti riservati.
+     </div>
+   </footer>
 </html>
