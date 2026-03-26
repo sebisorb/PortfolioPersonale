@@ -421,57 +421,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // --- Gestione overlay intro ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Mostra solo la prima volta
- // if (localStorage.getItem('menuIntroShown') === 'true') return;
+  // if (localStorage.getItem('menuIntroShown') === 'true') return;
 
-  const overlay = document.getElementById('intro-overlay');
+  const overlay  = document.getElementById('intro-overlay');
   const btnClose = document.getElementById('intro-close');
   const btnSkip  = document.getElementById('intro-skip');
 
-  const mainCategories = document.getElementById('main-categories');
-  const subCategories  = document.getElementById('sub-categories');
-  const bottomBar      = document.getElementById('bottom-actions-bar');
-
-
-  // Le funzioni addHighlights e removeHighlights sono state rimosse per eliminare i contorni gialli.
-  function addHighlights() {
-    // Non fa nulla: contorni gialli rimossi
-  }
-
-  function removeHighlights() {
-    // Non fa nulla: contorni gialli rimossi
-  }
-
   function closeOverlay(save) {
-    if (overlay) {
-      overlay.classList.add('hidden');
-    }
-    const targets = [mainCategories, subCategories, bottomBar];
-    
-    // fade-out del contorno (opacity)
-    targets.forEach(el => {
-      if (!el) return;
-      el.classList.add('opacity-0');
-    });
-    // dopo la transizione, rimuovi il ring e ripristina l'opacity
-    setTimeout(() => {
-      removeHighlights();
-      targets.forEach(el => {
-        if (!el) return;
-        el.classList.remove('opacity-0');
-      });
-    }, 500);
-    if (save) {
-      localStorage.setItem('menuIntroShown', 'true');
-    }
+    overlay.classList.remove('visible');
+    overlay.classList.add('hidden');
+    document.body.classList.remove('intro-overlay-open');
+    if (save) localStorage.setItem('menuIntroShown', 'true');
   }
+
 
   if (!overlay) return;
 
-  // mostra overlay + highlight
+
   overlay.classList.remove('hidden');
-  addHighlights();
+  overlay.classList.add('visible');
+  document.body.classList.add('intro-overlay-open');
 
   if (btnClose) btnClose.addEventListener('click', () => closeOverlay(true));
-  if (btnSkip)  btnSkip.addEventListener('click', () => closeOverlay(true));
+  if (btnSkip)  btnSkip.addEventListener('click',  () => closeOverlay(true));
 });

@@ -26,14 +26,6 @@ h1, h2 {
   display: none; /* Safari and Chrome */
 }
 
-/* Stato selezionato per tutte le category-btn */
-.category-btn.is-active {
-  /* scegli tu i valori, esempio: */
-  background-color: rgba(255, 255, 255, 0.85) !important;
-  /* se vuoi cambiare anche il testo: */
-  color: #000;
-}
-
 /* Facoltativo: per rendere evidente anche i bottoni icona (sub e sticky) */
 .category-btn.is-active img {
   filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
@@ -50,3 +42,31 @@ h1, h2 {
   fill: currentColor;      /* riempie il cuore */
   stroke: currentColor;    /* mantiene il bordo dello stesso colore */
 }
+
+
+/* ESTETICA TASTI MENU */
+:root {
+  --btn-bg-default: rgba(255, 255, 255, 0.4);
+  --btn-bg-active: rgba(255, 255, 255, 0.85);
+  --btn-bg-overlay: rgba(255, 235, 150, 0.85);
+}
+
+.category-btn {
+  background-color: var(--btn-bg-default);
+  transition: background-color 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.intro-overlay-open .category-btn {
+  background-color: var(--btn-bg-overlay);
+}
+
+@media (hover: none) and (max-width: 768px) {
+  .category-btn:not(.is-active):hover,
+  .category-btn:not(.is-active):focus,
+  .category-btn:not(.is-active):active {
+    background-color: var(--btn-bg-default);
+    outline: none;
+  }
+}
+
+/* Transizione */
