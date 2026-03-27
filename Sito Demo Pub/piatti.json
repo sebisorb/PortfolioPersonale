@@ -1,0 +1,23 @@
+[
+  {
+    "id": "bruschetta-pomodoro",
+    "nome": "Bruschette al Pomodoro",
+    "prezzo": 12,
+    "ingredienti": "Pane, pomodoro, olio, basilico",
+    "allergeni": "Glutine",
+    "img": "img/foto/food/studio1.webp",
+    "categoria": "antipasti",
+    "subcategoria": "veg"
+  },
+  {
+    "id": "tagliere-salumi",
+    "nome": "Tagliere di Salumi",
+    "prezzo": 20,
+    "ingredienti": "Salumi misti, pane",
+    "allergeni": "Glutine, lattosio",
+    "img": "img/foto/food/studio1.webp",
+    "categoria": "antipasti",
+    "subcategoria": "carne"
+  }
+  // ...aggiungi altri piatti qui
+]
