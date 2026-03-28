@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/ph/ristorante-favicon.png">
+    <link rel="apple-touch-icon" href="img/ph/ristorante-favicon.png">
+    <meta name="theme-color" content="#a67c52">
+
+    <!-- Preload principali risorse -->
+    <link rel="preload" href="demo-stile.css" as="style">
+    <link rel="preload" href="img/ph/demo-piatto.webp" as="image">
+
+    <!-- Preconnect per Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Font per ristorante demo -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="demo-stile.css">
+
+    <!-- Title -->
+    <title>Sorbello's Restaurant - Sito di esempio</title>
+
+    <!-- Tailwind -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#2c2c2c',
+              premium: '#d3d3d3',
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <!-- BODY -->
+  <body class="bg-premium">
+
+    <!-- HEADER -->
+    <header class="bg-white/30 backdrop-blur border-b border-white/10 shadow
+     text-black p-4 flex justify-between items-center
+     sticky top-0 z-50">
+    <div class="flex items-center w-full max-w-[1200px] mx-auto">
+      <h1 class="text-2xl font-bold"><a href="demo-home.html">Sorbello's Restaurant</a></h1>
+      <div class="flex-1"></div>
+      <button class="block md:hidden ml-2" id="menu-toggle">
+        <span>☰</span>
+      </button>
+      <nav class="hidden md:flex space-x-4 ml-4">
+        <a href="demo-menu.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Menu</a>
+        <a href="demo-about.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">About</a>
+        <a href="demo-contatti.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Menu mobile dinamico -->
+    </header>
+    <div id="mobile-menu-container"></div>
+
+    <!-- Segnaposto Menu -->
+    <script>
+      fetch('demo-mobile-menu.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('mobile-menu-container').innerHTML = html;
+          const script = document.createElement('script');
+          script.src = 'demo-mobile-menu.js';
+          script.onload = function() {
+            if (typeof initMobileMenu === 'function') initMobileMenu();
+          };
+          document.body.appendChild(script);
+        });
+    </script>
+
+    <!-- MAIN -->
+    <main class="min-h-screen max-w-[1200px] mx-auto">
+
+      <!-- Contenuto principale del sito -->
+      <div class="justify-center text-center">
+        <h2 class="text-3xl font-bold p-10">Benvenuti da<br>Sorbello's Restaurant</h2>
+        <p class="text-lg text-gray-700 p-10">Scopri i nostri piatti deliziosi e l'atmosfera accogliente.</p>
+        <a href="demo-menu.html" class="inline-block bg-clifford text-white px-5 py-3 rounded-xl hover:bg-gray-800 transition-colors duration-300">Esplora il Menu</a>
+      </div>
+    </main>
+
+   </body>
+   <footer>
+     <!-- Footer con eventuali info o link -->
+     <div class="text-center text-sm text-gray-500 py-4">
+       &copy; 2024 Ristorante Italiano. Tutti i diritti riservati.
+     </div>
+   </footer>
+</html>
