@@ -83,33 +83,41 @@ body.intro-overlay-open .category-btn.is-active {
   }
 }
 
-/* DISH OVERLAY */
-
 /* ═══════════════════════════════════════════════════════════════
-   OVERLAY DETTAGLIO PIATTO
-   Aggiungere in fondo a demo-stile.css
+   OVERLAY DETTAGLIO PIATTO + PANNELLO PREFERITI
+   Aggiungere in fondo a demo-stile.css (o come file separato)
+   ═══════════════════════════════════════════════════════════════
+
+   Z-INDEX usati:
+   - Barra sticky (#bottom-actions-bar): z-index 80 (sovrascritto qui)
+   - Backdrop pannello preferiti:        z-index 60  → barra sticky sopra
+   - Pannello preferiti:                 z-index 61
+   - Backdrop overlay dettaglio piatto:  z-index 200 → copre tutto
+   - Pannello overlay dettaglio piatto:  z-index 201
    ═══════════════════════════════════════════════════════════════ */
 
-/* Contenitore principale dell'overlay */
+
+/* ───────────────────────────────────────────────────────────────
+   OVERLAY DETTAGLIO PIATTO
+   ─────────────────────────────────────────────────────────────── */
+
 .dish-overlay {
   position: fixed;
   inset: 0;
   z-index: 200;
   display: flex;
-  align-items: flex-end;        /* su mobile sale dal basso */
+  align-items: flex-end;
   justify-content: center;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Quando aperto */
 .dish-overlay.is-open {
   pointer-events: auto;
   opacity: 1;
 }
 
-/* Sfondo scurito */
 .dish-overlay-backdrop {
   position: absolute;
   inset: 0;
@@ -118,19 +126,17 @@ body.intro-overlay-open .category-btn.is-active {
   -webkit-backdrop-filter: blur(4px);
 }
 
-/* Pannello del piatto */
 .dish-overlay-panel {
   position: relative;
   z-index: 1;
   background: #ffffff;
-  border-radius: 1.5rem 1.5rem 0 0;
+  border-radius: 1.5rem;
   width: 100%;
   max-width: 560px;
-  max-height: 92dvh;
+  max-height: calc(92dvh - 80px);
+  margin-bottom: 80px;
   overflow-y: auto;
   overscroll-behavior: contain;
-
-  /* Sale dal basso */
   transform: translateY(32px);
   transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -139,7 +145,6 @@ body.intro-overlay-open .category-btn.is-active {
   transform: translateY(0);
 }
 
-/* Su schermi più grandi: overlay centrato */
 @media (min-width: 640px) {
   .dish-overlay {
     align-items: center;
@@ -147,6 +152,7 @@ body.intro-overlay-open .category-btn.is-active {
   .dish-overlay-panel {
     border-radius: 1.5rem;
     max-height: 88dvh;
+    margin-bottom: 0;
     transform: translateY(16px) scale(0.97);
   }
   .dish-overlay.is-open .dish-overlay-panel {
@@ -154,7 +160,6 @@ body.intro-overlay-open .category-btn.is-active {
   }
 }
 
-/* Foto */
 .dish-overlay-img-wrap {
   width: 100%;
   aspect-ratio: 16 / 7;
@@ -170,7 +175,6 @@ body.intro-overlay-open .category-btn.is-active {
   display: block;
 }
 
-/* Contenuto testuale */
 .dish-overlay-body {
   padding: 1.5rem;
   display: flex;
@@ -178,7 +182,6 @@ body.intro-overlay-open .category-btn.is-active {
   gap: 1rem;
 }
 
-/* Header: nome + prezzo + bottoni */
 .dish-overlay-header {
   display: flex;
   justify-content: space-between;
@@ -208,7 +211,6 @@ body.intro-overlay-open .category-btn.is-active {
   flex-shrink: 0;
 }
 
-/* Bottone chiudi */
 .dish-overlay-close {
   display: flex;
   align-items: center;
@@ -223,11 +225,8 @@ body.intro-overlay-open .category-btn.is-active {
   color: #1a1a1a;
 }
 
-.dish-overlay-close:hover {
-  background: #e5e5e5;
-}
+.dish-overlay-close:hover { background: #e5e5e5; }
 
-/* Like nell'overlay */
 .dish-overlay-like {
   display: flex;
   align-items: center;
@@ -242,15 +241,10 @@ body.intro-overlay-open .category-btn.is-active {
   color: #1a1a1a;
 }
 
-.dish-overlay-like:hover {
-  background: #e5e5e5;
-}
+.dish-overlay-like:hover { background: #e5e5e5; }
 
-.dish-overlay-like.is-active svg {
-  fill: currentColor;
-}
+.dish-overlay-like.is-active svg { fill: currentColor; }
 
-/* Descrizione */
 .dish-overlay-description {
   font-size: 0.95rem;
   color: #444;
@@ -260,7 +254,6 @@ body.intro-overlay-open .category-btn.is-active {
   border-bottom: 1px solid #f0ede8;
 }
 
-/* Sezioni (ingredienti, allergeni) */
 .dish-overlay-section {
   display: flex;
   flex-direction: column;
@@ -277,8 +270,8 @@ body.intro-overlay-open .category-btn.is-active {
   margin: 0;
 }
 
-/* Lista ingredienti */
-.dish-overlay-ingredients {
+.dish-overlay-ingredients,
+.dish-overlay-allergens {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -287,7 +280,8 @@ body.intro-overlay-open .category-btn.is-active {
   gap: 0.4rem;
 }
 
-.dish-overlay-ingredients li {
+.dish-overlay-ingredients li,
+.dish-overlay-allergens li {
   font-size: 0.875rem;
   color: #333;
   background: #f5f3f0;
@@ -295,15 +289,140 @@ body.intro-overlay-open .category-btn.is-active {
   border-radius: 9999px;
 }
 
-/* Allergeni */
-.dish-overlay-allergens {
-  font-size: 0.875rem;
-  color: #555;
-  margin: 0;
-  line-height: 1.6;
+body:has(#dish-overlay.is-open) {
+  overflow: hidden;
 }
 
-/* Blocca scroll del body quando l'overlay è aperto */
-body:has(#dish-overlay.is-open) {
+
+/* ───────────────────────────────────────────────────────────────
+   PANNELLO PREFERITI
+   ─────────────────────────────────────────────────────────────── */
+
+/* Barra sticky sopra il backdrop del pannello preferiti */
+#bottom-actions-bar {
+  z-index: 80 !important;
+}
+
+#favorites-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#favorites-panel-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.favorites-panel {
+  position: relative;
+  z-index: 61;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(92dvh - 80px);
+  margin-bottom: 80px;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(32px);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+#favorites-panel-backdrop.is-open .favorites-panel {
+  transform: translateY(0);
+}
+
+@media (min-width: 640px) {
+  #favorites-panel-backdrop {
+    align-items: center;
+  }
+  .favorites-panel {
+    border-radius: 1.5rem;
+    max-height: 88dvh;
+    margin-bottom: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  #favorites-panel-backdrop.is-open .favorites-panel {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fav-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 0.75rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid #f0ede8;
+}
+
+.fav-panel-title {
+  font-family: 'Lora', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.fav-panel-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: #f3f3f3;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+
+.fav-panel-close:hover { background: #e5e5e5; }
+
+.fav-panel-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.fav-panel-empty {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: center;
+  padding: 2rem 0;
+  margin: 0;
+}
+
+/* Animazione uscita card dal pannello preferiti */
+.fav-card-removing {
+  overflow: hidden;
+  transition: opacity 0.25s ease, max-height 0.35s ease, padding 0.35s ease, margin 0.35s ease;
+  opacity: 0;
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+body.favorites-panel-open {
   overflow: hidden;
 }

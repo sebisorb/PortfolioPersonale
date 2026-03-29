@@ -1,12 +1,18 @@
-<div id="favorites-panel" class="relative w-full max-w-md mx-4 p-4 max-h-[70vh] rounded-2xl bg-white/80 backdrop-blur shadow-xl overflow-y-auto">
-  <div class="relative flex flex-col items-center mb-4">
-    <h2 class="text-xl font-semibold text-center mt-2" id="favorites-title">Piatti preferiti</h2>
-    <button type="button" id="favorites-close-btn" class="px-3 py-1 rounded-full bg-black/10 hover:bg-black/20 transition-colors absolute right-0 top-0">
-      <span class="block md:hidden">✕</span>
-      <span class="hidden md:block">Chiudi</span>
+<div id="favorites-panel" class="favorites-panel">
+
+  <!-- Header -->
+  <div class="fav-panel-header">
+    <h2 class="fav-panel-title">Preferiti</h2>
+    <button type="button" id="favorites-close-btn" class="fav-panel-close" aria-label="Chiudi">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
     </button>
   </div>
-  <div id="favorites-list" class="flex flex-col items-center">
-    <p class="text-sm text-gray-600 text-center" id="favorites-empty-msg">Nessun piatto preferito selezionato.</p>
+
+  <!-- Lista piatti -->
+  <div id="favorites-list" class="fav-panel-list">
+    <p class="fav-panel-empty" id="favorites-empty-msg">Nessun piatto preferito selezionato.</p>
   </div>
+
 </div>
