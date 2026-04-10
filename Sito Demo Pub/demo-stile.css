@@ -328,12 +328,11 @@ body:has(#dish-overlay.is-open) {
   z-index: 61;
   width: 100%;
   max-width: 560px;
-  max-height: calc(92dvh - 80px);
+  height: calc(92dvh - 80px);
   margin-bottom: 80px;
   background: #ffffff;
   border-radius: 1.5rem;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transform: translateY(32px);
@@ -425,4 +424,21 @@ body:has(#dish-overlay.is-open) {
 
 body.favorites-panel-open {
   overflow: hidden;
+}
+
+/* Fix: Card preferiti scrollabili senza sovrapposizione */
+.fav-panel-list .menu-card {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 1rem;
+  position: static !important;
+  float: none !important;
+  box-sizing: border-box;
+  overflow: visible !important;
+}
+
+.fav-panel-list .menu-card:last-child {
+  margin-bottom: 0;
 }

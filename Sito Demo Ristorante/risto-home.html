@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="demo-stile.css">
+      <link rel="stylesheet" type="text/css" href="risto-stile.css">
 
     <!-- Title -->
     <title>Sorbello's Restaurant - Sito di esempio</title>
@@ -55,9 +55,9 @@
         <span>☰</span>
       </button>
       <nav class="hidden md:flex space-x-4 ml-4">
-        <a href="demo-menu.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Menu</a>
-        <a href="demo-about.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">About</a>
-        <a href="demo-contatti.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Contact</a>
+          <a href="risto-menu.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Menu</a>
+          <a href="risto-about.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">About</a>
+          <a href="risto-contatti.html" class="bg-white/20 px-3 py-2 hover:bg-white/40 rounded-xl transition-colors duration-300">Contact</a>
       </nav>
     </div>
 
@@ -68,11 +68,11 @@
     <!-- Segnaposto Menu -->
     <script>
       fetch('demo-mobile-menu.html')
-        .then(response => response.text())
+          .then(response => response.text())
         .then(html => {
           document.getElementById('mobile-menu-container').innerHTML = html;
           const script = document.createElement('script');
-          script.src = 'demo-mobile-menu.js';
+          script.src = 'risto-mobile-menu.js';
           script.onload = function() {
             if (typeof initMobileMenu === 'function') initMobileMenu();
           };

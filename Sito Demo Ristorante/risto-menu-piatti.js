@@ -1,7 +1,60 @@
+// menu-piatti.js
+
 document.addEventListener('DOMContentLoaded', function () {
-  // --- Riferimenti DOM principali ---
-  const menuIntro = document.getElementById('menu-intro');
-  const menuCards = Array.from(document.querySelectorAll('.menu-card'));
+
+  // ── 1. RENDER CARD DA DATI ───────────────────────────────────
+
+  const gridContainer = document.getElementById('menu-grid');
+
+  function createCardElement(piatto) {
+    const card = document.createElement('div');
+    card.className =
+      'menu-card group relative bg-white/20 p-4 m-2 max-w-lg w-full mx-auto ' +
+      'rounded-xl shadow-sm overflow-hidden cursor-pointer';
+    card.setAttribute('data-id', piatto.id);
+    card.setAttribute('data-category', piatto.category);
+    card.setAttribute('data-sub-category', piatto.subCategory);
+
+    card.innerHTML = `
+      <img
+        src="${piatto.img}"
+        alt="${piatto.imgAlt}"
+        class="menu-card-img w-full h-40 object-cover rounded-t-xl hidden"
+      />
+      <div class="flex justify-between items-center">
+        <span class="font-semibold text-lg">${piatto.name}</span>
+        <div class="flex items-center">
+          <span class="font-bold text-clifford text-base">${piatto.price}</span>
+          <button
+            class="like-btn p-2 rounded-full hover:bg-white/40 transition"
+            title="Aggiungi ai preferiti"
+            aria-pressed="false"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733
+                   -.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25
+                   c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+
+    return card;
+  }
+
+  if (gridContainer && typeof MENU_DATA !== 'undefined') {
+    MENU_DATA.forEach(function (piatto) {
+      gridContainer.appendChild(createCardElement(piatto));
+    });
+  }
+
+
+  // ── 2. RIFERIMENTI DOM ───────────────────────────────────────
+
+  const menuIntro    = document.getElementById('menu-intro');
+  const menuCards    = Array.from(document.querySelectorAll('.menu-card'));
 
   const mainCategoryButtons = Array.from(
     document.querySelectorAll('#main-categories .category-btn')
@@ -9,53 +62,54 @@ document.addEventListener('DOMContentLoaded', function () {
   const subCategoryButtons = Array.from(
     document.querySelectorAll('#sub-categories .category-btn')
   );
-  // Gestione sottocategorie bevande (bibite, vini, birra, cocktail)
   const subCategoryBevandeButtons = Array.from(
     document.querySelectorAll('#sub-categories-bevande .category-btn')
   );
 
-  const scrollTopBtn = document.getElementById('scroll-top-btn');
-  const togglePhotosBtn = document.getElementById('toggle-photos-btn');
+  const scrollTopBtn      = document.getElementById('scroll-top-btn');
+  const togglePhotosBtn   = document.getElementById('toggle-photos-btn');
   const favoritesPanelBtn = document.getElementById('favorites-panel-btn');
 
-  // --- Stato interno ---
-  let selectedMainCategory = null;      // es. "antipasti" | null
-  let selectedSubCategory = null;       // es. "veg" | null
-  let photosEnabled = false;            // camera toggle
+
+  // ── 3. STATO INTERNO ─────────────────────────────────────────
+
+  let selectedMainCategory = null;
+  let selectedSubCategory  = null;
+  let photosEnabled        = false;
 
   const FAVORITES_STORAGE_KEY = 'menuFavoritesV1';
-  let favoriteIds = loadFavoritesFromStorage(); // Set di data-id
+  let favoriteIds = loadFavoritesFromStorage();
 
-  // --- Inizializzazione ---
+  const BEVANDE_SUB_CATEGORIES = new Set(['bibite', 'birra', 'vini', 'cocktail']);
 
-  // Applica stato preferiti dalle info in localStorage
+
+  // ── 4. INIZIALIZZAZIONE ──────────────────────────────────────
+
   applyFavoritesToCards();
-
-  // Applica filtri iniziali (stato neutro: solo menu-intro)
   applyFilters();
-
-  // Applica stato foto iniziale (di default false)
   applyPhotoState();
 
-  // --- Gestione categorie principali ---
-  mainCategoryButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
+
+  // ── 5. CATEGORIE PRINCIPALI ──────────────────────────────────
+
+  mainCategoryButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const prev     = selectedMainCategory;
       const category = btn.getAttribute('data-category');
+      selectedMainCategory = selectedMainCategory === category ? null : category;
 
-      if (selectedMainCategory === category) {
-        selectedMainCategory = null;
-      } else {
-        selectedMainCategory = category;
-      }
-
-      // Mostra/nasconde le sottocategorie corrette
-      const subCategories = document.getElementById('sub-categories');
+      const subCategories        = document.getElementById('sub-categories');
       const subCategoriesBevande = document.getElementById('sub-categories-bevande');
+
       if (selectedMainCategory === 'bevande') {
-        if (subCategories) subCategories.classList.add('hidden');
+        if (subCategories)        subCategories.classList.add('hidden');
         if (subCategoriesBevande) subCategoriesBevande.classList.remove('hidden');
       } else {
-        if (subCategories) subCategories.classList.remove('hidden');
+        if (prev === 'bevande' && BEVANDE_SUB_CATEGORIES.has(selectedSubCategory)) {
+          selectedSubCategory = null;
+          updateActiveState(subCategoryBevandeButtons, null);
+        }
+        if (subCategories)        subCategories.classList.remove('hidden');
         if (subCategoriesBevande) subCategoriesBevande.classList.add('hidden');
       }
 
@@ -64,41 +118,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-   // Limita lo scroll della barra categorie su mobile (8px margine)
-   (function limitCategoryScrollMobile() {
-   const container = document.getElementById('main-categories');
-   if (!container) return;
-   // Solo su mobile
-   if (window.innerWidth > 768) return;
-   const buttons = container.querySelectorAll('button');
-   if (!buttons.length) return;
-   const margin = 16;
-   container.addEventListener('scroll', function () {
-    const scrollLeft = container.scrollLeft;
-    const firstBtn = buttons[0];
-    const lastBtn = buttons[buttons.length - 1];
-    const firstBtnLeft = firstBtn.offsetLeft;
-    const lastBtnRight = lastBtn.offsetLeft + lastBtn.offsetWidth;
-    const maxScroll = lastBtnRight - container.clientWidth + margin;
-    if (scrollLeft < firstBtnLeft - margin) {
-      container.scrollLeft = firstBtnLeft - margin;
-    }
-    if (scrollLeft > maxScroll) {
-      container.scrollLeft = maxScroll;
-    }
-   });
-   })();
+  (function limitCategoryScrollMobile() {
+    const container = document.getElementById('main-categories');
+    if (!container || window.innerWidth > 768) return;
+    const buttons = container.querySelectorAll('button');
+    if (!buttons.length) return;
+    const margin = 16;
+    container.addEventListener('scroll', function () {
+      const firstBtn  = buttons[0];
+      const lastBtn   = buttons[buttons.length - 1];
+      const maxScroll = lastBtn.offsetLeft + lastBtn.offsetWidth - container.clientWidth + margin;
+      if (container.scrollLeft < firstBtn.offsetLeft - margin) container.scrollLeft = firstBtn.offsetLeft - margin;
+      if (container.scrollLeft > maxScroll) container.scrollLeft = maxScroll;
+    });
+  })();
 
-  // --- Gestione sotto-categorie ---
+
+  // ── 6. SOTTO-CATEGORIE ───────────────────────────────────────
+
   function handleSubCategoryClick(btns) {
-    btns.forEach((btn) => {
-      btn.addEventListener('click', () => {
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
         const subCategory = btn.getAttribute('data-category');
-        if (selectedSubCategory === subCategory) {
-          selectedSubCategory = null;
-        } else {
-          selectedSubCategory = subCategory;
-        }
+        selectedSubCategory = selectedSubCategory === subCategory ? null : subCategory;
         updateActiveState(btns, selectedSubCategory);
         applyFilters();
       });
@@ -107,19 +149,17 @@ document.addEventListener('DOMContentLoaded', function () {
   handleSubCategoryClick(subCategoryButtons);
   handleSubCategoryClick(subCategoryBevandeButtons);
 
-  // --- Freccia su: scroll morbido in cima ---
+
+  // ── 7. BOTTONI BARRA STICKY ──────────────────────────────────
+
   if (scrollTopBtn) {
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    scrollTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  // --- Camera: mostra/nascondi foto di tutte le card ---
   if (togglePhotosBtn) {
-    togglePhotosBtn.addEventListener('click', () => {
+    togglePhotosBtn.addEventListener('click', function () {
       photosEnabled = !photosEnabled;
       togglePhotosBtn.classList.toggle('is-active', photosEnabled);
       togglePhotosBtn.setAttribute('aria-pressed', String(photosEnabled));
@@ -127,12 +167,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Cuore sticky: pannello preferiti ---
   if (favoritesPanelBtn) {
-    favoritesPanelBtn.addEventListener('click', () => {
-      const isOpen = document.body.classList.contains('favorites-panel-open');
-
-      if (isOpen) {
+    favoritesPanelBtn.addEventListener('click', function () {
+      if (document.body.classList.contains('favorites-panel-open')) {
         closeFavoritesPanel();
       } else {
         openFavoritesPanel();
@@ -140,94 +177,228 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Like sui piatti (preferiti) ---
-  // Delego su tutte le card per agganciare i click sui .like-btn
-  menuCards.forEach((card) => {
+
+  // ── 8. CLICK CARD → OVERLAY DETTAGLIO ───────────────────────
+
+  function openDishOverlay(piatto) {
+    const existing = document.getElementById('dish-overlay');
+    if (existing) existing.remove();
+
+    const isFav = favoriteIds.has(piatto.id);
+
+    const ingredientsList = piatto.ingredients && piatto.ingredients.length
+      ? piatto.ingredients.map(function (i) { return '<li>' + i + '</li>'; }).join('')
+      : '<li>Non disponibile</li>';
+
+    const allergensContent = piatto.allergens && piatto.allergens.length
+      ? piatto.allergens.map(function (a) { return '<li>' + a + '</li>'; }).join('')
+      : '<li style="background:none;padding-left:0;color:#888;">Nessun allergene dichiarato</li>';
+
+    const overlay = document.createElement('div');
+    overlay.id = 'dish-overlay';
+    overlay.className = 'dish-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', piatto.name);
+
+    overlay.innerHTML = `
+      <div class="dish-overlay-backdrop"></div>
+      <div class="dish-overlay-panel">
+        <div class="dish-overlay-img-wrap">
+          <img src="${piatto.img}" alt="${piatto.imgAlt}" class="dish-overlay-img" />
+        </div>
+        <div class="dish-overlay-body">
+          <div class="dish-overlay-header">
+            <div>
+              <h2 class="dish-overlay-name">${piatto.name}</h2>
+              <span class="dish-overlay-price">${piatto.price}</span>
+            </div>
+            <div class="dish-overlay-header-actions">
+              <button
+                class="like-btn dish-overlay-like ${isFav ? 'is-active' : ''}"
+                data-id="${piatto.id}"
+                title="Aggiungi ai preferiti"
+                aria-pressed="${isFav}"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="${isFav ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733
+                       -.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25
+                       c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                </svg>
+              </button>
+              <button class="dish-overlay-close" aria-label="Chiudi">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <p class="dish-overlay-description">${piatto.description || ''}</p>
+          <div class="dish-overlay-section">
+            <h3 class="dish-overlay-section-title">Ingredienti</h3>
+            <ul class="dish-overlay-ingredients">${ingredientsList}</ul>
+          </div>
+          <div class="dish-overlay-section">
+            <h3 class="dish-overlay-section-title">Allergeni</h3>
+            <ul class="dish-overlay-allergens">${allergensContent}</ul>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        overlay.classList.add('is-open');
+      });
+    });
+
+    overlay.querySelector('.dish-overlay-backdrop').addEventListener('click', closeDishOverlay);
+    overlay.querySelector('.dish-overlay-close').addEventListener('click', closeDishOverlay);
+    document.addEventListener('keydown', onOverlayEscape);
+
+    const overlayLikeBtn = overlay.querySelector('.dish-overlay-like');
+    if (overlayLikeBtn) {
+      overlayLikeBtn.addEventListener('click', function () {
+        const isNowFav = toggleFavorite(piatto.id);
+        saveFavoritesToStorage();
+        overlayLikeBtn.classList.toggle('is-active', isNowFav);
+        overlayLikeBtn.setAttribute('aria-pressed', String(isNowFav));
+        const svg = overlayLikeBtn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
+        const originalCard = menuCards.find(function (c) { return getCardId(c) === piatto.id; });
+        if (originalCard) updateCardFavoriteState(originalCard, isNowFav);
+        if (document.body.classList.contains('favorites-panel-open')) {
+          rebuildFavoritesPanelContent();
+        }
+      });
+    }
+  }
+
+  function closeDishOverlay() {
+    const overlay = document.getElementById('dish-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('is-open');
+    document.removeEventListener('keydown', onOverlayEscape);
+    overlay.addEventListener('transitionend', function () {
+      overlay.remove();
+    }, { once: true });
+  }
+
+  function onOverlayEscape(e) {
+    if (e.key === 'Escape') closeDishOverlay();
+  }
+
+  function attachCardClickListener(card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.like-btn')) return;
+      const cardId = getCardId(card);
+      if (!cardId || typeof MENU_DATA === 'undefined') return;
+      const piatto = MENU_DATA.find(function (p) { return p.id === cardId; });
+      if (piatto) openDishOverlay(piatto);
+    });
+  }
+
+  menuCards.forEach(function (card) {
+    attachLikeListener(card);
+    attachCardClickListener(card);
+  });
+
+
+  // ── 9. LIKE SUI PIATTI (con blur per rimuovere hover residuo) ─
+
+  function attachLikeListener(card) {
     const likeBtn = card.querySelector('.like-btn');
     if (!likeBtn) return;
-
-    likeBtn.addEventListener('click', () => {
+    likeBtn.addEventListener('click', function () {
       const cardId = getCardId(card);
       if (!cardId) return;
-
       const isNowFavorite = toggleFavorite(cardId);
       updateCardFavoriteState(card, isNowFavorite);
       saveFavoritesToStorage();
-
-      // Se il pannello preferiti è aperto, rigenero la lista
+      // Rimuove lo stato focus/hover residuo dopo il click
+      likeBtn.blur();
       if (document.body.classList.contains('favorites-panel-open')) {
         rebuildFavoritesPanelContent();
       }
     });
-  });
+  }
 
-  // =========================
-  // Funzioni di supporto
-  // =========================
+
+  // ── 10. FILTRI E VISIBILITÀ CARD (con fade) ──────────────────
+
+  function fadeInCard(card, index) {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(8px)';
+    card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    const delay = Math.min(index * 30, 120);
+    setTimeout(function () {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, delay);
+  }
 
   function applyFilters() {
-    const hasAnyFilter =
-      Boolean(selectedMainCategory) || Boolean(selectedSubCategory);
-
-    // Gestione visibilità menu-intro
-    if (menuIntro) {
-      menuIntro.style.display = hasAnyFilter ? 'none' : '';
-    }
+    const hasAnyFilter = Boolean(selectedMainCategory) || Boolean(selectedSubCategory);
+    if (menuIntro) menuIntro.style.display = hasAnyFilter ? 'none' : '';
 
     if (!hasAnyFilter) {
-      // Nessun filtro attivo → nessuna card visibile
-      menuCards.forEach((card) => {
+      menuCards.forEach(function (card) {
         card.classList.add('hidden');
+        card.style.opacity = '';
+        card.style.transform = '';
+        card.style.transition = '';
       });
       return;
     }
 
-    // Filtro per ogni card
-    menuCards.forEach((card) => {
-      const cardCategory = card.getAttribute('data-category');
+    let visibleIndex = 0;
+    menuCards.forEach(function (card) {
+      const cardCategory    = card.getAttribute('data-category');
       const cardSubCategory = card.getAttribute('data-sub-category');
-
       let visible = true;
-
-      if (selectedMainCategory) {
-        visible = visible && cardCategory === selectedMainCategory;
-      }
-
-      if (selectedSubCategory) {
-        visible = visible && cardSubCategory === selectedSubCategory;
-      }
+      if (selectedMainCategory) visible = visible && cardCategory    === selectedMainCategory;
+      if (selectedSubCategory)  visible = visible && cardSubCategory === selectedSubCategory;
 
       if (visible) {
         card.classList.remove('hidden');
+        fadeInCard(card, visibleIndex);
+        visibleIndex++;
       } else {
         card.classList.add('hidden');
+        card.style.opacity    = '';
+        card.style.transform  = '';
+        card.style.transition = '';
       }
     });
   }
 
+
+  // ── 11. STATO ATTIVO BOTTONI ─────────────────────────────────
+
   function updateActiveState(buttons, selectedValue) {
-    buttons.forEach((btn) => {
-      const value = btn.getAttribute('data-category');
-      const isActive = value === selectedValue;
+    buttons.forEach(function (btn) {
+      const isActive = btn.getAttribute('data-category') === selectedValue;
       btn.classList.toggle('is-active', isActive);
       btn.setAttribute('aria-pressed', String(isActive));
     });
   }
 
+
+  // ── 12. FOTO ─────────────────────────────────────────────────
+
   function applyPhotoState() {
-    const allCards = document.querySelectorAll('.menu-card');
-    allCards.forEach((card) => {
+    document.querySelectorAll('.menu-card').forEach(function (card) {
       const img = card.querySelector('.menu-card-img');
       if (!img) return;
-      if (photosEnabled) {
-        img.classList.remove('hidden');
-      } else {
-        img.classList.add('hidden');
-      }
+      img.classList.toggle('hidden', !photosEnabled);
     });
   }
 
-  // --- Gestione preferiti in memoria/localStorage ---
+
+  // ── 13. PREFERITI ────────────────────────────────────────────
 
   function getCardId(card) {
     return card.getAttribute('data-id');
@@ -238,210 +409,217 @@ document.addEventListener('DOMContentLoaded', function () {
       const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
       if (!raw) return new Set();
       const arr = JSON.parse(raw);
-      if (!Array.isArray(arr)) return new Set();
-      return new Set(arr);
-    } catch (e) {
-      return new Set();
-    }
+      return Array.isArray(arr) ? new Set(arr) : new Set();
+    } catch (e) { return new Set(); }
   }
 
   function saveFavoritesToStorage() {
     try {
-      const arr = Array.from(favoriteIds);
-      localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(arr));
-    } catch (e) {
-      // niente: se localStorage fallisce non blocchiamo il sito
-    }
+      localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(Array.from(favoriteIds)));
+    } catch (e) {}
   }
 
   function toggleFavorite(cardId) {
-    if (favoriteIds.has(cardId)) {
-      favoriteIds.delete(cardId);
-      return false;
-    } else {
-      favoriteIds.add(cardId);
-      return true;
-    }
+    if (favoriteIds.has(cardId)) { favoriteIds.delete(cardId); return false; }
+    favoriteIds.add(cardId);
+    return true;
   }
 
   function applyFavoritesToCards() {
-    menuCards.forEach((card) => {
+    menuCards.forEach(function (card) {
       const cardId = getCardId(card);
       if (!cardId) return;
-      const likeBtn = card.querySelector('.like-btn');
-      if (!likeBtn) return;
-
-      const isFav = favoriteIds.has(cardId);
-      updateCardFavoriteState(card, isFav);
+      updateCardFavoriteState(card, favoriteIds.has(cardId));
     });
   }
 
   function updateCardFavoriteState(card, isFavorite) {
     const likeBtn = card.querySelector('.like-btn');
     if (!likeBtn) return;
-
     card.classList.toggle('is-favorite', isFavorite);
-    likeBtn.setAttribute('aria-pressed', String(isFavorite));
-
-    // Se vuoi cambiare il cuore pieno/vuoto via classe, gestiscilo in CSS
     likeBtn.classList.toggle('is-active', isFavorite);
+    likeBtn.setAttribute('aria-pressed', String(isFavorite));
   }
 
-  // --- Pannello Preferiti (overlay creato via JS) ---
+
+  // ── 14. PANNELLO PREFERITI ───────────────────────────────────
 
   function openFavoritesPanel() {
-    // Evito di creare doppi pannelli
-    let panel = document.getElementById('favorites-panel');
     let backdrop = document.getElementById('favorites-panel-backdrop');
 
     if (!backdrop) {
       backdrop = document.createElement('div');
       backdrop.id = 'favorites-panel-backdrop';
-      backdrop.className =
-        'fixed inset-0 z-40 bg-black/20 backdrop-blur-lg flex items-center justify-center px-4';
       document.body.appendChild(backdrop);
-
-      backdrop.addEventListener('click', (event) => {
-        // Chiudi solo se clicchi fuori dal pannello
-        if (event.target === backdrop) {
-          closeFavoritesPanel();
-        }
+      backdrop.addEventListener('click', function (event) {
+        if (event.target === backdrop) closeFavoritesPanel();
       });
     }
 
+    let panel = document.getElementById('favorites-panel');
+
     if (!panel) {
-      // Carica il template HTML del pannello preferiti
       fetch('favorites-panel.html')
-        .then(response => response.text())
-        .then(html => {
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
           const tempDiv = document.createElement('div');
           tempDiv.innerHTML = html;
           panel = tempDiv.firstElementChild;
-          // Append il pannello dentro il backdrop per centrarlo con flex
           backdrop.appendChild(panel);
 
-          // Aggiungi evento al bottone Chiudi
           const closeBtn = panel.querySelector('#favorites-close-btn');
-          if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-              closeFavoritesPanel();
-            });
-          }
+          if (closeBtn) closeBtn.addEventListener('click', closeFavoritesPanel);
 
-          // Popola la lista preferiti
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              backdrop.classList.add('is-open');
+            });
+          });
+
+          document.body.classList.add('favorites-panel-open');
+          if (favoritesPanelBtn) {
+            favoritesPanelBtn.classList.add('is-active');
+            favoritesPanelBtn.setAttribute('aria-pressed', 'true');
+          }
+          document.addEventListener('keydown', onFavPanelEscape);
           rebuildFavoritesPanelContent();
         });
-      return; // esci, rebuildFavoritesPanelContent verrà chiamato dopo fetch
+      return;
     }
 
-    // Icona/stato visivo del bottone sticky
-    favoritesPanelBtn.classList.add('is-active');
-    favoritesPanelBtn.setAttribute('aria-pressed', 'true');
-
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        backdrop.classList.add('is-open');
+      });
+    });
     document.body.classList.add('favorites-panel-open');
-
+    if (favoritesPanelBtn) {
+      favoritesPanelBtn.classList.add('is-active');
+      favoritesPanelBtn.setAttribute('aria-pressed', 'true');
+    }
+    document.addEventListener('keydown', onFavPanelEscape);
     rebuildFavoritesPanelContent();
   }
 
   function closeFavoritesPanel() {
-    const panel = document.getElementById('favorites-panel');
     const backdrop = document.getElementById('favorites-panel-backdrop');
-
-    if (panel) {
-      panel.remove();
-    }
     if (backdrop) {
-      backdrop.remove();
+      backdrop.classList.remove('is-open');
+      backdrop.addEventListener('transitionend', function () {
+        const panel = document.getElementById('favorites-panel');
+        if (panel)    panel.remove();
+        backdrop.remove();
+      }, { once: true });
     }
-
+    document.body.classList.remove('favorites-panel-open');
+    document.removeEventListener('keydown', onFavPanelEscape);
     if (favoritesPanelBtn) {
       favoritesPanelBtn.classList.remove('is-active');
       favoritesPanelBtn.setAttribute('aria-pressed', 'false');
     }
+  }
 
-    document.body.classList.remove('favorites-panel-open');
+  function onFavPanelEscape(e) {
+    if (e.key === 'Escape') closeFavoritesPanel();
+  }
+
+  /**
+   * Anima l'uscita di una card dal pannello preferiti,
+   * poi ricostruisce la lista (le altre card rimangono visibili).
+   */
+  function removeFavCardAnimated(cardEl, id) {
+    // Blocca l'altezza corrente prima di animare verso 0
+    cardEl.style.maxHeight = cardEl.offsetHeight + 'px';
+    cardEl.style.overflow  = 'hidden';
+
+    // Forza un reflow per far partire la transizione CSS
+    cardEl.getBoundingClientRect();
+
+    cardEl.classList.add('fav-card-removing');
+
+    cardEl.addEventListener('transitionend', function () {
+      // Aggiorna stato sulla card originale nel grid
+      const originalCard = menuCards.find(function (c) { return getCardId(c) === id; });
+      if (originalCard) updateCardFavoriteState(originalCard, false);
+
+      // Ricostruisce la lista (mostra messaggio vuoto se necessario)
+      rebuildFavoritesPanelContent();
+    }, { once: true });
   }
 
   function rebuildFavoritesPanelContent() {
     const panel = document.getElementById('favorites-panel');
     if (!panel) return;
 
-    // Trova il contenitore lista e messaggio vuoto nel template
     const listContainer = panel.querySelector('#favorites-list');
-    const emptyMsg = panel.querySelector('#favorites-empty-msg');
     if (!listContainer) return;
 
-    // Svuota la lista (ma lascia il messaggio vuoto se serve)
     listContainer.innerHTML = '';
-
     const favArray = Array.from(favoriteIds);
 
     if (favArray.length === 0) {
-      if (emptyMsg) {
-        emptyMsg.style.display = '';
-        listContainer.appendChild(emptyMsg);
-      }
-    } else {
-      if (emptyMsg) emptyMsg.style.display = 'none';
-      favArray.forEach((id) => {
-        const originalCard = menuCards.find((card) => getCardId(card) === id);
-        if (!originalCard) return;
-
-        // Cloniamo la card per il pannello
-        const clone = originalCard.cloneNode(true);
-        clone.classList.add('favorite-card');
-        clone.classList.remove('hidden');
-
-        // Like nel pannello aggiorna stato globale
-        const likeBtn = clone.querySelector('.like-btn');
-        if (likeBtn) {
-          likeBtn.addEventListener('click', () => {
-            const isNowFavorite = toggleFavorite(id);
-            saveFavoritesToStorage();
-            if (originalCard) updateCardFavoriteState(originalCard, isNowFavorite);
-            rebuildFavoritesPanelContent();
-          });
-        }
-
-        // Rispetta lo stato della camera anche nel pannello
-        const img = clone.querySelector('.menu-card-img');
-        if (img) {
-          if (photosEnabled) {
-            img.classList.remove('hidden');
-          } else {
-            img.classList.add('hidden');
-          }
-        }
-
-        listContainer.appendChild(clone);
-      });
+      // Ricrea il messaggio vuoto (il nodo precedente è stato distrutto con innerHTML = '')
+      const emptyMsg = document.createElement('p');
+      emptyMsg.id        = 'favorites-empty-msg';
+      emptyMsg.className = 'fav-panel-empty';
+      emptyMsg.textContent = 'Nessun piatto preferito selezionato.';
+      listContainer.appendChild(emptyMsg);
+      return;
     }
+
+    favArray.forEach(function (id) {
+      const piatto = (typeof MENU_DATA !== 'undefined')
+        ? MENU_DATA.find(function (p) { return p.id === id; })
+        : null;
+      if (!piatto) return;
+
+      const clone = createCardElement(piatto);
+      clone.classList.add('favorite-card');
+      clone.classList.remove('cursor-pointer'); // no overlay al click
+      updateCardFavoriteState(clone, true);
+
+      // Rispetta stato foto
+      const img = clone.querySelector('.menu-card-img');
+      if (img) img.classList.toggle('hidden', !photosEnabled);
+
+      // Like: anima uscita, poi rimuove dai preferiti e ricostruisce
+      const likeBtn = clone.querySelector('.like-btn');
+      if (likeBtn) {
+        likeBtn.addEventListener('click', function () {
+          toggleFavorite(id);      // rimuove da favoriteIds
+          saveFavoritesToStorage();
+          likeBtn.blur();
+          removeFavCardAnimated(clone, id);
+        });
+      }
+
+      listContainer.appendChild(clone);
+    });
   }
+
 });
 
-// --- Gestione overlay intro ---
-document.addEventListener('DOMContentLoaded', () => {
-  // if (localStorage.getItem('menuIntroShown') === 'true') return;
 
+// ── OVERLAY INTRO ────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', function () {
   const overlay  = document.getElementById('intro-overlay');
   const btnClose = document.getElementById('intro-close');
   const btnSkip  = document.getElementById('intro-skip');
 
   function closeOverlay(save) {
+    if (!overlay) return;
     overlay.classList.remove('visible');
     overlay.classList.add('hidden');
     document.body.classList.remove('intro-overlay-open');
     if (save) localStorage.setItem('menuIntroShown', 'true');
   }
 
-
   if (!overlay) return;
-
-
   overlay.classList.remove('hidden');
   overlay.classList.add('visible');
   document.body.classList.add('intro-overlay-open');
 
-  if (btnClose) btnClose.addEventListener('click', () => closeOverlay(true));
-  if (btnSkip)  btnSkip.addEventListener('click',  () => closeOverlay(true));
+  if (btnClose) btnClose.addEventListener('click', function () { closeOverlay(true); });
+  if (btnSkip)  btnSkip.addEventListener('click',  function () { closeOverlay(true); });
 });
