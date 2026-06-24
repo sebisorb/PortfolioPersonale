@@ -140,26 +140,17 @@ class PageLoader {
     }
     
     makePageReady() {
-        // Small delay to ensure all rendering is complete
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                // Remove loading classes
-                document.documentElement.classList.remove('page-loading');
-                document.body.classList.remove('page-loading');
-                
-                // Add ready class
-                document.documentElement.classList.add('page-ready');
-                document.body.classList.add('page-ready');
-                
-                // Dispatch ready event for other scripts
-                document.dispatchEvent(new CustomEvent('pageReady', {
-                    detail: {
-                        loadTime: performance.now() - this.startTime
-                    }
-                }));
-                
-            });
-        });
+        document.documentElement.classList.remove('page-loading');
+        document.body.classList.remove('page-loading');
+
+        document.documentElement.classList.add('page-ready');
+        document.body.classList.add('page-ready');
+
+        document.dispatchEvent(new CustomEvent('pageReady', {
+            detail: {
+                loadTime: performance.now() - this.startTime
+            }
+        }));
     }
 }
 
